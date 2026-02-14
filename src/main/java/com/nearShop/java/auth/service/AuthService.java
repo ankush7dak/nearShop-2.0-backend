@@ -1,19 +1,32 @@
 package com.nearShop.java.auth.service;
 
 import com.nearShop.java.auth.dto.LoginRequest;
+import com.nearShop.java.entity.User;
+import com.nearShop.java.entity.UserRole;
+import com.nearShop.java.repository.RoleRepository;
+import com.nearShop.java.repository.UserRepository;
+import com.nearShop.java.repository.UserRoleRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
-import com.nearShop.java.user.entity.User;
-// import com.nearShop.java.user.repository.UserRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AuthService {
 
-    // @Autowired
-    // private UserRepository userRepository;
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -21,21 +34,38 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // @Autowired
-    // User user;
-
+    /**
+     * Login user and generate JWT token
+     */
     public String login(LoginRequest request) {
+        logger.info("Login attempt for mobile: {}", request.getMobile());
 
-        // User user = userRepository.findByMobile(request.getMobile())
-        //         .orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<User> optionalUser = userRepository.findByMobile(request.getMobile());
+        if (optionalUser.isEmpty()) {
+            logger.warn("Login failed for mobile {}: user not found", request.getMobile());
+            throw new RuntimeException("User not found");
+        }
 
-        // if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-        //     throw new RuntimeException("Invalid password");
-        // }
+        User user = optionalUser.get();
 
-        // return jwtUtil.generateToken(user.getMobile(), user.getRole());
+        // Check password (replace with BCrypt check in production)
+        if (!request.getPassword().equals(user.getPassword())) {
+            logger.warn("Login failed for mobile {}: invalid password", request.getMobile());
+            throw new RuntimeException("Invalid password");
+        }
 
-        return jwtUtil.generateToken("7700856845", "shopkeeper");
+        Optional<UserRole> optionalRole = userRoleRepository.findByUser_Id(user.getId());
+        if (optionalRole.isEmpty()) {
+            logger.warn("Login failed for mobile {}: role not assigned", request.getMobile());
+            throw new RuntimeException("Role not assigned");
+        }
 
+        UserRole userRole = optionalRole.get();
+        String roleName = userRole.getRole().getName();
+
+        String token = jwtUtil.generateToken(user.getMobile(), roleName);
+        logger.info("Login successful for mobile {} with role {}", user.getMobile(), roleName);
+
+        return token;
     }
 }

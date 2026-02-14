@@ -1,12 +1,12 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '4.0.2'
+	id 'org.springframework.boot' version '3.3.5'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.nearShop.java'
 version = '0.0.1-SNAPSHOT'
-description = 'nearShob backend'
+description = 'nearShop backend'
 
 java {
 	toolchain {
@@ -20,37 +20,47 @@ repositories {
 
 dependencies {
 
-	// Web
+	// -------------------- WEB --------------------
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// JPA (for @Entity, Repository, Hibernate)
+	// -------------------- JPA & DATABASE --------------------
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-	// Database Driver (MySQL - change if needed)
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
-	// Spring Security
+	// -------------------- SECURITY --------------------
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	// JWT
+	// -------------------- VALIDATION --------------------
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// -------------------- JWT --------------------
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-	// Lombok
+	// -------------------- LOMBOK --------------------
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
-	// DevTools
+
+	// -------------------- DEVTOOLS --------------------
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	// Testing
+	// -------------------- TESTING --------------------
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+
+bootJar {
+	mainClass = 'com.nearShop.java.NearShopApplication'
+}
+
+tasks.named('bootRun') {
+    mainClass.set('com.nearShop.java.NearShopApplication')
 }

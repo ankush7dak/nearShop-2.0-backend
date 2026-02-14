@@ -1,11 +1,11 @@
-package com.nearShop.java.user.repository;
+package com.nearShop.java.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.nearShop.java.user.entity.User;
+import com.nearShop.java.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
