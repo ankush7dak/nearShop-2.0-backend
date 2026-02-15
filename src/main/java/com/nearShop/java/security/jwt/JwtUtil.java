@@ -27,12 +27,13 @@ public class JwtUtil {
      * Generate JWT token with mobile number and role
      * Role is prefixed with ROLE_ for Spring Security hasRole checks
      */
-    public String generateToken(String mobile, String role) {
+    public String generateToken(String mobile, String role ,Long userId) {
         String roleWithPrefix = role.toLowerCase(); // e.g., ROLE_SHOPKEEPER
 
         return Jwts.builder()
                 .setSubject(mobile)
                 .claim("role", roleWithPrefix)
+                .claim("userId", userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)

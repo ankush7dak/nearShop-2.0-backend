@@ -1,10 +1,14 @@
 package com.nearShop.java.services;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nearShop.java.auth.dto.response.LoginResponse;
 import com.nearShop.java.entity.OtpVerification;
 import com.nearShop.java.entity.Role;
 import com.nearShop.java.entity.User;
@@ -17,6 +21,8 @@ import com.nearShop.java.security.jwt.JwtUtil;
 
 @Service
 public class OtpService {
+
+    private static final Logger logger = LoggerFactory.getLogger(OtpService.class);
 
     @Autowired
     private OtpRepository otpRepository;
@@ -33,51 +39,86 @@ public class OtpService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public void sendOtp(String mobile) {
-        String otp = String.valueOf((int)(Math.random() * 900000) + 100000); // 6-digit OTP
+    // ---------- Send OTP ----------
+    public String sendOtp(String mobile, String roleSelected) {
+        logger.info("Sending OTP for mobile: {}, role: {}", mobile, roleSelected);
+
+        String otp = String.valueOf((int) (Math.random() * 900000) + 100000); // 6-digit OTP
+        Optional<User> user = userRepository.findByMobile(mobile);
+
+        if (user.isPresent()) {
+            logger.warn("User already exists for mobile: {}", mobile);
+            return "User Already Exists";
+        }
+
         OtpVerification otpEntity = OtpVerification.builder()
                 .mobile(mobile)
                 .otp(otp)
                 .expiresAt(LocalDateTime.now().plusMinutes(5))
                 .verified(false)
                 .build();
+
         otpRepository.save(otpEntity);
 
-        // TODO: Integrate SMS here; for dev, just print
-        System.out.println("OTP for " + mobile + " : " + otp);
+        logger.info("OTP saved to DB for mobile: {} - OTP: {}", mobile, otp);
+        System.out.println("OTP for " + mobile + " : " + otp); // temporary dev print
+
+        return "OTP Sent Successfully";
     }
 
-    public String verifyOtp(String mobile, String otp,String password,String role_selected) {
+    // ---------- Verify OTP ----------
+    public LoginResponse verifyOtp(String mobile, String otp, String password, String roleSelected) {
+        logger.info("Verifying OTP for mobile: {}, role: {}", mobile, roleSelected);
+
         OtpVerification otpEntity = otpRepository.findTopByMobileAndOtpOrderByIdDesc(mobile, otp)
                 .orElseThrow(() -> new RuntimeException("Invalid OTP"));
 
-        if (otpEntity.isVerified()) throw new RuntimeException("OTP already used");
-        if (otpEntity.getExpiresAt().isBefore(LocalDateTime.now()))
+        if (otpEntity.isVerified()) {
+            logger.warn("OTP already used for mobile: {}", mobile);
+            throw new RuntimeException("OTP already used");
+        }
+
+        if (otpEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
+            logger.warn("OTP expired for mobile: {}", mobile);
             throw new RuntimeException("OTP expired");
+        }
 
         otpEntity.setVerified(true);
         otpRepository.save(otpEntity);
+        logger.info("OTP marked as verified for mobile: {}", mobile);
 
-        // Create user if not exists
+        // ---------- Create or fetch user ----------
         User user = userRepository.findByMobile(mobile).orElseGet(() -> {
+            logger.info("Creating new user for mobile: {}", mobile);
+
             User newUser = User.builder()
                     .mobile(mobile)
                     .isMobileVerified(true)
-                    .status("ACTIVE")
+                    .status("PENDING")
                     .createdAt(LocalDateTime.now())
                     .password(password)
                     .build();
-            newUser = userRepository.save(newUser);
 
-            // Assign default role (customer)
-            Role role = roleRepository.findByName(role_selected)
-                    .orElseThrow(() -> new RuntimeException("Default role not found"));
+            newUser = userRepository.save(newUser);
+            logger.info("User saved with id: {}", newUser.getId());
+
+            // Assign role
+            Role role = roleRepository.findByName(roleSelected)
+                    .orElseThrow(() -> new RuntimeException("Role not found: " + roleSelected));
             userRoleRepository.save(UserRole.builder().user(newUser).role(role).build());
+            logger.info("Role '{}' assigned to user id: {}", roleSelected, newUser.getId());
 
             return newUser;
         });
 
-        // Generate JWT
-        return jwtUtil.generateToken(user.getMobile(), "CUSTOMER");
+        // ---------- Generate JWT ----------
+        String jwt = jwtUtil.generateToken(user.getMobile(), roleSelected.toUpperCase(),user.getId());
+        logger.info("JWT generated for mobile: {}", mobile);
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setAccountStatus(user.getStatus());
+        loginResponse.setToken(jwt);
+        loginResponse.setMessage("Otp verified Successfully");
+
+        return loginResponse;
     }
 }

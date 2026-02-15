@@ -1,6 +1,7 @@
 package com.nearShop.java.auth.service;
 
 import com.nearShop.java.auth.dto.LoginRequest;
+import com.nearShop.java.auth.dto.response.LoginResponse;
 import com.nearShop.java.entity.User;
 import com.nearShop.java.entity.UserRole;
 import com.nearShop.java.repository.RoleRepository;
@@ -37,7 +38,7 @@ public class AuthService {
     /**
      * Login user and generate JWT token
      */
-    public String login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) {
         logger.info("Login attempt for mobile: {}", request.getMobile());
 
         Optional<User> optionalUser = userRepository.findByMobile(request.getMobile());
@@ -62,10 +63,24 @@ public class AuthService {
 
         UserRole userRole = optionalRole.get();
         String roleName = userRole.getRole().getName();
+        Long userId = user.getId();
 
-        String token = jwtUtil.generateToken(user.getMobile(), roleName);
+        String token = jwtUtil.generateToken(user.getMobile(), roleName,userId);
         logger.info("Login successful for mobile {} with role {}", user.getMobile(), roleName);
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(token);
 
-        return token;
+        //setting user
+        if(user.getStatus().equals("PENDING")){
+            loginResponse.setAccountStatus(user.getStatus());
+            loginResponse.setMessage("Please register you shop, Redirecting you to registration Page");
+        }
+        else{
+            loginResponse.setAccountStatus(user.getStatus());
+            loginResponse.setMessage("Registered Shop");
+
+        }
+
+        return loginResponse;
     }
 }
