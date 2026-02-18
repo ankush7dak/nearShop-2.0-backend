@@ -67,7 +67,7 @@ public class OtpService {
     }
 
     // ---------- Verify OTP ----------
-    public LoginResponse verifyOtp(String mobile, String otp, String password, String roleSelected) {
+    public boolean verifyOtp(String mobile, String otp, String password, String roleSelected) {
         logger.info("Verifying OTP for mobile: {}, role: {}", mobile, roleSelected);
 
         OtpVerification otpEntity = otpRepository.findTopByMobileAndOtpOrderByIdDesc(mobile, otp)
@@ -80,7 +80,7 @@ public class OtpService {
 
         if (otpEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
             logger.warn("OTP expired for mobile: {}", mobile);
-            throw new RuntimeException("OTP expired");
+            return false;
         }
 
         otpEntity.setVerified(true);
@@ -112,13 +112,6 @@ public class OtpService {
         });
 
         // ---------- Generate JWT ----------
-        String jwt = jwtUtil.generateToken(user.getMobile(), roleSelected.toUpperCase(),user.getId());
-        logger.info("JWT generated for mobile: {}", mobile);
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setAccountStatus(user.getStatus());
-        loginResponse.setToken(jwt);
-        loginResponse.setMessage("Otp verified Successfully");
-
-        return loginResponse;
+        return true;
     }
 }

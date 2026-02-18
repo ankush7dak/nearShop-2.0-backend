@@ -9,9 +9,13 @@ import com.nearShop.java.repository.UserRepository;
 import com.nearShop.java.repository.UserRoleRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +42,7 @@ public class AuthService {
     /**
      * Login user and generate JWT token
      */
-    public LoginResponse login(LoginRequest request) {
+    public String login(LoginRequest request) {
         logger.info("Login attempt for mobile: {}", request.getMobile());
 
         Optional<User> optionalUser = userRepository.findByMobile(request.getMobile());
@@ -65,22 +69,35 @@ public class AuthService {
         String roleName = userRole.getRole().getName();
         Long userId = user.getId();
 
-        String token = jwtUtil.generateToken(user.getMobile(), roleName,userId);
+        String token = jwtUtil.generateToken(user.getMobile(), roleName, userId);
         logger.info("Login successful for mobile {} with role {}", user.getMobile(), roleName);
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setToken(token);
 
-        //setting user
-        if(user.getStatus().equals("PENDING")){
-            loginResponse.setAccountStatus(user.getStatus());
-            loginResponse.setMessage("Please register you shop, Redirecting you to registration Page");
-        }
-        else{
-            loginResponse.setAccountStatus(user.getStatus());
-            loginResponse.setMessage("Registered Shop");
+        
+        // LoginResponse loginResponse = new LoginResponse();
+        // loginResponse.setToken(token);
 
-        }
+        // setting user
+        // if(user.getStatus().equals("PENDING")){
+        // loginResponse.setAccountStatus(user.getStatus());
+        // loginResponse.setMessage("Please register you shop, Redirecting you to
+        // registration Page");
+        // }
+        // else{
+        // loginResponse.setAccountStatus(user.getStatus());
+        // loginResponse.setMessage("Registered Shop");
 
-        return loginResponse;
+        // }
+
+        return token;
+    }
+
+    public Cookie createCookie(String token){
+        Cookie cookie = new Cookie("jwt", token);
+            cookie.setHttpOnly(true);
+            cookie.setSecure(false); // true in production
+            cookie.setPath("/");
+            cookie.setMaxAge(24 * 60 * 60);
+
+            return cookie;
     }
 }

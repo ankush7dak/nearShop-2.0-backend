@@ -19,7 +19,7 @@ public class JwtUtil {
     private final long EXPIRATION = 1000 * 60 * 60 * 10;
 
     // Convert secret string to Key object
-    private Key getSignKey() {
+    public Key getSignKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
