@@ -9,4 +9,5 @@ import lombok.Setter;
 public class LoginRequest {
     private String mobile;
     private String password;
+    private String loginRole;
 }

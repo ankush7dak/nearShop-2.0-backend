@@ -1,5 +1,6 @@
 package com.nearShop.java.auth.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nearShop.java.auth.dto.LoginRequest;
 import com.nearShop.java.auth.dto.OtpRequest;
 import com.nearShop.java.auth.dto.OtpVerifyRequest;
@@ -7,6 +8,8 @@ import com.nearShop.java.auth.dto.response.LoginResponse;
 import com.nearShop.java.auth.service.AuthService;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.OtpService;
+import com.nearShop.java.services.ShopkeeperServices;
+import com.nearShop.java.utilities.NearShopUtility;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -16,11 +19,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import javax.security.auth.login.LoginException;
-
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,31 +43,49 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private ShopkeeperServices objShopkeeperServices;
+
+    @Autowired
+    private NearShopUtility objNearShopUtility;
+
     // ================= LOGIN =================
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request,
-                                   HttpServletResponse response) {
+            HttpServletResponse response) {
 
         try {
+            //checking for valid request
             if (request == null || request.getMobile() == null || request.getPassword() == null) {
                 logger.warn("Login failed: Missing mobile or password");
                 return ResponseEntity.badRequest().body("Mobile and Password are required");
             }
 
             logger.info("Login attempt for mobile: {}", request.getMobile());
-
             String token = authService.login(request);
 
             if (token == null || token.isEmpty()) {
                 logger.error("Token generation failed for mobile: {}", request.getMobile());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
             }
-
+            //adding cookie
             Cookie cookie = authService.createCookie(token);
             response.addCookie(cookie);
+            LoginResponse objLoginResponse = new LoginResponse();
 
-            logger.info("Login successful for mobile: {}", request.getMobile());
+            // getting user roles
+            List<String> roles = objNearShopUtility.getUserRoles(request.getMobile());
+            if (!roles.isEmpty() && roles.contains(request.getLoginRole()))
+                objLoginResponse.setRole(request.getLoginRole());
+            else{
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED) // HTTP 401
+                                 .body("No roles Assigned Contact Administrator!!");
+            }
 
+            // ObjectMapper mapper = new ObjectMapper();
+            // String json = mapper.writeValueAsString(objLoginResponse);
+            // response.getWriter().write(json);
+            // logger.info("Login successful for mobile: {}", request.getMobile());
             return ResponseEntity.ok("Login Successful");
 
         } catch (Exception e) {
@@ -141,14 +160,14 @@ public class AuthController {
 
     // ================= VERIFY OTP =================
     @PostMapping("/verify-otp")
-    public ResponseEntity<?> verifyOtp(@RequestBody OtpVerifyRequest request,HttpServletResponse response) {
+    public ResponseEntity<?> verifyOtp(@RequestBody OtpVerifyRequest request, HttpServletResponse response) {
 
         try {
             if (request == null ||
-                request.getMobile() == null ||
-                request.getOtp() == null ||
-                request.getPassword() == null ||
-                request.getRole() == null) {
+                    request.getMobile() == null ||
+                    request.getOtp() == null ||
+                    request.getPassword() == null ||
+                    request.getRole() == null) {
 
                 logger.warn("OTP verification failed: Missing required fields");
                 return ResponseEntity.badRequest().body("All fields are required");
@@ -160,9 +179,7 @@ public class AuthController {
                     request.getMobile(),
                     request.getOtp(),
                     request.getPassword(),
-                    request.getRole()
-            );
-            
+                    request.getRole());
 
             if (!isVerified) {
                 logger.warn("OTP verification failed for mobile: {}", request.getMobile());
@@ -174,6 +191,7 @@ public class AuthController {
             LoginRequest objLoginRequest = new LoginRequest();
             objLoginRequest.setMobile(request.getMobile());
             objLoginRequest.setPassword(request.getPassword());
+            objLoginRequest.setLoginRole(request.getRole());
 
             String token = authService.login(objLoginRequest);
 
