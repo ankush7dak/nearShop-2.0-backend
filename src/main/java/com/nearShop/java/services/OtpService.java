@@ -94,7 +94,7 @@ public class OtpService {
             User newUser = User.builder()
                     .mobile(mobile)
                     .isMobileVerified(true)
-                    .status("PENDING")
+                    .status((roleSelected == "shopkeeper")?"PENDING":"ACTIVE")
                     .createdAt(LocalDateTime.now())
                     .password(password)
                     .build();

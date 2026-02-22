@@ -1,6 +1,5 @@
 package com.nearShop.java.auth.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nearShop.java.auth.dto.LoginRequest;
 import com.nearShop.java.auth.dto.OtpRequest;
 import com.nearShop.java.auth.dto.OtpVerifyRequest;
@@ -8,7 +7,6 @@ import com.nearShop.java.auth.dto.response.LoginResponse;
 import com.nearShop.java.auth.service.AuthService;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.OtpService;
-import com.nearShop.java.services.ShopkeeperServices;
 import com.nearShop.java.utilities.NearShopUtility;
 
 import io.jsonwebtoken.Claims;
@@ -36,16 +34,10 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
-
     @Autowired
     private OtpService otpService;
-
     @Autowired
     private JwtUtil jwtUtil;
-
-    @Autowired
-    private ShopkeeperServices objShopkeeperServices;
-
     @Autowired
     private NearShopUtility objNearShopUtility;
 
@@ -55,7 +47,7 @@ public class AuthController {
             HttpServletResponse response) {
 
         try {
-            //checking for valid request
+            // checking for valid request
             if (request == null || request.getMobile() == null || request.getPassword() == null) {
                 logger.warn("Login failed: Missing mobile or password");
                 return ResponseEntity.badRequest().body("Mobile and Password are required");
@@ -68,7 +60,7 @@ public class AuthController {
                 logger.error("Token generation failed for mobile: {}", request.getMobile());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
             }
-            //adding cookie
+            // adding cookie
             Cookie cookie = authService.createCookie(token);
             response.addCookie(cookie);
             LoginResponse objLoginResponse = new LoginResponse();
@@ -77,15 +69,10 @@ public class AuthController {
             List<String> roles = objNearShopUtility.getUserRoles(request.getMobile());
             if (!roles.isEmpty() && roles.contains(request.getLoginRole()))
                 objLoginResponse.setRole(request.getLoginRole());
-            else{
+            else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED) // HTTP 401
-                                 .body("No roles Assigned Contact Administrator!!");
+                        .body("No roles Assigned Contact Administrator!!");
             }
-
-            // ObjectMapper mapper = new ObjectMapper();
-            // String json = mapper.writeValueAsString(objLoginResponse);
-            // response.getWriter().write(json);
-            // logger.info("Login successful for mobile: {}", request.getMobile());
             return ResponseEntity.ok("Login Successful");
 
         } catch (Exception e) {
@@ -100,7 +87,7 @@ public class AuthController {
     public ResponseEntity<String> getRole(HttpServletRequest request) {
 
         try {
-            String token = extractJwtFromCookies(request);
+            String token = objNearShopUtility.extractJwtFromCookies(request);
 
             if (token == null) {
                 logger.warn("JWT token not found in cookies");
@@ -205,7 +192,7 @@ public class AuthController {
 
             logger.info("Login successful for mobile: {}", request.getMobile());
 
-            return ResponseEntity.ok("Login Successful");
+            return ResponseEntity.ok("Signup Success");
 
         } catch (Exception e) {
             logger.error("Exception during OTP verification", e);
@@ -214,19 +201,25 @@ public class AuthController {
         }
     }
 
-    // ================= HELPER METHOD =================
-    private String extractJwtFromCookies(HttpServletRequest request) {
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        try {
+            // Create a cookie with the same name, empty value, and maxAge=0 to delete it
+            Cookie cookie = new Cookie("jwt", "");
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true); // true if using HTTPS
+            cookie.setPath("/"); // must match your login cookie path
+            cookie.setMaxAge(0); // delete cookie immediately
+            response.addCookie(cookie);
 
-        if (request.getCookies() == null) {
-            return null;
+            return ResponseEntity.ok("Logout successful");
+        } catch (Exception e) {
+            logger.error("Exception during logout", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Something went wrong during logout");
         }
-
-        for (Cookie cookie : request.getCookies()) {
-            if ("jwt".equals(cookie.getName())) {
-                return cookie.getValue();
-            }
-        }
-
-        return null;
     }
+
+    // ================= HELPER METHOD =================
+
 }

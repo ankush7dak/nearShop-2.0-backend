@@ -39,7 +39,7 @@ public class SecurityConfig {
             .and()
             .authorizeHttpRequests(auth -> auth
                 // public endpoints
-                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/auth/**","/shop/**").permitAll()
                 // role-based endpoints (match lowercase DB roles)
                 .requestMatchers("/shopkeeper/**").hasAuthority("shopkeeper")
                 .requestMatchers("/customer/**").hasAuthority("customer")
