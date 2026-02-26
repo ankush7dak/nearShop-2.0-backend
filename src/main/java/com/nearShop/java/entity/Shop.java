@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Entity
 @Table(name = "shops")
@@ -42,7 +43,7 @@ public class Shop {
     private String status;
 
     @Column(name = "is_active")
-    private Boolean isActive = true;
+    private Boolean isActive = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "approved_by")

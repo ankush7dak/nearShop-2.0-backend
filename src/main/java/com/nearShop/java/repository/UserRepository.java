@@ -11,6 +11,8 @@ import com.nearShop.java.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByMobile(String mobile);
+    Optional<User> findById(Long id);
+
 
     @Query(value = """
                 select ur.status from nearshop.users ur where ur.id = ?1

@@ -1,184 +1,318 @@
-2026-02-23T01:17:39.397+05:30  INFO 9056 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 9056 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
-2026-02-23T01:17:39.412+05:30  INFO 9056 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-02-23T01:17:39.530+05:30  INFO 9056 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-02-23T01:17:39.531+05:30  INFO 9056 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-02-23T01:17:41.803+05:30  INFO 9056 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-02-23T01:17:42.036+05:30  INFO 9056 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 205 ms. Found 5 JPA repository interfaces.
-2026-02-23T01:17:43.559+05:30  INFO 9056 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-02-23T01:17:43.587+05:30  INFO 9056 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-02-23T01:17:43.588+05:30  INFO 9056 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-02-23T01:17:43.722+05:30  INFO 9056 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-02-23T01:17:43.722+05:30  INFO 9056 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4189 ms
-2026-02-23T01:17:44.046+05:30  INFO 9056 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-02-23T01:17:44.170+05:30  INFO 9056 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-02-23T01:17:44.244+05:30  INFO 9056 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-02-23T01:17:44.830+05:30  INFO 9056 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-02-23T01:17:44.892+05:30  INFO 9056 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-02-23T01:17:47.304+05:30  INFO 9056 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@207a9d92
-2026-02-23T01:17:47.310+05:30  INFO 9056 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-02-23T01:17:47.552+05:30  WARN 9056 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-02-23T01:17:47.556+05:30  WARN 9056 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-02-23T01:17:50.107+05:30  INFO 9056 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-02-23T01:17:52.303+05:30  INFO 9056 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-02-23T01:17:53.032+05:30  INFO 9056 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-02-23T01:17:53.460+05:30  WARN 9056 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-02-23T01:17:53.636+05:30  INFO 9056 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-02-23T01:17:55.773+05:30  INFO 9056 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2026-02-23T01:17:55.863+05:30  INFO 9056 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-02-23T01:17:55.897+05:30  INFO 9056 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 17.338 seconds (process running for 18.586)
-2026-02-23T01:18:16.388+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-23T01:18:16.389+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-02-23T01:18:16.391+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-02-23T01:18:16.617+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:18:23.258+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:15.046+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:23.715+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:24.762+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:25.452+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:25.824+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:26.740+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:41.163+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:19:49.584+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
-2026-02-23T01:19:49.585+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
-2026-02-23T01:19:50.067+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.service.AuthService        : Login failed for mobile 7700856874: role not assigned
-2026-02-23T01:19:50.068+05:30 ERROR 9056 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Exception during login
+2026-02-27T01:11:17.950+05:30  INFO 11272 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 11272 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:11:17.964+05:30  INFO 11272 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:11:18.110+05:30  INFO 11272 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:11:18.126+05:30  INFO 11272 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:11:19.766+05:30  INFO 11272 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:11:19.908+05:30  INFO 11272 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 128 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:11:21.261+05:30  INFO 11272 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:11:21.292+05:30  INFO 11272 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:11:21.292+05:30  INFO 11272 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:11:21.410+05:30  INFO 11272 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:11:21.410+05:30  INFO 11272 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3283 ms
+2026-02-27T01:11:21.725+05:30  INFO 11272 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:11:21.864+05:30  INFO 11272 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-27T01:11:21.949+05:30  INFO 11272 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:11:22.676+05:30  INFO 11272 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:11:22.748+05:30  INFO 11272 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T01:11:25.342+05:30  INFO 11272 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7e6817e9
+2026-02-27T01:11:25.353+05:30  INFO 11272 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T01:11:25.551+05:30  WARN 11272 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:11:25.551+05:30  WARN 11272 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:11:27.517+05:30  INFO 11272 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:11:29.838+05:30  INFO 11272 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:11:30.305+05:30  INFO 11272 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T01:11:30.672+05:30  WARN 11272 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:11:30.757+05:30  INFO 11272 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:11:31.833+05:30  INFO 11272 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-02-27T01:11:31.879+05:30  INFO 11272 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-02-27T01:11:31.897+05:30  INFO 11272 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 15.009 seconds (process running for 15.925)
+2026-02-27T01:11:59.175+05:30  INFO 11272 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-27T01:11:59.175+05:30  INFO 11272 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-27T01:11:59.177+05:30  INFO 11272 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-02-27T01:11:59.416+05:30  INFO 11272 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:14:48.080+05:30  INFO 11272 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:18:34.610+05:30  INFO 2832 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 2832 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:18:34.616+05:30  INFO 2832 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:18:34.721+05:30  INFO 2832 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:18:34.721+05:30  INFO 2832 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:18:36.187+05:30  INFO 2832 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:18:36.359+05:30  INFO 2832 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 159 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:18:38.136+05:30  INFO 2832 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:18:38.172+05:30  INFO 2832 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:18:38.173+05:30  INFO 2832 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:18:38.341+05:30  INFO 2832 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:18:38.342+05:30  INFO 2832 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3619 ms
+2026-02-27T01:18:38.692+05:30  INFO 2832 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:18:38.786+05:30  INFO 2832 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-27T01:18:38.868+05:30  INFO 2832 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:18:39.704+05:30  INFO 2832 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:18:39.769+05:30  INFO 2832 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T01:18:41.943+05:30  INFO 2832 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@516b1b67
+2026-02-27T01:18:41.959+05:30  INFO 2832 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T01:18:42.161+05:30  WARN 2832 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:18:42.170+05:30  WARN 2832 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:18:44.765+05:30  INFO 2832 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:18:47.114+05:30  INFO 2832 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:18:47.751+05:30  INFO 2832 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T01:18:48.167+05:30  WARN 2832 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:18:48.283+05:30  INFO 2832 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:18:49.672+05:30  INFO 2832 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-02-27T01:18:49.723+05:30  INFO 2832 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-02-27T01:18:49.740+05:30  INFO 2832 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 16.126 seconds (process running for 17.407)
+2026-02-27T01:19:56.964+05:30  INFO 2832 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-27T01:19:56.965+05:30  INFO 2832 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-27T01:19:56.967+05:30  INFO 2832 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-02-27T01:19:57.178+05:30  INFO 2832 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:23:04.643+05:30  INFO 2832 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:26:53.055+05:30  INFO 8332 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 8332 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:26:53.100+05:30  INFO 8332 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:26:53.339+05:30  INFO 8332 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:26:53.389+05:30  INFO 8332 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:26:57.534+05:30  INFO 8332 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:26:57.794+05:30  INFO 8332 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 230 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:27:05.210+05:30  INFO 8332 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:27:05.271+05:30  INFO 8332 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:27:05.271+05:30  INFO 8332 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:27:05.786+05:30  INFO 8332 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:27:05.803+05:30  INFO 8332 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 12375 ms
+2026-02-27T01:27:08.486+05:30  INFO 8332 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:27:09.519+05:30  INFO 8332 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-27T01:27:10.923+05:30  INFO 8332 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:27:13.027+05:30  INFO 8332 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:27:13.373+05:30  INFO 8332 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T01:27:16.369+05:30  INFO 8332 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a6572f
+2026-02-27T01:27:16.415+05:30  INFO 8332 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T01:27:16.689+05:30  WARN 8332 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:27:16.803+05:30  WARN 8332 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:27:22.951+05:30  INFO 8332 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:27:25.281+05:30  INFO 8332 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:27:28.992+05:30  INFO 8332 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T01:27:32.607+05:30  WARN 8332 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:27:33.187+05:30  INFO 8332 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:27:42.078+05:30  INFO 8332 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-02-27T01:27:43.593+05:30  INFO 8332 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-02-27T01:27:44.036+05:30  INFO 8332 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 54.31 seconds (process running for 57.747)
+2026-02-27T01:27:46.554+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-27T01:27:46.556+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-27T01:27:46.579+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-02-27T01:27:55.335+05:30  INFO 14028 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 14028 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:27:55.438+05:30  INFO 14028 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:27:55.983+05:30  INFO 14028 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:27:56.135+05:30  INFO 14028 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:28:00.795+05:30  INFO 14028 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:28:01.568+05:30  INFO 14028 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 748 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:28:05.665+05:30  INFO 14028 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:28:05.720+05:30  INFO 14028 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:28:05.782+05:30  INFO 14028 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:28:06.076+05:30  INFO 14028 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:28:06.087+05:30  INFO 14028 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9751 ms
+2026-02-27T01:28:07.963+05:30  INFO 14028 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:28:08.235+05:30  INFO 14028 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-27T01:28:08.465+05:30  INFO 14028 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:28:09.883+05:30  INFO 14028 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:28:10.023+05:30  INFO 14028 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T01:28:12.111+05:30  INFO 14028 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1938d60b
+2026-02-27T01:28:12.120+05:30  INFO 14028 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T01:28:12.354+05:30  WARN 14028 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:28:12.364+05:30  WARN 14028 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:28:19.981+05:30  INFO 14028 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:28:22.357+05:30  INFO 14028 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:28:24.277+05:30  INFO 14028 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T01:28:25.631+05:30  WARN 14028 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:28:25.924+05:30  INFO 14028 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:28:32.770+05:30  WARN 14028 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-02-27T01:28:32.902+05:30  WARN 14028 --- [nearShop] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-02-27T01:28:32.965+05:30  INFO 14028 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:28:33.027+05:30  INFO 14028 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-02-27T01:28:33.197+05:30  INFO 14028 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-02-27T01:28:33.313+05:30  INFO 14028 --- [nearShop] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
-java.lang.RuntimeException: Role not assigned
-	at com.nearShop.java.auth.service.AuthService.login(AuthService.java:53) ~[main/:na]
-	at com.nearShop.java.auth.controller.AuthController.login(AuthController.java:57) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at com.nearShop.java.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:63) ~[main/:na]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-02-27T01:28:33.436+05:30 ERROR 14028 --- [nearShop] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
-2026-02-23T01:19:52.551+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
-2026-02-23T01:19:52.552+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
-2026-02-23T01:19:52.854+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
-2026-02-23T01:19:52.970+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:22:30.745+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:10.620+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:20.203+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:31.835+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:34.654+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:37.364+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:40.201+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
-2026-02-23T01:23:40.202+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
-2026-02-23T01:23:40.477+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
-2026-02-23T01:23:40.579+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:50.503+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:54.231+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:23:56.391+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
-2026-02-23T01:23:56.392+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
-2026-02-23T01:23:56.689+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
-2026-02-23T01:23:56.810+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:24:03.668+05:30  INFO 9056 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-02-23T01:33:03.044+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@207a9d92 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.047+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@d39de4f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.050+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@24288a6 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.052+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7328c853 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.054+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@57b993b5 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.055+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@14b1e4ab (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.057+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2a05923 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.058+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@37ff6374 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.060+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2cc07a05 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T01:33:03.062+05:30  WARN 9056 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@37cf578a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-02-23T02:02:11.734+05:30  INFO 9056 --- [nearShop] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 34 class path changes (0 additions, 34 deletions, 0 modifications)
-2026-02-23T02:02:11.797+05:30  INFO 9056 --- [nearShop] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-02-23T02:02:11.813+05:30  INFO 9056 --- [nearShop] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-02-23T02:02:11.831+05:30  INFO 9056 --- [nearShop] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2026-02-27T01:29:24.339+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:29:35.472+05:30  WARN 8332 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : JWT token not found in cookies
+2026-02-27T01:29:45.087+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
+2026-02-27T01:29:45.089+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
+2026-02-27T01:29:46.803+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
+2026-02-27T01:29:46.926+05:30  INFO 8332 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:40:37.654+05:30  INFO 8332 --- [nearShop] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2026-02-27T01:40:42.898+05:30  WARN 8332 --- [nearShop] [Thread-5] org.apache.tomcat.util.net.NioEndpoint   : The executor associated with thread pool [http-nio-8081] has not fully shutdown. Some application threads may still be running.
+2026-02-27T01:40:42.969+05:30  INFO 8332 --- [nearShop] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:40:43.253+05:30  INFO 8332 --- [nearShop] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-02-27T01:40:43.352+05:30  INFO 8332 --- [nearShop] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-02-27T01:40:47.986+05:30  INFO 8332 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 8332 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:40:48.038+05:30  INFO 8332 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:40:54.114+05:30  INFO 12860 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 12860 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:40:54.183+05:30  INFO 12860 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:40:54.614+05:30  INFO 12860 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:40:54.729+05:30  INFO 12860 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:41:03.042+05:30  INFO 12860 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:41:03.844+05:30  INFO 12860 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 720 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:41:58.565+05:30  INFO 6856 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 6856 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:41:58.731+05:30  INFO 6856 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:41:59.347+05:30  INFO 6856 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:41:59.592+05:30  INFO 6856 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:42:05.881+05:30  INFO 6856 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:42:06.841+05:30  INFO 6856 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 786 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:42:13.379+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:42:13.617+05:30  INFO 6856 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:42:13.678+05:30  INFO 6856 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:42:14.400+05:30  INFO 6856 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:42:14.413+05:30  INFO 6856 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 14736 ms
+2026-02-27T01:42:26.963+05:30  INFO 6856 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:42:28.932+05:30  INFO 6856 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-27T01:42:29.400+05:30  INFO 6856 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:42:32.068+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:42:32.332+05:30  INFO 6856 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T01:42:35.383+05:30  INFO 6856 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a6572f
+2026-02-27T01:42:35.390+05:30  INFO 6856 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T01:42:35.618+05:30  WARN 6856 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:42:35.627+05:30  WARN 6856 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:42:39.869+05:30  INFO 6856 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:42:42.735+05:30  INFO 6856 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:42:44.603+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T01:42:45.632+05:30  WARN 6856 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:42:45.966+05:30  INFO 6856 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:42:49.890+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-02-27T01:42:50.123+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-02-27T01:42:50.195+05:30  INFO 6856 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 55.46 seconds (process running for 64.147)
+2026-02-27T01:42:58.862+05:30  INFO 6856 --- [nearShop] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2026-02-27T01:42:59.219+05:30  INFO 6856 --- [nearShop] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:42:59.283+05:30  INFO 6856 --- [nearShop] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-02-27T01:42:59.517+05:30  INFO 6856 --- [nearShop] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-02-27T01:43:00.473+05:30  INFO 6856 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 6856 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:43:00.625+05:30  INFO 6856 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:43:02.408+05:30  INFO 6856 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:43:02.714+05:30  INFO 6856 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 252 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:43:04.195+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:43:04.336+05:30  INFO 6856 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:43:04.371+05:30  INFO 6856 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:43:04.689+05:30  INFO 6856 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:43:04.764+05:30  INFO 6856 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4051 ms
+2026-02-27T01:43:06.901+05:30  INFO 6856 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:43:07.090+05:30  INFO 6856 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:43:07.332+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:43:07.336+05:30  INFO 6856 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-02-27T01:43:08.450+05:30  INFO 6856 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@667f3135
+2026-02-27T01:43:08.456+05:30  INFO 6856 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-02-27T01:43:08.462+05:30  WARN 6856 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:43:08.485+05:30  WARN 6856 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:43:09.916+05:30  INFO 6856 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:43:12.093+05:30  INFO 6856 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:43:12.665+05:30  WARN 6856 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:43:12.749+05:30  INFO 6856 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:43:13.579+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-02-27T01:43:13.623+05:30  INFO 6856 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-02-27T01:43:13.777+05:30  INFO 6856 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 13.969 seconds (process running for 87.736)
+2026-02-27T01:43:13.878+05:30  INFO 6856 --- [nearShop] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-02-27T01:43:16.090+05:30  INFO 14204 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 14204 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:43:16.115+05:30  INFO 14204 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:43:16.357+05:30  INFO 14204 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:43:16.362+05:30  INFO 14204 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:43:20.911+05:30  INFO 14204 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:43:21.258+05:30  INFO 14204 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 311 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:43:24.290+05:30  INFO 14204 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:43:24.524+05:30  INFO 14204 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:43:24.602+05:30  INFO 14204 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:43:24.951+05:30  INFO 14204 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:43:24.956+05:30  INFO 14204 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8589 ms
+2026-02-27T01:43:25.652+05:30  INFO 14204 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:43:25.952+05:30  INFO 14204 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-27T01:43:26.152+05:30  INFO 14204 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:43:27.224+05:30  INFO 14204 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:43:27.357+05:30  INFO 14204 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T01:43:29.419+05:30  INFO 14204 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31cf4611
+2026-02-27T01:43:29.425+05:30  INFO 14204 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T01:43:29.649+05:30  WARN 14204 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:43:29.658+05:30  WARN 14204 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:43:32.916+05:30  INFO 14204 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:43:35.319+05:30  INFO 14204 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:43:36.369+05:30  INFO 14204 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T01:43:37.041+05:30  WARN 14204 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:43:37.204+05:30  INFO 14204 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:43:39.623+05:30  WARN 14204 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2026-02-27T01:43:39.724+05:30  WARN 14204 --- [nearShop] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-02-27T01:43:39.874+05:30  INFO 14204 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:43:39.942+05:30  INFO 14204 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-02-27T01:43:40.097+05:30  INFO 14204 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-02-27T01:43:40.157+05:30  INFO 14204 --- [nearShop] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-02-27T01:43:40.246+05:30 ERROR 14204 --- [nearShop] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2026-02-27T01:44:21.506+05:30  INFO 10256 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 10256 (C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop\build\classes\java\main started by Ankush kumar in C:\Users\Ankush kumar\Documents\nearShop\nearShop-backend\nearShop)
+2026-02-27T01:44:21.637+05:30  INFO 10256 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-02-27T01:44:22.057+05:30  INFO 10256 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-27T01:44:22.111+05:30  INFO 10256 --- [nearShop] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-27T01:44:27.449+05:30  INFO 10256 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-27T01:44:27.992+05:30  INFO 10256 --- [nearShop] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 484 ms. Found 6 JPA repository interfaces.
+2026-02-27T01:44:31.860+05:30  INFO 10256 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-02-27T01:44:31.910+05:30  INFO 10256 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-27T01:44:31.918+05:30  INFO 10256 --- [nearShop] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-02-27T01:44:32.188+05:30  INFO 10256 --- [nearShop] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-27T01:44:32.195+05:30  INFO 10256 --- [nearShop] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9937 ms
+2026-02-27T01:44:33.161+05:30  INFO 10256 --- [nearShop] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-27T01:44:33.562+05:30  INFO 10256 --- [nearShop] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-02-27T01:44:33.807+05:30  INFO 10256 --- [nearShop] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-27T01:44:35.597+05:30  INFO 10256 --- [nearShop] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-27T01:44:35.794+05:30  INFO 10256 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-27T01:44:38.117+05:30  INFO 10256 --- [nearShop] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31cf4611
+2026-02-27T01:44:38.123+05:30  INFO 10256 --- [nearShop] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-27T01:44:38.310+05:30  WARN 10256 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-27T01:44:38.314+05:30  WARN 10256 --- [nearShop] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-02-27T01:44:43.260+05:30  INFO 10256 --- [nearShop] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-27T01:44:45.526+05:30  INFO 10256 --- [nearShop] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:44:46.358+05:30  INFO 10256 --- [nearShop] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-02-27T01:44:47.340+05:30  WARN 10256 --- [nearShop] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-27T01:44:47.510+05:30  INFO 10256 --- [nearShop] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-27T01:44:50.141+05:30  INFO 10256 --- [nearShop] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-02-27T01:44:50.303+05:30  INFO 10256 --- [nearShop] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-02-27T01:44:50.375+05:30  INFO 10256 --- [nearShop] [restartedMain] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 32.635 seconds (process running for 35.298)
+2026-02-27T01:45:00.702+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-27T01:45:00.705+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-27T01:45:00.711+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2026-02-27T01:45:02.035+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : JWT token not found in cookies
+2026-02-27T01:45:20.938+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
+2026-02-27T01:45:22.354+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
+2026-02-27T01:45:39.180+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
+2026-02-27T01:45:39.354+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:53:59.823+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:54:22.291+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@31cf4611 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.291+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6ce866b2 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.307+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@682215 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.312+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@185cdd63 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.320+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2e8cd01 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.324+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2d1ae618 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.324+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6ca31124 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.335+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@126a7e16 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.342+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@56ae299f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:54:22.346+05:30  WARN 10256 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2c7e3f74 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-02-27T01:56:05.473+05:30  INFO 10256 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-02-27T01:59:19.230+05:30  INFO 10256 --- [nearShop] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-27T01:59:19.281+05:30  INFO 10256 --- [nearShop] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-02-27T01:59:19.371+05:30  INFO 10256 --- [nearShop] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

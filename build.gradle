@@ -20,6 +20,8 @@ repositories {
 
 dependencies {
 
+	// Google Cloud Storage SDK
+    implementation 'com.google.cloud:google-cloud-storage:2.30.0'
 	// -------------------- WEB --------------------
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
