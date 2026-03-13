@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -52,6 +53,9 @@ public class Shop {
     private LocalDateTime approvedAt;
     private LocalDateTime createdAt;
     private String logoUrl;
+    
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    private List<ShopSubcategory> subcategories;
 
     @PrePersist
     protected void onCreate() {

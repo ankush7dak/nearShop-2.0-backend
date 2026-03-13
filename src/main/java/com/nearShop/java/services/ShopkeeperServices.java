@@ -10,14 +10,27 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nearShop.java.auth.controller.AuthController;
 import com.nearShop.java.dto.ShopDTO;
+import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.entity.Category;
 import com.nearShop.java.entity.Shop;
+import com.nearShop.java.entity.ShopSubcategory;
+import com.nearShop.java.entity.SubCategory;
 import com.nearShop.java.entity.User;
 import com.nearShop.java.repository.CategoryRepository;
 import com.nearShop.java.repository.ShopRepository;
+import com.nearShop.java.repository.ShopSubcategoryRepository;
+import com.nearShop.java.repository.SubCategoryRepository;
 import com.nearShop.java.repository.UserRepository;
 import com.nearShop.java.utilities.NearShopUtility;
+import java.util.Optional;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import jakarta.servlet.http.HttpServletRequest;
 @Service
 public class ShopkeeperServices {
     @Autowired 
@@ -30,12 +43,18 @@ public class ShopkeeperServices {
     GCSService objGcsService;
     @Autowired
     ShopRepository objShopRepository;
+    @Autowired
+    SubCategoryRepository objSubCategoryRepository;
+    @Autowired
+    ShopSubcategoryRepository objShopSubcategoryRepository;
+
 
     public boolean isShopRegistered(Long userId) {
         // TODO Auto-generated method stub
-         String status = objUserRepository.findByUser_id(userId);
+        //  String status = objUserRepository.findByUser_id(userId);
+        int isShopEntryAvailable = objShopRepository.findShopByOwnerId(userId);
 
-        if(status.equals("PENDING")) return false;
+        if(isShopEntryAvailable == 0) return false;
         return true;
         
     }
@@ -82,6 +101,49 @@ public class ShopkeeperServices {
 
     return true;   // now returning true after saving
 }
+
+    public List<String> getShopSubCategories(Long userId) {
+        // TODO Auto-generated method stub
+        Long categoryId = objShopRepository.getShopCategoryId(userId);
+        Long shopId = objShopRepository.getShopId(userId);
+        List<String> shopSubCategories = objShopSubcategoryRepository.findBy_Id(shopId);
+        shopSubCategories.addAll(objSubCategoryRepository.getShopSubCategories(categoryId));
+        return shopSubCategories;
+
+    }
+
+    public void addShopSubCategory(ShopSubCategoryDTO shopSubCategoryDTO, Long shopId) {
+        // TODO Auto-generated method stub
+            final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+        logger.info("Request received to add subcategory for shopId: {}", shopId);
+
+        try {
+
+            ShopSubcategory objShopSubcategory = new ShopSubcategory();
+            objShopSubcategory.setName(shopSubCategoryDTO.getName());
+            objShopSubcategory.setIsActive(shopSubCategoryDTO.isActive());
+
+            Optional<Shop> shop = objShopRepository.findById(shopId);
+
+            if (shop.isEmpty()) {
+                logger.error("Shop not found for shopId: {}", shopId);
+                throw new RuntimeException("Shop not found with id: " + shopId);
+            }
+
+            objShopSubcategory.setShop(shop.get());
+
+            objShopSubcategoryRepository.save(objShopSubcategory);
+
+            logger.info("Subcategory '{}' saved successfully for shopId: {}",
+                    shopSubCategoryDTO.getName(), shopId);
+
+        } catch (Exception e) {
+
+            logger.error("Error while adding subcategory for shopId: {}", shopId, e);
+            throw new RuntimeException("Failed to add subcategory", e);
+        }
+    }
 
 
 

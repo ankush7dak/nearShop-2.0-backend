@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -19,6 +20,8 @@ import org.slf4j.LoggerFactory;
 
 import com.nearShop.java.auth.controller.AuthController;
 import com.nearShop.java.dto.ShopDTO;
+import com.nearShop.java.dto.ShopSubCategoryDTO;
+import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.ShopkeeperServices;
 import com.nearShop.java.utilities.NearShopUtility;
@@ -37,6 +40,8 @@ public class ShopkeeperController {
     NearShopUtility objNearShopUtility;
     @Autowired
     JwtUtil obJwtUtil;
+    @Autowired
+    ShopRepository objShopRepository;
 
     @GetMapping("/isShopRegistered")
     public ResponseEntity<?> isShopRegistered(HttpServletRequest request,HttpServletResponse response){
@@ -62,6 +67,70 @@ public class ShopkeeperController {
         List<String> shopCategories = objShopkeeperServices.getAllShopCategories();
         return ResponseEntity.ok(shopCategories);
     }
+
+    @GetMapping("/getShopSubCategories")
+    public ResponseEntity<?> getShopSubCategories(HttpServletRequest request){
+        try {
+                Logger logger = LoggerFactory.getLogger(getClass());
+
+            String token = objNearShopUtility.extractJwtFromCookies(request);
+            Claims claims = objNearShopUtility.claimParser(token);
+            Long userId = claims.get("userId", Long.class);
+            List<String> shopSubCategories = objShopkeeperServices.getShopSubCategories(userId);
+
+
+            return ResponseEntity.ok(shopSubCategories);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+        }
+       
+    }
+
+@PostMapping("/addShopSubCategory")
+public ResponseEntity<?> addShopSubCategory(
+        HttpServletRequest request,
+        @RequestBody ShopSubCategoryDTO shopSubCategoryDTO
+) {
+
+    Logger logger = LoggerFactory.getLogger(getClass());
+
+    logger.info("Received request to add shop subcategory");
+
+    try {
+
+        String token = objNearShopUtility.extractJwtFromCookies(request);
+        logger.debug("JWT token extracted from cookies");
+
+        Claims claims = objNearShopUtility.claimParser(token);
+        Long userId = claims.get("userId", Long.class);
+
+        logger.info("User ID extracted from token: {}", userId);
+
+        Long shopId = objShopRepository.getShopId(userId);
+
+        if (shopId == null) {
+            logger.error("No shop found for userId: {}", userId);
+            return ResponseEntity.status(404).body("Shop not found for user");
+        }
+
+        logger.info("Shop ID found: {}", shopId);
+
+        objShopkeeperServices.addShopSubCategory(shopSubCategoryDTO, shopId);
+
+        logger.info("Subcategory '{}' added successfully for shopId: {}",
+                shopSubCategoryDTO.getName(), shopId);
+
+        return ResponseEntity.ok("SubCategory Added Successfully!!");
+
+    } catch (Exception e) {
+
+        logger.error("Error while adding shop subcategory", e);
+
+        return ResponseEntity
+                .status(500)
+                .body("Error while adding subcategory: " + e.getMessage());
+    }
+}
 
     @PostMapping("/registorShop")
     public ResponseEntity<?> registorShop(

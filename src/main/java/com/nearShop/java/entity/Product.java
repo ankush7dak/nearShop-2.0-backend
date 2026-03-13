@@ -1,10 +1,14 @@
 package com.nearShop.java.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
+@Data
 public class Product {
 
     @Id
@@ -33,71 +37,11 @@ public class Product {
     @Column(name = "is_available")
     private Boolean isAvailable = true;
 
-    // Constructors
-    public Product() {
-    }
+    // One product has many inventory logs
+    // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    // private List<InventoryLog> inventoryLogs;
 
-    public Product(Shop shop, ShopSubcategory shopSubcategory, String name,
-                   BigDecimal price, Integer stock, Boolean isAvailable) {
-        this.shop = shop;
-        this.shopSubcategory = shopSubcategory;
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.isAvailable = isAvailable;
-    }
-
-    // Getters and Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
-
-    public ShopSubcategory getShopSubcategory() {
-        return shopSubcategory;
-    }
-
-    public void setShopSubcategory(ShopSubcategory shopSubcategory) {
-        this.shopSubcategory = shopSubcategory;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Boolean getIsAvailable() {
-        return isAvailable;
-    }
-
-    public void setIsAvailable(Boolean available) {
-        isAvailable = available;
-    }
+    // // One product can be in many order items
+    // @OneToMany(mappedBy = "product")
+    // private List<OrderItem> orderItems;
 }
