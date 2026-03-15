@@ -13,7 +13,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long product_id;
 
     // Many products belong to one shop
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,8 +22,12 @@ public class Product {
 
     // Many products belong to one shop subcategory
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_subcategory_id", nullable = false)
+    @JoinColumn(name = "shop_sub_category_id", nullable = true)
     private ShopSubcategory shopSubcategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_category_id", nullable = true)
+    private SubCategory subcategory;
 
     @Column(nullable = false)
     private String name;
@@ -34,8 +38,11 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
+    @Column(nullable = false)
+    private String weight;
+
     @Column(name = "is_available")
-    private Boolean isAvailable = true;
+    private Boolean isAvailable = false;
 
     // One product has many inventory logs
     // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

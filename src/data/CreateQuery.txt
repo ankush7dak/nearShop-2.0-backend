@@ -1,0 +1,24 @@
+CREATE TABLE products (
+    product_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    shop_id BIGINT NOT NULL,
+    shop_sub_category_id BIGINT NOT NULL,
+    sub_category_id BIGINT NOT NULL,
+
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    stock INT NOT NULL,
+    is_available BOOLEAN DEFAULT FALSE,
+
+    CONSTRAINT fk_product_shop
+        FOREIGN KEY (shop_id) 
+        REFERENCES shops(id),
+
+    CONSTRAINT fk_product_shop_subcategory
+        FOREIGN KEY (shop_sub_category_id) 
+        REFERENCES shop_subcategories(shop_sub_category_id),
+
+    CONSTRAINT fk_product_subcategory
+        FOREIGN KEY (sub_category_id) 
+        REFERENCES subcategories(sub_category_id)
+);

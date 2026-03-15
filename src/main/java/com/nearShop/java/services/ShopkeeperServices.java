@@ -11,14 +11,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nearShop.java.auth.controller.AuthController;
+import com.nearShop.java.dto.AddProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.entity.Category;
+import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
 import com.nearShop.java.entity.ShopSubcategory;
 import com.nearShop.java.entity.SubCategory;
 import com.nearShop.java.entity.User;
 import com.nearShop.java.repository.CategoryRepository;
+import com.nearShop.java.repository.ProductRepository;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.repository.ShopSubcategoryRepository;
 import com.nearShop.java.repository.SubCategoryRepository;
@@ -47,6 +50,8 @@ public class ShopkeeperServices {
     SubCategoryRepository objSubCategoryRepository;
     @Autowired
     ShopSubcategoryRepository objShopSubcategoryRepository;
+    @Autowired
+    ProductRepository objpProductRepository;
 
 
     public boolean isShopRegistered(Long userId) {
@@ -130,7 +135,7 @@ public class ShopkeeperServices {
                 logger.error("Shop not found for shopId: {}", shopId);
                 throw new RuntimeException("Shop not found with id: " + shopId);
             }
-
+            objShopSubcategory.setCategory(shop.get().getCategory());
             objShopSubcategory.setShop(shop.get());
 
             objShopSubcategoryRepository.save(objShopSubcategory);
@@ -143,6 +148,41 @@ public class ShopkeeperServices {
             logger.error("Error while adding subcategory for shopId: {}", shopId, e);
             throw new RuntimeException("Failed to add subcategory", e);
         }
+    }
+
+    public String addProduct(AddProductDTO addProductDTO, Long userId ,String productImageLink) {
+        // TODO Auto-generated method stub
+        Product product = new Product();
+        Long shopId = objShopRepository.getShopId(userId);
+        if(objpProductRepository.getProductCountForShop(shopId,addProductDTO.getName()) != 0){
+            return "This product is Already Present!!";
+        }
+
+        Optional<Shop> shop = objShopRepository.findById(shopId);
+        product.setName(addProductDTO.getName());
+        product.setPrice(addProductDTO.getPrice());
+        product.setIsAvailable(addProductDTO.isAvailable());
+        product.setShop(shop.get());
+        product.setStock(addProductDTO.getStock());
+        product.setWeight(addProductDTO.getWeight());
+
+        Integer isSubCategory =  objSubCategoryRepository.getSubCategoryCount(addProductDTO.getShopSubcategoryName());
+        if(isSubCategory >= 1){
+            Optional<SubCategory> subCategory = objSubCategoryRepository.findByName(addProductDTO.getShopSubcategoryName());
+            if(subCategory.isPresent()){
+            product.setSubcategory(subCategory.get());
+        }
+        }        
+        else{
+            Optional<ShopSubcategory> shopSubCategory = objShopSubcategoryRepository.findByName(addProductDTO.getShopSubcategoryName());
+            if(shopSubCategory.isPresent()){
+            product.setShopSubcategory(shopSubCategory.get());
+            }
+
+        }
+        objpProductRepository.save(product);
+        return "Product Added Successfully!!";
+        
     }
 
 

@@ -17,14 +17,18 @@ import java.util.Optional;
 public class ShopSubcategory {
 
     @Id
-    @Column(name = "sub_category_id")
+    @Column(name = "shop_sub_category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long subCategoryId;
+    private Long shopSubCategoryId;
 
     // Many subcategories belong to one shop
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @Column(nullable = false)
     private String name;

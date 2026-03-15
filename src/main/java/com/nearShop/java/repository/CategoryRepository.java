@@ -13,6 +13,7 @@ import com.nearShop.java.entity.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     Optional<Category> findByName(String name);
+    Optional<Category> findById(Long id);
 
     @Query(value = """
             SELECT c.name

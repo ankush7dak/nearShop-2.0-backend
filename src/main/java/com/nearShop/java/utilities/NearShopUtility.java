@@ -66,4 +66,11 @@ public class NearShopUtility {
         return claims;
     }
 
+    public Long getUserIdUsingRequest(HttpServletRequest request) {
+        // TODO Auto-generated method stub
+        String token = extractJwtFromCookies(request);
+        Claims claims = claimParser(token);
+        return claims.get("userId", Long.class);
+    }
+
 }
