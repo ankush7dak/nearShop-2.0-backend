@@ -10,6 +10,7 @@ public class AddProductDTO {
     private String shopSubcategoryName;
     private String description;
     private BigDecimal price;
+    private BigDecimal cost;
     private Integer stock;
     private String weight;
     private boolean isAvailable;

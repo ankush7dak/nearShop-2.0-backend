@@ -1,11 +1,14 @@
 package com.nearShop.java.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "subcategories")
+@Data
 public class SubCategory {
 
     @Id
@@ -33,6 +36,8 @@ public class SubCategory {
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
+
+
 
 
 

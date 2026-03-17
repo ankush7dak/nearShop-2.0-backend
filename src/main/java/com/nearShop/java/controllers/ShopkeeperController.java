@@ -20,8 +20,11 @@ import org.slf4j.LoggerFactory;
 
 import com.nearShop.java.auth.controller.AuthController;
 import com.nearShop.java.dto.AddProductDTO;
+import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.ShopSubCategoryDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.GCSService;
@@ -46,20 +49,39 @@ public class ShopkeeperController {
     ShopRepository objShopRepository;
     @Autowired
     GCSService objGCSService;
+    @Autowired
+
+    @GetMapping("/getDashboardData")
+    public ResponseEntity<?> getDashboardData(HttpServletRequest req){
+        try{
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+        ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
+        objShopkeeperDashboardDTO = objShopkeeperServices.getDashboardData(userId);
+        // fetching product count
+        return ResponseEntity.ok(objShopkeeperDashboardDTO);
+        }catch(Exception e){
+            return ResponseEntity.status(500).body("Error");
+        }
+
+    }
+
+    @GetMapping("/getAllInvertoryData")
+    public ResponseEntity<ShopInventoryDataDTO> getAllInvertoryData(HttpServletRequest req){
+        ShopInventoryDataDTO objShopInventoryDataDTO = new ShopInventoryDataDTO();
+        try{
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+            objShopInventoryDataDTO = objShopkeeperServices.getAllInvertoryData(objShopInventoryDataDTO,userId);
+            return ResponseEntity.ok(objShopInventoryDataDTO);
+        }catch(Exception e){
+            objShopInventoryDataDTO.setErrCode("ERROR");
+            objShopInventoryDataDTO.setErrMsg(e.getMessage());
+            return ResponseEntity.status(500).body(objShopInventoryDataDTO);
+        }
+    }
 
     @GetMapping("/isShopRegistered")
-    public ResponseEntity<?> isShopRegistered(HttpServletRequest request, HttpServletResponse response) {
-        String token = objNearShopUtility.extractJwtFromCookies(request);
-        final Logger logger = LoggerFactory.getLogger(AuthController.class);
-
-        if (token == null) {
-            logger.warn("JWT token not found in cookies");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No token found");
-        }
-        // token claim
-        Claims claims = obJwtUtil.extractAllClaims(token);
-
-        Long userId = claims.get("userId", Long.class);
+    public ResponseEntity<?> isShopRegistered(HttpServletRequest request) {
+        Long userId = objNearShopUtility.getUserIdUsingRequest(request);
         boolean isRegistered = objShopkeeperServices.isShopRegistered(userId);
 
         return ResponseEntity.ok((isRegistered) ? 1 : 0);
@@ -157,4 +179,23 @@ public class ShopkeeperController {
             return ResponseEntity.status(500).body("Error" + e.getMessage());
         }
     }
+
+     @PostMapping("/updateProduct")
+    public ResponseEntity<?> updateProduct(
+                        HttpServletRequest request,
+                        @RequestBody ProductDTO productDTO
+                        
+    ){
+        try{
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+            // String productImageLink = objGCSService.uploadFile(productImage);
+            String resMessage = objShopkeeperServices.updateProduct(productDTO,userId);
+            return ResponseEntity.ok(resMessage);
+
+        }catch(Exception e){
+            return ResponseEntity.status(500).body("Error" + e.getMessage());
+        }
+    }
 }
+
+

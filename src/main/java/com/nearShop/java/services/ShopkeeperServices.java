@@ -13,7 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nearShop.java.auth.controller.AuthController;
 import com.nearShop.java.dto.AddProductDTO;
 import com.nearShop.java.dto.ShopDTO;
+import com.nearShop.java.dto.ProductDTO;
+
 import com.nearShop.java.dto.ShopSubCategoryDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.entity.Category;
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
@@ -29,6 +33,8 @@ import com.nearShop.java.repository.UserRepository;
 import com.nearShop.java.utilities.NearShopUtility;
 import java.util.Optional;
 import java.util.List;
+
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +57,9 @@ public class ShopkeeperServices {
     @Autowired
     ShopSubcategoryRepository objShopSubcategoryRepository;
     @Autowired
-    ProductRepository objpProductRepository;
+    ProductRepository objProductRepository;
+    @Autowired
+    ModelMapper objModelMapper;
 
 
     public boolean isShopRegistered(Long userId) {
@@ -154,7 +162,7 @@ public class ShopkeeperServices {
         // TODO Auto-generated method stub
         Product product = new Product();
         Long shopId = objShopRepository.getShopId(userId);
-        if(objpProductRepository.getProductCountForShop(shopId,addProductDTO.getName()) != 0){
+        if(objProductRepository.getProductCountForShop(shopId,addProductDTO.getName()) != 0){
             return "This product is Already Present!!";
         }
 
@@ -165,6 +173,8 @@ public class ShopkeeperServices {
         product.setShop(shop.get());
         product.setStock(addProductDTO.getStock());
         product.setWeight(addProductDTO.getWeight());
+        product.setCost(addProductDTO.getCost());
+        product.setDescription(addProductDTO.getDescription());
 
         Integer isSubCategory =  objSubCategoryRepository.getSubCategoryCount(addProductDTO.getShopSubcategoryName());
         if(isSubCategory >= 1){
@@ -180,9 +190,60 @@ public class ShopkeeperServices {
             }
 
         }
-        objpProductRepository.save(product);
+        objProductRepository.save(product);
         return "Product Added Successfully!!";
         
+    }
+
+    public ShopkeeperDashboardDTO getDashboardData(Long userId) {
+        // TODO Auto-generated method stub
+        Long shopId = objShopRepository.getShopId(userId);
+        ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
+        Integer productCount = objProductRepository.getProductCount(shopId);
+        objShopkeeperDashboardDTO.setProductCount(productCount);
+        return objShopkeeperDashboardDTO;
+    }
+
+    public ShopInventoryDataDTO getAllInvertoryData(ShopInventoryDataDTO objShopInventoryDataDTO, Long userId) {
+        try{
+            Long shopId = objShopRepository.getShopId(userId);
+            List<Product> productList = objProductRepository.findByShop_Id(shopId);
+            List<ProductDTO> productDTOList = productList.stream().map(product -> {
+                ProductDTO dto = objModelMapper.map(product,ProductDTO.class);
+                dto.setShopId(product.getShop().getId());
+                if(product.getShopSubcategory() != null){
+                    dto.setShopSubcategoryName(product.getShopSubcategory().getName());
+                }
+                else if(product.getSubcategory() != null){
+                    dto.setSubcategoryName(product.getSubcategory().getName());
+                }
+                return dto;
+            }).toList();
+            objShopInventoryDataDTO.setProductDTOList(productDTOList);
+            return objShopInventoryDataDTO;
+        }catch(Exception e){
+            objShopInventoryDataDTO.setErrCode("ERROR");
+            objShopInventoryDataDTO.setErrMsg(e.getMessage());
+            return objShopInventoryDataDTO;
+        }
+    }
+
+    public String updateProduct(ProductDTO productDTO, Long userId) {
+        // TODO Auto-generated method stub
+        Optional<Product> objProduct = objProductRepository.findById(productDTO.getProductId());
+        if(null!= objProduct &&  objProduct.isPresent()){
+            Product product = objProduct.get();
+            product.setCost(productDTO.getCost());
+            product.setDescription(productDTO.getDescription());
+            product.setIsAvailable(productDTO.getIsAvailable());
+            product.setPrice(productDTO.getPrice());
+            product.setStock(productDTO.getStock());
+            objProductRepository.save(product);
+            return "Product Data Updated!!";
+        }
+        else{
+            throw new RuntimeException("Product not found");
+        }
     }
 
 

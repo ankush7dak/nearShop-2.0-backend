@@ -13,7 +13,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_id;
+    private Long productId;
 
     // Many products belong to one shop
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,6 +34,12 @@ public class Product {
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal cost;
+
+    @Column(nullable = true)
+    private String description;
 
     @Column(nullable = false)
     private Integer stock;
