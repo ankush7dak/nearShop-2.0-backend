@@ -5,6 +5,7 @@ import com.nearShop.java.auth.dto.OtpRequest;
 import com.nearShop.java.auth.dto.OtpVerifyRequest;
 import com.nearShop.java.auth.dto.response.LoginResponse;
 import com.nearShop.java.auth.service.AuthService;
+import com.nearShop.java.dto.RequestDTO.SignUpRequestDTO;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.OtpService;
 import com.nearShop.java.utilities.NearShopUtility;
@@ -122,7 +123,7 @@ public class AuthController {
 
     // ================= SEND OTP =================
     @PostMapping("/send-otp")
-    public ResponseEntity<String> sendOtp(@RequestBody OtpRequest request) {
+    public ResponseEntity<String> sendOtp(@RequestBody SignUpRequestDTO request) {
 
         try {
             if (request == null || request.getMobile() == null || request.getRole() == null) {
@@ -147,50 +148,46 @@ public class AuthController {
 
     // ================= VERIFY OTP =================
     @PostMapping("/verify-otp")
-    public ResponseEntity<?> verifyOtp(@RequestBody OtpVerifyRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> verifyOtp(@RequestBody SignUpRequestDTO objSignUpRequestDTO, HttpServletResponse response) {
 
         try {
-            if (request == null ||
-                    request.getMobile() == null ||
-                    request.getOtp() == null ||
-                    request.getPassword() == null ||
-                    request.getRole() == null) {
+            // if (request == null ||
+            //         request.getMobile() == null ||
+            //         request.getOtp() == null ||
+            //         request.getPassword() == null ||
+            //         request.getRole() == null) {
 
-                logger.warn("OTP verification failed: Missing required fields");
-                return ResponseEntity.badRequest().body("All fields are required");
-            }
+            //     logger.warn("OTP verification failed: Missing required fields");
+            //     return ResponseEntity.badRequest().body("All fields are required");
+            // }
 
-            logger.info("Verifying OTP for mobile: {}", request.getMobile());
+            logger.info("Verifying OTP for mobile: {}", objSignUpRequestDTO.getMobile());
 
-            boolean isVerified = otpService.verifyOtp(
-                    request.getMobile(),
-                    request.getOtp(),
-                    request.getPassword(),
-                    request.getRole());
+            boolean isVerified = otpService.verifyOtp(objSignUpRequestDTO);
 
             if (!isVerified) {
-                logger.warn("OTP verification failed for mobile: {}", request.getMobile());
+                logger.warn("OTP verification failed for mobile: {}", objSignUpRequestDTO.getMobile());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body("Invalid OTP or expired OTP");
             }
 
-            logger.info("OTP verified successfully for mobile: {}", request.getMobile());
+            logger.info("OTP verified successfully for mobile: {}", objSignUpRequestDTO.getMobile());
             LoginRequest objLoginRequest = new LoginRequest();
-            objLoginRequest.setMobile(request.getMobile());
-            objLoginRequest.setPassword(request.getPassword());
-            objLoginRequest.setLoginRole(request.getRole());
+            objLoginRequest.setMobile(objSignUpRequestDTO.getMobile());
+            objLoginRequest.setPassword(objSignUpRequestDTO.getPassword());
+            objLoginRequest.setLoginRole(objSignUpRequestDTO.getRole());
 
             String token = authService.login(objLoginRequest);
 
             if (token == null || token.isEmpty()) {
-                logger.error("Token generation failed for mobile: {}", request.getMobile());
+                logger.error("Token generation failed for mobile: {}", objLoginRequest.getMobile());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
             }
 
             Cookie cookie = authService.createCookie(token);
             response.addCookie(cookie);
 
-            logger.info("Login successful for mobile: {}", request.getMobile());
+            logger.info("Login successful for mobile: {}", objLoginRequest.getMobile());
 
             return ResponseEntity.ok("Signup Success");
 

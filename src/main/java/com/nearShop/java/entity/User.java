@@ -21,6 +21,8 @@ public class User {
     // Optional email
     @Column(unique = true, nullable = true, length = 100)
     private String email;
+    
+    private String name;
 
     // Login field
     @Column(unique = true, nullable = false, length = 15)

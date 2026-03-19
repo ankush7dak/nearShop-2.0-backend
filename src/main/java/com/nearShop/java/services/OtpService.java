@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nearShop.java.auth.dto.response.LoginResponse;
+import com.nearShop.java.dto.RequestDTO.SignUpRequestDTO;
 import com.nearShop.java.entity.OtpVerification;
 import com.nearShop.java.entity.Role;
 import com.nearShop.java.entity.User;
@@ -67,46 +68,48 @@ public class OtpService {
     }
 
     // ---------- Verify OTP ----------
-    public boolean verifyOtp(String mobile, String otp, String password, String roleSelected) {
-        logger.info("Verifying OTP for mobile: {}, role: {}", mobile, roleSelected);
+    public boolean verifyOtp(SignUpRequestDTO objSignUpRequestDTO) {
+        logger.info("Verifying OTP for mobile: {}, role: {}", objSignUpRequestDTO.getMobile(), objSignUpRequestDTO.getRole());
 
-        OtpVerification otpEntity = otpRepository.findTopByMobileAndOtpOrderByIdDesc(mobile, otp)
+        OtpVerification otpEntity = otpRepository.findTopByMobileAndOtpOrderByIdDesc(objSignUpRequestDTO.getMobile(), objSignUpRequestDTO.getOtp())
                 .orElseThrow(() -> new RuntimeException("Invalid OTP"));
 
         if (otpEntity.isVerified()) {
-            logger.warn("OTP already used for mobile: {}", mobile);
+            logger.warn("OTP already used for mobile: {}", objSignUpRequestDTO.getMobile());
             throw new RuntimeException("OTP already used");
         }
 
         if (otpEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
-            logger.warn("OTP expired for mobile: {}", mobile);
+            logger.warn("OTP expired for mobile: {}", objSignUpRequestDTO.getMobile());
             return false;
         }
 
         otpEntity.setVerified(true);
         otpRepository.save(otpEntity);
-        logger.info("OTP marked as verified for mobile: {}", mobile);
+        logger.info("OTP marked as verified for mobile: {}", objSignUpRequestDTO.getMobile());
 
         // ---------- Create or fetch user ----------
-        User user = userRepository.findByMobile(mobile).orElseGet(() -> {
-            logger.info("Creating new user for mobile: {}", mobile);
+        User user = userRepository.findByMobile(objSignUpRequestDTO.getMobile()).orElseGet(() -> {
+            logger.info("Creating new user for mobile: {}", objSignUpRequestDTO.getMobile());
 
             User newUser = User.builder()
-                    .mobile(mobile)
+                    .mobile(objSignUpRequestDTO.getMobile())
                     .isMobileVerified(true)
-                    .status((roleSelected == "shopkeeper")?"PENDING":"ACTIVE")
+                    .status((objSignUpRequestDTO.getRole() == "shopkeeper")?"PENDING":"ACTIVE")
                     .createdAt(LocalDateTime.now())
-                    .password(password)
+                    .password(objSignUpRequestDTO.getPassword())
+                    .email(objSignUpRequestDTO.getEmail())
+                    .name(objSignUpRequestDTO.getName())
                     .build();
 
             newUser = userRepository.save(newUser);
             logger.info("User saved with id: {}", newUser.getId());
 
             // Assign role
-            Role role = roleRepository.findByName(roleSelected)
-                    .orElseThrow(() -> new RuntimeException("Role not found: " + roleSelected));
+            Role role = roleRepository.findByName(objSignUpRequestDTO.getRole())
+                    .orElseThrow(() -> new RuntimeException("Role not found: " + objSignUpRequestDTO.getRole()));
             userRoleRepository.save(UserRole.builder().user(newUser).role(role).build());
-            logger.info("Role '{}' assigned to user id: {}", roleSelected, newUser.getId());
+            logger.info("Role '{}' assigned to user id: {}", objSignUpRequestDTO.getRole(), newUser.getId());
 
             return newUser;
         });

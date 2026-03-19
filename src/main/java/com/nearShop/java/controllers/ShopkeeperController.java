@@ -24,6 +24,7 @@ import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
@@ -108,6 +109,18 @@ public class ShopkeeperController {
             return ResponseEntity.status(500).body("Error: " + e.getMessage());
         }
 
+    }
+
+    @GetMapping("/getShopProfile")
+    public ResponseEntity<?> getShopProfile(HttpServletRequest request){
+        try{
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+            ShopProfileDTO objShopProfileDTO = new ShopProfileDTO();
+            objShopProfileDTO = objShopkeeperServices.getShopProfile(objShopProfileDTO,userId);
+            return ResponseEntity.ok(objShopProfileDTO);
+        }catch(Exception e){
+            return ResponseEntity.status(500).body("Error");
+        }
     }
 
     @PostMapping("/addShopSubCategory")

@@ -17,7 +17,9 @@ import com.nearShop.java.dto.ProductDTO;
 
 import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
+import com.nearShop.java.dto.ResponseDTO.UserDTO;
 import com.nearShop.java.entity.Category;
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
@@ -87,7 +89,7 @@ public class ShopkeeperServices {
     User user = objUserRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
 
     // Fetch category by name
-    Category category = objCategoryRepository.findByName(shopDTO.getCategoryId()).orElseThrow(() -> new RuntimeException("Category not found"));
+    Category category = objCategoryRepository.findByName(shopDTO.getCategoryName()).orElseThrow(() -> new RuntimeException("Category not found"));
 
     // Create Shop object
     Shop shop = new Shop();
@@ -244,6 +246,30 @@ public class ShopkeeperServices {
         else{
             throw new RuntimeException("Product not found");
         }
+    }
+
+    public ShopProfileDTO getShopProfile(ShopProfileDTO objShopProfileDTO, Long userId) {
+        // TODO Auto-generated method stub
+        Optional<User> user = objUserRepository.findById(userId);
+        Long shopId = objShopRepository.getShopId(userId);
+        Optional<Shop> shop = objShopRepository.findById(shopId);
+        UserDTO userDTO = new UserDTO();
+        ShopDTO shopDTO = new ShopDTO();
+        if(user.isPresent()){
+            userDTO = objModelMapper.map(user.get(),UserDTO.class);
+            userDTO.setId(user.get().getId());
+        }
+        if(shop.isPresent()){
+            Shop shop_ = shop.get();
+            shopDTO = objModelMapper.map(shop_,ShopDTO.class);
+            if(null != shop_ && shop_.getCategory()!= null){
+                shopDTO.setCategoryName(shop_.getCategory().getName());
+                shopDTO.setId(shop_.getId());
+            }
+        }
+        objShopProfileDTO.setShopDTO(shopDTO);
+        objShopProfileDTO.setUserDTO(userDTO);
+        return objShopProfileDTO;
     }
 
 

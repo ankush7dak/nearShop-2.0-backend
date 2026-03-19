@@ -54,8 +54,6 @@ public class Shop {
     private LocalDateTime createdAt;
     private String logoUrl;
     
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
-    private List<ShopSubcategory> subcategories;
 
     @PrePersist
     protected void onCreate() {

@@ -5,6 +5,7 @@ import lombok.Data;
 // ShopDTO.java
 @Data
 public class ShopDTO {
+    private Long id;
     private String shopName;
     private String mobile;
     private String email;
@@ -17,7 +18,7 @@ public class ShopDTO {
     private String pincode;
     private String latitude;
     private String longitude;
-    private String categoryId;
+    private String categoryName;
 
     // getters and setters
 }
