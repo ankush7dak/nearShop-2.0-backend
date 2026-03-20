@@ -16,6 +16,7 @@ import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.ProductDTO;
 
 import com.nearShop.java.dto.ShopSubCategoryDTO;
+import com.nearShop.java.dto.RequestDTO.NavDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
@@ -97,8 +98,8 @@ public class ShopkeeperServices {
     shop.setShopName(shopDTO.getShopName());
     shop.setAddress(shopDTO.getAddress());
     shop.setDescription(shopDTO.getDescription());
-    shop.setClosingTime(LocalTime.parse(shopDTO.getClosingTime()));
-    shop.setOpeningTime(LocalTime.parse(shopDTO.getOpeningTime()));
+    shop.setClosingTime((shopDTO.getClosingTime()));
+    shop.setOpeningTime((shopDTO.getOpeningTime()));
     shop.setCategory(category);
     shop.setStatus("open");
     shop.setLatitude(Double.parseDouble(shopDTO.getLatitude()));
@@ -270,6 +271,57 @@ public class ShopkeeperServices {
         objShopProfileDTO.setShopDTO(shopDTO);
         objShopProfileDTO.setUserDTO(userDTO);
         return objShopProfileDTO;
+    }
+
+    public String updateShopProfile(HttpServletRequest req, ShopProfileDTO objShopProfileDTO) {
+        // TODO Auto-generated method stub
+        try{
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+        Long shopId = objShopRepository.getShopId(userId);
+
+        Optional<User> objUser = objUserRepository.findById(userId);
+        Optional<Shop> objShop = objShopRepository.findById(shopId);
+
+        if(objUser.isPresent()){
+            User user = objUser.get();
+            user.setEmail(objShopProfileDTO.getUserDTO().getEmail());
+            user.setName(objShopProfileDTO.getUserDTO().getName());
+            objUserRepository.save((user));
+        }
+
+        if(objShop.isPresent()){
+            Shop shop = objShop.get();
+            shop.setAddress(objShopProfileDTO.getShopDTO().getAddress());
+            Optional<Category> category = objCategoryRepository.findByName(objShopProfileDTO.getShopDTO().getCategoryName());
+            if(category.isPresent()){
+                shop.setCategory(category.get());
+            }
+            shop.setClosingTime(objShopProfileDTO.getShopDTO().getClosingTime());
+            shop.setOpeningTime(objShopProfileDTO.getShopDTO().getOpeningTime());
+            shop.setDeliveryRange(objShopProfileDTO.getShopDTO().getDeliveryRange());
+            shop.setDescription(objShopProfileDTO.getShopDTO().getDescription());
+            shop.setShopName(objShopProfileDTO.getShopDTO().getShopName());
+            shop.setProvidesDelivery(objShopProfileDTO.getShopDTO().getProvidesDelivery());
+            shop.setIsActive(objShopProfileDTO.getShopDTO().getIsActive());
+            objShopRepository.save(shop);
+        }
+        return "Updated Successfully!!";
+        }catch(Exception e){
+            return "Cannot update";
+        }
+    }
+
+    public NavDTO getNavData(HttpServletRequest req) {
+        // TODO Auto-generated method stub
+        Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+        Long shopId = objShopRepository.getShopId(userId);
+        Optional<Shop> shop = objShopRepository.findById(shopId);
+        NavDTO objNavDTO = new NavDTO();
+        if(shop.isPresent()){
+            objNavDTO.setIsActive(shop.get().getIsActive());
+            objNavDTO.setShopName(shop.get().getShopName());
+        }
+        return objNavDTO;
     }
 
 

@@ -23,6 +23,7 @@ import com.nearShop.java.dto.AddProductDTO;
 import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.ShopSubCategoryDTO;
+import com.nearShop.java.dto.RequestDTO.NavDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
@@ -64,6 +65,16 @@ public class ShopkeeperController {
             return ResponseEntity.status(500).body("Error");
         }
 
+    }
+
+    @GetMapping("/getNavData")
+    public ResponseEntity<?> getNavData(HttpServletRequest req){
+        try{
+            NavDTO objNavDTO = objShopkeeperServices.getNavData(req);
+            return ResponseEntity.ok(objNavDTO);
+        }catch(Exception e){
+            return ResponseEntity.status(500).body("Error");
+        }
     }
 
     @GetMapping("/getAllInvertoryData")
@@ -207,6 +218,16 @@ public class ShopkeeperController {
 
         }catch(Exception e){
             return ResponseEntity.status(500).body("Error" + e.getMessage());
+        }
+    }
+
+    @PostMapping("/updateShopProfile")
+    public ResponseEntity<?> updateShopProfile(HttpServletRequest req , @RequestBody ShopProfileDTO objShopProfileDTO){
+        try{
+            String isUpdated = objShopkeeperServices.updateShopProfile(req,objShopProfileDTO);
+            return ResponseEntity.ok(isUpdated);
+        }catch(Exception e){
+            return ResponseEntity.status(500).body("Error while Updating");
         }
     }
 }

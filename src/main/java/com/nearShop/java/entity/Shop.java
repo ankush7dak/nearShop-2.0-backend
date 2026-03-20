@@ -20,6 +20,10 @@ public class Shop {
     @Column(name = "shop_name", nullable = false)
     private String shopName;
 
+    private Boolean providesDelivery;
+
+    private Integer deliveryRange;
+
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,7 +48,7 @@ public class Shop {
     private String status;
 
     @Column(name = "is_active")
-    private Boolean isActive = false;
+    private Boolean isActive;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "approved_by")
