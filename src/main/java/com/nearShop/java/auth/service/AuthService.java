@@ -2,6 +2,7 @@ package com.nearShop.java.auth.service;
 import com.nearShop.java.auth.dto.LoginRequest;
 import com.nearShop.java.entity.User;
 import com.nearShop.java.repository.UserRepository;
+import com.nearShop.java.repository.UserRoleRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.utilities.NearShopUtility;
 import jakarta.servlet.http.Cookie;
@@ -23,6 +24,9 @@ public class AuthService {
     private JwtUtil jwtUtil;
     @Autowired
     private NearShopUtility objNearShopUtility;
+    @Autowired
+    private UserRoleRepository objUserRoleRepository;
+
 
     /**
      * Login user and generate JWT token
@@ -69,5 +73,13 @@ public class AuthService {
             cookie.setMaxAge(24 * 60 * 60);
 
             return cookie;
+    }
+
+    public List<String> getUserRoles(String mobile) {
+        Optional<User> user = userRepository.findByMobile(mobile);
+        List<String> roles = null;
+        if(user.isPresent())
+         roles= objUserRoleRepository.getRoles(user.get().getId());
+        return roles;
     }
 }

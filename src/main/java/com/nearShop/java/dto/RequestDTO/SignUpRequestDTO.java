@@ -10,4 +10,5 @@ public class SignUpRequestDTO {
     private String otp;
     private String name;
     private String email;
+    private Boolean verifyingforRoleAccess;
 }

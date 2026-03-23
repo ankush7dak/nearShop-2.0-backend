@@ -52,7 +52,7 @@ public class ShopkeeperServices {
     @Autowired
     CategoryRepository objCategoryRepository;
     @Autowired
-    GCSService objGcsService;
+    R2Service objR2Service;
     @Autowired
     ShopRepository objShopRepository;
     @Autowired
@@ -106,7 +106,7 @@ public class ShopkeeperServices {
     shop.setLongitude(Double.parseDouble(shopDTO.getLongitude()));
     // Handle logo (optional)
     if (logo != null && !logo.isEmpty()) {
-        shop.setLogoUrl(objGcsService.uploadFile(logo));
+        shop.setLogoUrl(objR2Service.uploadFile(logo));
     }
 
     // Save to database

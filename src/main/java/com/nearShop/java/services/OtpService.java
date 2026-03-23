@@ -69,9 +69,11 @@ public class OtpService {
 
     // ---------- Verify OTP ----------
     public boolean verifyOtp(SignUpRequestDTO objSignUpRequestDTO) {
-        logger.info("Verifying OTP for mobile: {}, role: {}", objSignUpRequestDTO.getMobile(), objSignUpRequestDTO.getRole());
+        logger.info("Verifying OTP for mobile: {}, role: {}", objSignUpRequestDTO.getMobile(),
+                objSignUpRequestDTO.getRole());
 
-        OtpVerification otpEntity = otpRepository.findTopByMobileAndOtpOrderByIdDesc(objSignUpRequestDTO.getMobile(), objSignUpRequestDTO.getOtp())
+        OtpVerification otpEntity = otpRepository
+                .findTopByMobileAndOtpOrderByIdDesc(objSignUpRequestDTO.getMobile(), objSignUpRequestDTO.getOtp())
                 .orElseThrow(() -> new RuntimeException("Invalid OTP"));
 
         if (otpEntity.isVerified()) {
@@ -81,6 +83,13 @@ public class OtpService {
 
         if (otpEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
             logger.warn("OTP expired for mobile: {}", objSignUpRequestDTO.getMobile());
+
+            return false;
+        }
+
+        if (!otpEntity.getMobile().equalsIgnoreCase(objSignUpRequestDTO.getMobile())) {
+            logger.warn("Mobile no not Matched: {}", objSignUpRequestDTO.getMobile());
+
             return false;
         }
 
@@ -89,13 +98,14 @@ public class OtpService {
         logger.info("OTP marked as verified for mobile: {}", objSignUpRequestDTO.getMobile());
 
         // ---------- Create or fetch user ----------
-        User user = userRepository.findByMobile(objSignUpRequestDTO.getMobile()).orElseGet(() -> {
+        if(!objSignUpRequestDTO.getVerifyingforRoleAccess()){
+            User user = userRepository.findByMobile(objSignUpRequestDTO.getMobile()).orElseGet(() -> {
             logger.info("Creating new user for mobile: {}", objSignUpRequestDTO.getMobile());
 
             User newUser = User.builder()
                     .mobile(objSignUpRequestDTO.getMobile())
                     .isMobileVerified(true)
-                    .status((objSignUpRequestDTO.getRole() == "shopkeeper")?"PENDING":"ACTIVE")
+                    .status((objSignUpRequestDTO.getRole() == "shopkeeper") ? "PENDING" : "ACTIVE")
                     .createdAt(LocalDateTime.now())
                     .password(objSignUpRequestDTO.getPassword())
                     .email(objSignUpRequestDTO.getEmail())
@@ -113,8 +123,44 @@ public class OtpService {
 
             return newUser;
         });
+        }
+        else{
+            Optional<User> user = userRepository.findByMobile(objSignUpRequestDTO.getMobile());
+            if(user.isPresent()){
+                Role role = roleRepository.findByName(objSignUpRequestDTO.getRole())
+                    .orElseThrow(() -> new RuntimeException("Role not found: " + objSignUpRequestDTO.getRole()));
+            userRoleRepository.save(UserRole.builder().user(user.get()).role(role).build());
+            }
+        }
 
         // ---------- Generate JWT ----------
         return true;
     }
+
+    public String sendOtpForRole(String mobile, String roleSelected) {
+        logger.info("Sending OTP for mobile: {}, role: {}", mobile, roleSelected);
+
+        String otp = String.valueOf((int) (Math.random() * 900000) + 100000); // 6-digit OTP
+        Optional<User> user = userRepository.findByMobile(mobile);
+
+        if (!user.isPresent()) {
+            logger.warn("User already exists for mobile: {}", mobile);
+            return "User Not Exists";
+        }
+
+        OtpVerification otpEntity = OtpVerification.builder()
+                .mobile(mobile)
+                .otp(otp)
+                .expiresAt(LocalDateTime.now().plusMinutes(5))
+                .verified(false)
+                .build();
+
+        otpRepository.save(otpEntity);
+
+        logger.info("OTP saved to DB for mobile: {} - OTP: {}", mobile, otp);
+        System.out.println("OTP for " + mobile + " : " + otp); // temporary dev print
+
+        return "OTP Sent Successfully";
+    }
+
 }

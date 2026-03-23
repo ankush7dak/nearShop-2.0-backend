@@ -29,7 +29,7 @@ import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
-import com.nearShop.java.services.GCSService;
+import com.nearShop.java.services.R2Service;
 import com.nearShop.java.services.ShopkeeperServices;
 import com.nearShop.java.utilities.NearShopUtility;
 
@@ -50,8 +50,8 @@ public class ShopkeeperController {
     @Autowired
     ShopRepository objShopRepository;
     @Autowired
-    GCSService objGCSService;
-    @Autowired
+    R2Service objR2Service;
+
 
     @GetMapping("/getDashboardData")
     public ResponseEntity<?> getDashboardData(HttpServletRequest req){
@@ -195,7 +195,7 @@ public class ShopkeeperController {
     ){
         try{
             Long userId = objNearShopUtility.getUserIdUsingRequest(request);
-            String productImageLink = objGCSService.uploadFile(productImage);
+            String productImageLink = objR2Service.uploadFile(productImage);
             String resMessage = objShopkeeperServices.addProduct(addProductDTO,userId,productImageLink);
             return ResponseEntity.ok(resMessage);
 

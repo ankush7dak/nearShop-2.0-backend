@@ -6,7 +6,6 @@ plugins {
 
 group = 'com.nearShop.java'
 version = '0.0.1-SNAPSHOT'
-description = 'nearShop backend'
 
 java {
 	toolchain {
@@ -20,50 +19,41 @@ repositories {
 
 dependencies {
 
-	// Google Cloud Storage SDK
-    implementation 'com.google.cloud:google-cloud-storage:2.30.0'
-	// -------------------- WEB --------------------
+	// 🌐 Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// -------------------- JPA & DATABASE --------------------
+	// 🗄️ JPA + MySQL
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.mysql:mysql-connector-j'
-	implementation 'org.modelmapper:modelmapper:3.2.0'
 
-	// -------------------- SECURITY --------------------
+	// 🔐 Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	// -------------------- VALIDATION --------------------
+	// ✅ Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	// -------------------- JWT --------------------
+	// 🔑 JWT
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-	// -------------------- LOMBOK --------------------
+	// 📦 Model Mapper
+	implementation 'org.modelmapper:modelmapper:3.2.0'
+
+	// ☁️ Cloudflare R2 (via S3 SDK)
+	implementation 'software.amazon.awssdk:s3:2.25.20'
+
+	// 🧰 Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
 
-	// -------------------- DEVTOOLS --------------------
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	// 🔄 DevTools
+	// developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	// -------------------- TESTING --------------------
+	// 🧪 Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-
-bootJar {
-	mainClass = 'com.nearShop.java.NearShopApplication'
-}
-
-tasks.named('bootRun') {
-    mainClass.set('com.nearShop.java.NearShopApplication')
 }

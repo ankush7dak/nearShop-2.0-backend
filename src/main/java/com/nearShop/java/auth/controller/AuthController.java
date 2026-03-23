@@ -6,6 +6,12 @@ import com.nearShop.java.auth.dto.OtpVerifyRequest;
 import com.nearShop.java.auth.dto.response.LoginResponse;
 import com.nearShop.java.auth.service.AuthService;
 import com.nearShop.java.dto.RequestDTO.SignUpRequestDTO;
+import com.nearShop.java.entity.Role;
+import com.nearShop.java.entity.User;
+import com.nearShop.java.entity.UserRole;
+import com.nearShop.java.repository.RoleRepository;
+import com.nearShop.java.repository.UserRepository;
+import com.nearShop.java.repository.UserRoleRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.OtpService;
 import com.nearShop.java.utilities.NearShopUtility;
@@ -18,7 +24,10 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +50,12 @@ public class AuthController {
     private JwtUtil jwtUtil;
     @Autowired
     private NearShopUtility objNearShopUtility;
+    @Autowired
+    private UserRepository objUserRepository;
+    @Autowired
+    private RoleRepository objRoleRepository;
+    @Autowired
+    private UserRoleRepository objuUserRoleRepository;
 
     // ================= LOGIN =================
     @PostMapping("/login")
@@ -80,6 +95,16 @@ public class AuthController {
             logger.error("Exception during login", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Something went wrong during login");
+        }
+    }
+
+    @GetMapping("/getUserRoles")
+    public ResponseEntity<?> getUserRoles(@RequestParam String mobile) {
+        try {
+            List<String> roles = authService.getUserRoles(mobile);
+            return ResponseEntity.ok(roles);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
         }
     }
 
@@ -146,21 +171,36 @@ public class AuthController {
         }
     }
 
-    // ================= VERIFY OTP =================
-    @PostMapping("/verify-otp")
-    public ResponseEntity<?> verifyOtp(@RequestBody SignUpRequestDTO objSignUpRequestDTO, HttpServletResponse response) {
+    @PostMapping("/send-otp-forRole")
+    public ResponseEntity<String> sendOtpForRole(@RequestBody SignUpRequestDTO request) {
 
         try {
-            // if (request == null ||
-            //         request.getMobile() == null ||
-            //         request.getOtp() == null ||
-            //         request.getPassword() == null ||
-            //         request.getRole() == null) {
+            if (request == null || request.getMobile() == null || request.getRole() == null) {
+                logger.warn("OTP send failed: Missing mobile or role");
+                return ResponseEntity.badRequest().body("Mobile and role are required");
+            }
 
-            //     logger.warn("OTP verification failed: Missing required fields");
-            //     return ResponseEntity.badRequest().body("All fields are required");
-            // }
+            logger.info("Sending OTP to mobile: {}", request.getMobile());
 
+            String msg = otpService.sendOtpForRole(request.getMobile(), request.getRole());
+
+            logger.info("OTP sent successfully to mobile: {}", request.getMobile());
+
+            return ResponseEntity.ok(msg);
+
+        } catch (Exception e) {
+            logger.error("Exception while sending OTP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to send OTP");
+        }
+    }
+
+    // ================= VERIFY OTP =================
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@RequestBody SignUpRequestDTO objSignUpRequestDTO, HttpServletRequest request,
+            HttpServletResponse response) {
+
+        try {
             logger.info("Verifying OTP for mobile: {}", objSignUpRequestDTO.getMobile());
 
             boolean isVerified = otpService.verifyOtp(objSignUpRequestDTO);
@@ -172,24 +212,31 @@ public class AuthController {
             }
 
             logger.info("OTP verified successfully for mobile: {}", objSignUpRequestDTO.getMobile());
-            LoginRequest objLoginRequest = new LoginRequest();
-            objLoginRequest.setMobile(objSignUpRequestDTO.getMobile());
-            objLoginRequest.setPassword(objSignUpRequestDTO.getPassword());
-            objLoginRequest.setLoginRole(objSignUpRequestDTO.getRole());
+            if (!objSignUpRequestDTO.getVerifyingforRoleAccess()) {
+                LoginRequest objLoginRequest = new LoginRequest();
+                objLoginRequest.setMobile(objSignUpRequestDTO.getMobile());
+                objLoginRequest.setPassword(objSignUpRequestDTO.getPassword());
+                objLoginRequest.setLoginRole(objSignUpRequestDTO.getRole());
 
-            String token = authService.login(objLoginRequest);
+                String token = authService.login(objLoginRequest);
 
-            if (token == null || token.isEmpty()) {
-                logger.error("Token generation failed for mobile: {}", objLoginRequest.getMobile());
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+                if (token == null || token.isEmpty()) {
+                    logger.error("Token generation failed for mobile: {}", objLoginRequest.getMobile());
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+                }
+
+                Cookie cookie = authService.createCookie(token);
+                response.addCookie(cookie);
+                logger.info("Login successful for mobile: {}", objLoginRequest.getMobile());
+
             }
 
-            Cookie cookie = authService.createCookie(token);
-            response.addCookie(cookie);
-
-            logger.info("Login successful for mobile: {}", objLoginRequest.getMobile());
-
-            return ResponseEntity.ok("Signup Success");
+            String msg = "";
+            if (objSignUpRequestDTO.getVerifyingforRoleAccess())
+                msg = "Role added";
+            else
+                msg = "Signup Success";
+            return ResponseEntity.ok(msg);
 
         } catch (Exception e) {
             logger.error("Exception during OTP verification", e);

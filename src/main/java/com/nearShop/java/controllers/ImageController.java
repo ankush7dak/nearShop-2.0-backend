@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nearShop.java.services.GCSService;
+import com.nearShop.java.services.R2Service;
 
 import io.jsonwebtoken.io.IOException;
 import lombok.RequiredArgsConstructor;
@@ -18,14 +18,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ImageController {
     @Autowired
-    GCSService gcsService;
+    R2Service r2Service;
 
     @PostMapping("/upload")
     public ResponseEntity<String> upload(
             @RequestParam("file") MultipartFile file)
             throws IOException, java.io.IOException {
 
-        String url = gcsService.uploadFile(file);
+        String url = r2Service.uploadFile(file);
         return ResponseEntity.ok(url);
     }
 }
