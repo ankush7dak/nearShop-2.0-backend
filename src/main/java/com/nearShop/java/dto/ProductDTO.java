@@ -14,6 +14,7 @@ public class ProductDTO {
     private Integer stock;
     private String weight;
     private Boolean isAvailable;
+    private String imageLink;
     // Instead of full objects, send only IDs or names
     private Long shopId;
     private String shopSubcategoryName;

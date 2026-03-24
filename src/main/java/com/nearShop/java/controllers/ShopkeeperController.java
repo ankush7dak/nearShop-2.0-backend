@@ -27,6 +27,7 @@ import com.nearShop.java.dto.RequestDTO.NavDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
+import com.nearShop.java.dto.ResponseDTO.UpdateProductDTO;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.R2Service;
@@ -207,14 +208,18 @@ public class ShopkeeperController {
      @PostMapping("/updateProduct")
     public ResponseEntity<?> updateProduct(
                         HttpServletRequest request,
-                        @RequestBody ProductDTO productDTO
+                        @ModelAttribute ProductDTO productDTO,
+                        @RequestParam("productImage") MultipartFile productImage
                         
     ){
         try{
             Long userId = objNearShopUtility.getUserIdUsingRequest(request);
             // String productImageLink = objGCSService.uploadFile(productImage);
-            String resMessage = objShopkeeperServices.updateProduct(productDTO,userId);
-            return ResponseEntity.ok(resMessage);
+            String ImageLink = objShopkeeperServices.updateProduct(productDTO,userId,productImage);
+            UpdateProductDTO objUpdateProductDTO = new UpdateProductDTO();
+            objUpdateProductDTO.setImageLink(ImageLink);
+            objUpdateProductDTO.setMessage("Product date Updated Successfully!!");
+            return ResponseEntity.ok(objUpdateProductDTO);
 
         }catch(Exception e){
             return ResponseEntity.status(500).body("Error" + e.getMessage());

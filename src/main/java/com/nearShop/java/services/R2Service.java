@@ -31,8 +31,8 @@ public class R2Service {
                 RequestBody.fromBytes(file.getBytes())
         );
 
-        return "https://013976dd37fa395dc9d2f09ec8709cf4.r2.cloudflarestorage.com/"
-                + bucketName + "/" + key;
+        return "https://pub-22d0a364b7b44f3a9521eed1c0ec7b5e.r2.dev"
+                + "/" + key;
 
     } catch (IOException e) {
         throw new RuntimeException("File upload failed", e);

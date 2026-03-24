@@ -50,6 +50,8 @@ public class Product {
     @Column(name = "is_available")
     private Boolean isAvailable = false;
 
+    private String imageLink;
+
     // One product has many inventory logs
     // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     // private List<InventoryLog> inventoryLogs;

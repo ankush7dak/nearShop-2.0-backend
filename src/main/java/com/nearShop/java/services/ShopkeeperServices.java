@@ -178,6 +178,7 @@ public class ShopkeeperServices {
         product.setWeight(addProductDTO.getWeight());
         product.setCost(addProductDTO.getCost());
         product.setDescription(addProductDTO.getDescription());
+        product.setImageLink(productImageLink);
 
         Integer isSubCategory =  objSubCategoryRepository.getSubCategoryCount(addProductDTO.getShopSubcategoryName());
         if(isSubCategory >= 1){
@@ -231,9 +232,10 @@ public class ShopkeeperServices {
         }
     }
 
-    public String updateProduct(ProductDTO productDTO, Long userId) {
+    public String updateProduct(ProductDTO productDTO, Long userId ,MultipartFile productimage) {
         // TODO Auto-generated method stub
         Optional<Product> objProduct = objProductRepository.findById(productDTO.getProductId());
+        String link = null;
         if(null!= objProduct &&  objProduct.isPresent()){
             Product product = objProduct.get();
             product.setCost(productDTO.getCost());
@@ -241,8 +243,12 @@ public class ShopkeeperServices {
             product.setIsAvailable(productDTO.getIsAvailable());
             product.setPrice(productDTO.getPrice());
             product.setStock(productDTO.getStock());
+            if(productimage != null){
+                link = objR2Service.uploadFile(productimage);
+                product.setImageLink(link);
+            }
             objProductRepository.save(product);
-            return "Product Data Updated!!";
+            return link;
         }
         else{
             throw new RuntimeException("Product not found");
