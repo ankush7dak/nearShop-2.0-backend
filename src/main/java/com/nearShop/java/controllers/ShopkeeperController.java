@@ -1,6 +1,7 @@
 package com.nearShop.java.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +32,7 @@ import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.dto.ResponseDTO.UpdateProductDTO;
+import com.nearShop.java.entity.Product;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
 import com.nearShop.java.services.R2Service;
@@ -52,40 +57,61 @@ public class ShopkeeperController {
     ShopRepository objShopRepository;
     @Autowired
     R2Service objR2Service;
-
+    @Autowired
+    ModelMapper objModelMapper;
 
     @GetMapping("/getDashboardData")
-    public ResponseEntity<?> getDashboardData(HttpServletRequest req){
-        try{
+    public ResponseEntity<?> getDashboardData(HttpServletRequest req) {
+        try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(req);
-        ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
-        objShopkeeperDashboardDTO = objShopkeeperServices.getDashboardData(userId);
-        // fetching product count
-        return ResponseEntity.ok(objShopkeeperDashboardDTO);
-        }catch(Exception e){
+            ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
+            objShopkeeperDashboardDTO = objShopkeeperServices.getDashboardData(userId);
+            // fetching product count
+            return ResponseEntity.ok(objShopkeeperDashboardDTO);
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error");
         }
 
     }
 
     @GetMapping("/getNavData")
-    public ResponseEntity<?> getNavData(HttpServletRequest req){
-        try{
+    public ResponseEntity<?> getNavData(HttpServletRequest req) {
+        try {
             NavDTO objNavDTO = objShopkeeperServices.getNavData(req);
             return ResponseEntity.ok(objNavDTO);
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error");
         }
     }
 
     @GetMapping("/getAllInvertoryData")
-    public ResponseEntity<ShopInventoryDataDTO> getAllInvertoryData(HttpServletRequest req){
+    public ResponseEntity<ShopInventoryDataDTO> getAllInvertoryData(HttpServletRequest req,
+            @RequestParam("page") Integer page,
+            @RequestParam("size") Integer size,
+            @RequestParam("search") String search,
+            @RequestParam("category") String category) {
         ShopInventoryDataDTO objShopInventoryDataDTO = new ShopInventoryDataDTO();
-        try{
+        try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(req);
-            objShopInventoryDataDTO = objShopkeeperServices.getAllInvertoryData(objShopInventoryDataDTO,userId);
+            Page<Product> productPage = objShopkeeperServices.getInventory(page, size, search, category,userId);
+            List<ProductDTO> productDTOList = productPage.getContent().stream().map(product -> {
+                ProductDTO dto = objModelMapper.map(product, ProductDTO.class);
+                dto.setShopId(product.getShop().getId());
+                if (product.getShopSubcategory() != null) {
+                    dto.setShopSubcategoryName(product.getShopSubcategory().getName());
+                } else if (product.getSubcategory() != null) {
+                    dto.setSubcategoryName(product.getSubcategory().getName());
+                }
+                return dto;
+            }).toList();
+            objShopInventoryDataDTO.setIsLastPage(productPage.isLast());
+            objShopInventoryDataDTO.setProductDTOList(productDTOList);
+
+            
+            // objShopInventoryDataDTO =
+            // objShopkeeperServices.getAllInvertoryData(objShopInventoryDataDTO,userId);
             return ResponseEntity.ok(objShopInventoryDataDTO);
-        }catch(Exception e){
+        } catch (Exception e) {
             objShopInventoryDataDTO.setErrCode("ERROR");
             objShopInventoryDataDTO.setErrMsg(e.getMessage());
             return ResponseEntity.status(500).body(objShopInventoryDataDTO);
@@ -124,13 +150,13 @@ public class ShopkeeperController {
     }
 
     @GetMapping("/getShopProfile")
-    public ResponseEntity<?> getShopProfile(HttpServletRequest request){
-        try{
+    public ResponseEntity<?> getShopProfile(HttpServletRequest request) {
+        try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(request);
             ShopProfileDTO objShopProfileDTO = new ShopProfileDTO();
-            objShopProfileDTO = objShopkeeperServices.getShopProfile(objShopProfileDTO,userId);
+            objShopProfileDTO = objShopkeeperServices.getShopProfile(objShopProfileDTO, userId);
             return ResponseEntity.ok(objShopProfileDTO);
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error");
         }
     }
@@ -190,51 +216,48 @@ public class ShopkeeperController {
 
     @PostMapping("/addProduct")
     public ResponseEntity<?> addProduct(
-                        HttpServletRequest request,
-                        @ModelAttribute AddProductDTO addProductDTO,
-                        @RequestParam("productImage") MultipartFile productImage
-    ){
-        try{
+            HttpServletRequest request,
+            @ModelAttribute AddProductDTO addProductDTO,
+            @RequestParam("productImage") MultipartFile productImage) {
+        try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(request);
             String productImageLink = objR2Service.uploadFile(productImage);
-            String resMessage = objShopkeeperServices.addProduct(addProductDTO,userId,productImageLink);
+            String resMessage = objShopkeeperServices.addProduct(addProductDTO, userId, productImageLink);
             return ResponseEntity.ok(resMessage);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error" + e.getMessage());
         }
     }
 
-     @PostMapping("/updateProduct")
+    @PostMapping("/updateProduct")
     public ResponseEntity<?> updateProduct(
-                        HttpServletRequest request,
-                        @ModelAttribute ProductDTO productDTO,
-                        @RequestParam("productImage") MultipartFile productImage
-                        
-    ){
-        try{
+            HttpServletRequest request,
+            @ModelAttribute ProductDTO productDTO,
+            @RequestParam("productImage") MultipartFile productImage
+
+    ) {
+        try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(request);
             // String productImageLink = objGCSService.uploadFile(productImage);
-            String ImageLink = objShopkeeperServices.updateProduct(productDTO,userId,productImage);
+            String ImageLink = objShopkeeperServices.updateProduct(productDTO, userId, productImage);
             UpdateProductDTO objUpdateProductDTO = new UpdateProductDTO();
             objUpdateProductDTO.setImageLink(ImageLink);
             objUpdateProductDTO.setMessage("Product date Updated Successfully!!");
             return ResponseEntity.ok(objUpdateProductDTO);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error" + e.getMessage());
         }
     }
 
     @PostMapping("/updateShopProfile")
-    public ResponseEntity<?> updateShopProfile(HttpServletRequest req , @RequestBody ShopProfileDTO objShopProfileDTO){
-        try{
-            String isUpdated = objShopkeeperServices.updateShopProfile(req,objShopProfileDTO);
+    public ResponseEntity<?> updateShopProfile(HttpServletRequest req, @RequestBody ShopProfileDTO objShopProfileDTO) {
+        try {
+            String isUpdated = objShopkeeperServices.updateShopProfile(req, objShopProfileDTO);
             return ResponseEntity.ok(isUpdated);
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("Error while Updating");
         }
     }
 }
-
-
