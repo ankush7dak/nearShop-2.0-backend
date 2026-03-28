@@ -19,6 +19,10 @@ public interface ShopRepository extends JpaRepository<Shop,Long>{
              select category_id from nearshop.shops where owner_id = ?1
             """, nativeQuery = true)
     public Long getShopCategoryId(Long user_id);
+    @Query(value = """
+             select category_id from nearshop.shops where id = ?1
+            """, nativeQuery = true)
+    public Long getShopCategoryIdByShopId(Long shopId);
      @Query(value = """
              select id from nearshop.shops where owner_id = ?1
             """, nativeQuery = true)
