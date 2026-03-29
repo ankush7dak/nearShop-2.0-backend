@@ -12,10 +12,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.nearShop.java.dto.ProductDTO;
+import com.nearShop.java.entity.Category;
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
 import com.nearShop.java.entity.ShopSubcategory;
 import com.nearShop.java.entity.SubCategory;
+import com.nearShop.java.repository.CategoryRepository;
 import com.nearShop.java.repository.ProductRepository;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.repository.ShopSubcategoryRepository;
@@ -32,11 +34,10 @@ public class CustomerServices {
     ProductRepository objProductRepository;
     @Autowired
     ShopSubcategoryRepository objShopSubcategoryRepository;
+    @Autowired
+    CategoryRepository objcCategoryRepository;
 
-    public List<Shop> getShopDate() {
-        // TODO Auto-generated method stub
-        return objShopRepository.findAll();
-    }
+    
 
     public Page<Product> getProductsForShopId(Integer page, Integer size, String search, String category, Long shopId) {
         // TODO Auto-generated method stub
@@ -63,5 +64,17 @@ public class CustomerServices {
         shopSubCategories.addAll(objSubCategoryRepository.getShopSubCategories(categoryId));
         return shopSubCategories;
 
+    }
+
+    public Page<Shop> getShopData(String shopSearch, String shopCategory, Long shopDistanceRange,  Integer shopPage, Integer shopSize ,Double userLatitude, Double userLongitude) {
+        // TODO Auto-generated method stub
+        Pageable pageable = PageRequest.of(shopPage, shopSize);
+        Optional<Category> cat = objcCategoryRepository.findByName(shopCategory);
+        Long catId = null;
+        if(cat.isPresent()){
+            catId = cat.get().getId();
+        }
+
+        return objShopRepository.fetchShopData(shopSearch,catId,shopDistanceRange , userLatitude , userLongitude,pageable);
     }
 }

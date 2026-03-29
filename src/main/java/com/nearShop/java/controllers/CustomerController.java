@@ -43,10 +43,18 @@ public class CustomerController {
     ShopkeeperServices objShopkeeperServices;
 
     @GetMapping("/getShopData")
-    ResponseEntity<?> getShopData(HttpServletRequest req){
+    ResponseEntity<?> getShopData(HttpServletRequest req,
+        @RequestParam Long shopDistanceRange,
+        @RequestParam String shopSearch,
+        @RequestParam  String shopCategory,
+        @RequestParam Integer shopPage,
+        @RequestParam Integer shopSize,
+        @RequestParam Double userLatitude,
+        @RequestParam Double userLongitude
+    ){
         try{
-            List<Shop> shops = objCustomerServices.getShopDate();
-            List<ShopDTO> shopDtoList = shops.stream().map(shop->{
+            Page<Shop> shops = objCustomerServices.getShopData(shopSearch,shopCategory ,shopDistanceRange ,shopPage,shopSize,userLatitude,userLongitude);
+            List<ShopDTO> shopDtoList = shops.getContent().stream().map(shop->{
                 ShopDTO shopDto = objModelMapper.map(shop,ShopDTO.class);
                 Optional<Category> category = objCategoryRepository.findById(shop.getCategory().getId());
                 shopDto.setCategoryName(category.get().getName());
