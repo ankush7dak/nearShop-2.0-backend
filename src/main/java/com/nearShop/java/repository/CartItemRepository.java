@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nearShop.java.entity.CartItem;
 
@@ -17,5 +19,16 @@ public interface CartItemRepository extends JpaRepository<CartItem,Long> {
             select * from nearshop.cart_items ci where ci.cart_id = ?1
             """, nativeQuery = true)
     List<CartItem> getAllCartData(Long cartId);
+        @Modifying
+        @Transactional
+    @Query(value = """
+            delete from nearshop.cart_items ci where ci.cart_id = ?1
+            """, nativeQuery = true)
+    void deleteCartItems(Long cartId);
+
+     @Query(value = """
+            select count(*) from nearshop.cart_items ci where ci.cart_id = ?1
+            """, nativeQuery = true)
+    Integer getCountOfItems(Long cartId);
     
 }

@@ -9,11 +9,11 @@ import com.nearShop.java.entity.Cart;
 
 public interface CartRepository extends JpaRepository<Cart,Long> {
     @Query(value = """
-            select count(*) from nearshop.cart c where c.user_id =?2 and c.shop_id = ?1
+            select count(*) from nearshop.cart c where c.user_id =?1
             """, nativeQuery = true)
-     public Integer isCartAvailable(Long shopId,Long userId);
+     public Integer isCartAvailable(Long userId);
     @Query(value = """
-            select * from nearshop.cart c where c.user_id =?2 and c.shop_id = ?1
+            select * from nearshop.cart c where c.user_id =?1
             """, nativeQuery = true)
-     public Optional<Cart> getCartData(Long shopId, Long userId);
+     public Optional<Cart> getCartData(Long userId);
 }

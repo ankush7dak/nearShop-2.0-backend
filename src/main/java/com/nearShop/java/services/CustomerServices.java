@@ -88,8 +88,8 @@ public class CustomerServices {
                 pageable);
     }
 
-    public Map<Long, Integer> getCartQuantities(Long userId, Long shopId) {
-        Optional<Cart> cart = objCartRepository.getCartData(shopId, userId);
+    public Map<Long, Integer> getCartQuantities(Long userId) {
+        Optional<Cart> cart = objCartRepository.getCartData( userId);
 
         if (!cart.isPresent()) {
             return new HashMap<>();

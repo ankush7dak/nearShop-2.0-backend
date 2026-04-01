@@ -234,7 +234,7 @@ public class ShopkeeperController {
     public ResponseEntity<?> updateProduct(
             HttpServletRequest request,
             @ModelAttribute ProductDTO productDTO,
-            @RequestParam("productImage") MultipartFile productImage
+            @RequestParam(value = "productImage", required = false) MultipartFile productImage
 
     ) {
         try {

@@ -26,6 +26,7 @@ import com.nearShop.java.entity.User;
 import com.nearShop.java.repository.CartItemRepository;
 import com.nearShop.java.repository.CartRepository;
 import com.nearShop.java.repository.CategoryRepository;
+import com.nearShop.java.repository.ProductRepository;
 import com.nearShop.java.services.CustomerServices;
 import com.nearShop.java.services.ShopkeeperServices;
 import com.nearShop.java.utilities.NearShopUtility;
@@ -50,6 +51,8 @@ public class CustomerController {
     CartRepository objCartRepository;
     @Autowired
     CartItemRepository objCartItemRepository;
+    @Autowired
+    ProductRepository objProductRepository;
 
     @GetMapping("/getShopData")
     ResponseEntity<?> getShopData(HttpServletRequest req,
@@ -125,13 +128,56 @@ public class CustomerController {
 
     @GetMapping("/getCartQuantities")
     public ResponseEntity<?> getCartQuantities(HttpServletRequest req,
-        @RequestParam Long shopId
-    ) {
+            @RequestParam Long shopId) {
         Long userId = objNearShopUtility.getUserIdUsingRequest(req); // from session/JWT
 
-        Map<Long, Integer> data = objCustomerServices.getCartQuantities(userId,shopId);
+        Map<Long, Integer> data = objCustomerServices.getCartQuantities(userId);
 
         return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/getMyCartData")
+    public ResponseEntity<?> getMyCartData(HttpServletRequest req) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req); // from session/JWT
+            Optional<Cart> cart = objCartRepository.getCartData(userId);
+            List<ProductDTO> lstProductDTO = null;
+            if(cart.isPresent()){
+                List<Product> lstProducts = objProductRepository.getCartProducts(cart.get().getCartId());
+
+                lstProductDTO = lstProducts.stream().map(product ->{
+                    ProductDTO productDTO = objModelMapper.map(product, ProductDTO.class);
+                    productDTO.setShopId(product.getShop().getId());
+                    if(product.getShopSubcategory() != null){
+                        productDTO.setShopSubcategoryName(product.getShopSubcategory().getName());
+                    }
+                    else if(product.getSubcategory() != null){
+                        productDTO.setSubcategoryName(product.getSubcategory().getName());
+                    }
+                    return productDTO;
+                }).toList();
+            }
+            return ResponseEntity.ok(lstProductDTO);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
+        }
+    }
+
+    @PostMapping("/deleteCartItems")
+    ResponseEntity<?> deleteCartItems(HttpServletRequest req,
+            @RequestParam Long shopId) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+            Optional<Cart> cart = objCartRepository.getCartData(userId);
+            objCartItemRepository.deleteCartItems(cart.get().getCartId());
+            cart.get().setShopId(shopId);
+            objCartRepository.save(cart.get());
+
+            return ResponseEntity.ok("Success");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
+        }
     }
 
     @PostMapping("/addOrDeleteToCart")
@@ -142,14 +188,25 @@ public class CustomerController {
             @RequestParam String cartTask) {
         try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(req);
-            Integer isCartPresent = objCartRepository.isCartAvailable(shopId, userId);
+            Integer isCartPresent = objCartRepository.isCartAvailable(userId);
             if (isCartPresent < 1) {
                 Cart cart = new Cart();
                 cart.setShopId(shopId);
                 cart.setUserId(userId);
                 objCartRepository.save(cart);
             }
-            Optional<Cart> cart = objCartRepository.getCartData(shopId, userId);
+            Optional<Cart> cart = objCartRepository.getCartData(userId);
+            if (cart.isPresent()) {
+                if (!cart.get().getShopId().equals(shopId)) {
+                    Integer countOfCartData = objCartItemRepository.getCountOfItems(cart.get().getCartId());
+                    if (countOfCartData.equals(0)) {
+                        cart.get().setShopId(shopId);
+                        objCartRepository.save(cart.get());
+                    } else {
+                        return ResponseEntity.ok("clearCart");
+                    }
+                }
+            }
             Optional<CartItem> cartItem = objCartItemRepository.getCartItem(productId, cart.get().getCartId());
             if (!cartItem.isPresent()) {
                 CartItem cartItemNew = new CartItem();

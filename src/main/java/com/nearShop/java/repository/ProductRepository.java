@@ -38,4 +38,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             """, nativeQuery = true)
     public Page<Product> searchProducts(String search, Long category ,Long shopId,Pageable pageable);
 
+    @Query(value = """
+    select p.* from nearshop.products p, nearshop.cart_items ci where p.product_id = ci.product_id and ci.cart_id = ?1       
+    """,nativeQuery = true)
+    public List<Product> getCartProducts(Long cartId);
+
 }
