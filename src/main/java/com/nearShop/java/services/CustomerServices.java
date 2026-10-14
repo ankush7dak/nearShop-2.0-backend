@@ -1,5 +1,6 @@
 package com.nearShop.java.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +13,16 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.nearShop.java.dto.OrderItemDTO;
 import com.nearShop.java.dto.ProductDTO;
+import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
 import com.nearShop.java.entity.Cart;
 import com.nearShop.java.entity.CartItem;
 import com.nearShop.java.entity.Category;
+import com.nearShop.java.entity.Order;
+import com.nearShop.java.entity.OrderItem;
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
 import com.nearShop.java.entity.ShopSubcategory;
@@ -24,6 +30,7 @@ import com.nearShop.java.entity.SubCategory;
 import com.nearShop.java.repository.CartItemRepository;
 import com.nearShop.java.repository.CartRepository;
 import com.nearShop.java.repository.CategoryRepository;
+import com.nearShop.java.repository.OrderRepository;
 import com.nearShop.java.repository.ProductRepository;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.repository.ShopSubcategoryRepository;
@@ -46,6 +53,8 @@ public class CustomerServices {
     CartRepository objCartRepository;
     @Autowired
     CartItemRepository objCartItemRepository;
+    @Autowired
+    OrderRepository objOrderRepository;
 
     public Page<Product> getProductsForShopId(Integer page, Integer size, String search, String category, Long shopId) {
         // TODO Auto-generated method stub
@@ -104,5 +113,62 @@ public class CustomerServices {
         }
 
         return result;
+    }
+    @Transactional
+    public void placeOrder(Long userId, OrderRequestDTO orderRequest, Cart cart) {
+        // TODO Auto-generated method stub
+        
+       try{
+            Order order = new Order();
+
+            order.setUserId(userId);
+            order.setShopId(orderRequest.getShopId());
+
+            order.setSubtotal(orderRequest.getSubtotal());
+            order.setDiscount(orderRequest.getDiscount());
+            order.setDiscountAmount(orderRequest.getDiscountAmount());
+            order.setDeliveryFee(orderRequest.getDeliveryFee());
+            order.setTotalAmount(orderRequest.getTotalAmount());
+            order.setCouponCode(orderRequest.getCouponCode());
+            order.setTotalItems(orderRequest.getTotalItems());
+
+        // order.setOrderDate(
+        // orderRequest.getOrderDate() != null
+        //     ? orderRequest.getOrderDate()
+        //     : OffsetDateTime.now()
+        // );
+
+    order.setOrderStatus("PLACED");
+
+    // Create Order Items
+    ArrayList<OrderItem> orderItems = new ArrayList<>();
+
+    for (OrderItemDTO itemDTO : orderRequest.getItems()) {
+
+        OrderItem orderItem = new OrderItem();
+
+        orderItem.setProductId(itemDTO.getProductId());
+        orderItem.setProductName(itemDTO.getProductName());
+        orderItem.setPrice(itemDTO.getPrice());
+        orderItem.setQuantity(itemDTO.getQuantity());
+        orderItem.setItemTotal(itemDTO.getItemTotal());
+
+        // Important: set parent order
+        orderItem.setOrder(order);
+
+        orderItems.add(orderItem);
+    }
+
+    order.setItems(orderItems);
+
+    // Save order + order items
+    objOrderRepository.save(order);
+
+    // Clear cart after successful order
+        cart.getItems().clear();
+    objCartRepository.save(cart);
+       }catch(Exception e){
+        throw new RuntimeException("Error occurred while placing the order: " + e.getMessage());
+       }
     }
 }

@@ -10,12 +10,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
+import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.entity.Cart;
 import com.nearShop.java.entity.CartItem;
@@ -231,6 +233,23 @@ public class CustomerController {
             return ResponseEntity.ok("Success");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error");
+        }
+    }
+    @PostMapping("/placeOrder")
+    public ResponseEntity<?> placeOrder(HttpServletRequest req,
+             @RequestBody OrderRequestDTO orderRequest
+    ) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+            Optional<Cart> cart = objCartRepository.getCartData(userId);
+            if (!cart.isPresent()) {
+                return ResponseEntity.status(400).body("Cart is empty");
+            }
+            // Implementation for placing the order
+            objCustomerServices.placeOrder(userId, orderRequest, cart.get());
+            return ResponseEntity.ok("Order placed successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error occurred while placing the order");
         }
     }
 }
