@@ -1,0 +1,66 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.nearShop.java'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// 🌐 Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// 🗄️ JPA + MySQL
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// 🔐 Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// ✅ Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// 🔑 JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// 📦 Model Mapper
+	implementation 'org.modelmapper:modelmapper:3.2.0'
+
+	// ☁️ Cloudflare R2 (via S3 SDK)
+	implementation 'software.amazon.awssdk:s3:2.25.20'
+
+	// 🧰 Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+	
+	
+
+	// 🔄 DevTools
+	// developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// 🧪 Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

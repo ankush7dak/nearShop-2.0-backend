@@ -1,0 +1,355 @@
+package com.nearShop.java.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.nearShop.java.auth.controller.AuthController;
+import com.nearShop.java.dto.AddProductDTO;
+import com.nearShop.java.dto.ProductDTO;
+import com.nearShop.java.dto.ShopDTO;
+import com.nearShop.java.dto.ShopSubCategoryDTO;
+import com.nearShop.java.dto.RequestDTO.NavDTO;
+import com.nearShop.java.dto.RequestDTO.UpdateOrderStatusRequest;
+import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
+import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
+import com.nearShop.java.dto.ResponseDTO.UpdateProductDTO;
+import com.nearShop.java.entity.Order;
+import com.nearShop.java.entity.Product;
+import com.nearShop.java.repository.ShopRepository;
+import com.nearShop.java.security.jwt.JwtUtil;
+import com.nearShop.java.services.R2Service;
+import com.nearShop.java.services.ShopkeeperServices;
+import com.nearShop.java.utilities.NearShopUtility;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@RestController
+@RequestMapping("api/shop")
+public class ShopkeeperController {
+    @Autowired
+    ShopkeeperServices objShopkeeperServices;
+    @Autowired
+    NearShopUtility objNearShopUtility;
+    @Autowired
+    JwtUtil obJwtUtil;
+    @Autowired
+    ShopRepository objShopRepository;
+    @Autowired
+    R2Service objR2Service;
+    @Autowired
+    ModelMapper objModelMapper;
+
+    @GetMapping("/getDashboardData")
+    public ResponseEntity<?> getDashboardData(HttpServletRequest req) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+            ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
+            objShopkeeperDashboardDTO = objShopkeeperServices.getDashboardData(userId);
+            // fetching product count
+            return ResponseEntity.ok(objShopkeeperDashboardDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
+        }
+
+    }
+
+    @GetMapping("/getNavData")
+    public ResponseEntity<?> getNavData(HttpServletRequest req) {
+        try {
+            NavDTO objNavDTO = objShopkeeperServices.getNavData(req);
+            return ResponseEntity.ok(objNavDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
+        }
+    }
+
+    @GetMapping("/getAllInvertoryData")
+    public ResponseEntity<ShopInventoryDataDTO> getAllInvertoryData(HttpServletRequest req,
+            @RequestParam("page") Integer page,
+            @RequestParam("size") Integer size,
+            @RequestParam("search") String search,
+            @RequestParam("category") String category) {
+        ShopInventoryDataDTO objShopInventoryDataDTO = new ShopInventoryDataDTO();
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+            Page<Product> productPage = objShopkeeperServices.getInventory(page, size, search, category,userId);
+            List<ProductDTO> productDTOList = productPage.getContent().stream().map(product -> {
+                ProductDTO dto = objModelMapper.map(product, ProductDTO.class);
+                dto.setShopId(product.getShop().getId());
+                if (product.getShopSubcategory() != null) {
+                    dto.setShopSubcategoryName(product.getShopSubcategory().getName());
+                } else if (product.getSubcategory() != null) {
+                    dto.setSubcategoryName(product.getSubcategory().getName());
+                }
+                return dto;
+            }).toList();
+            objShopInventoryDataDTO.setIsLastPage(productPage.isLast());
+            objShopInventoryDataDTO.setProductDTOList(productDTOList);
+
+            
+            // objShopInventoryDataDTO =
+            // objShopkeeperServices.getAllInvertoryData(objShopInventoryDataDTO,userId);
+            return ResponseEntity.ok(objShopInventoryDataDTO);
+        } catch (Exception e) {
+            objShopInventoryDataDTO.setErrCode("ERROR");
+            objShopInventoryDataDTO.setErrMsg(e.getMessage());
+            return ResponseEntity.status(500).body(objShopInventoryDataDTO);
+        }
+    }
+
+    @GetMapping("/isShopRegistered")
+    public ResponseEntity<?> isShopRegistered(HttpServletRequest request) {
+        Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        boolean isRegistered = objShopkeeperServices.isShopRegistered(userId);
+
+        return ResponseEntity.ok((isRegistered) ? 1 : 0);
+    }
+
+    @GetMapping("/getAllShopCategories")
+    public ResponseEntity<?> getAllShopCategories(HttpServletResponse response) {
+        List<String> shopCategories = objShopkeeperServices.getAllShopCategories();
+        return ResponseEntity.ok(shopCategories);
+    }
+
+    @GetMapping("/getShopSubCategories")
+    public ResponseEntity<?> getShopSubCategories(HttpServletRequest request) {
+        try {
+            Logger logger = LoggerFactory.getLogger(getClass());
+
+            String token = objNearShopUtility.extractJwtFromCookies(request);
+            Claims claims = objNearShopUtility.claimParser(token);
+            Long userId = claims.get("userId", Long.class);
+            List<String> shopSubCategories = objShopkeeperServices.getShopSubCategories(userId);
+
+            return ResponseEntity.ok(shopSubCategories);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+        }
+
+    }
+
+    @GetMapping("/getShopProfile")
+    public ResponseEntity<?> getShopProfile(HttpServletRequest request) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+            ShopProfileDTO objShopProfileDTO = new ShopProfileDTO();
+            objShopProfileDTO = objShopkeeperServices.getShopProfile(objShopProfileDTO, userId);
+            return ResponseEntity.ok(objShopProfileDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
+        }
+    }
+
+    @PostMapping("/addShopSubCategory")
+    public ResponseEntity<?> addShopSubCategory(
+            HttpServletRequest request,
+            @RequestBody ShopSubCategoryDTO shopSubCategoryDTO) {
+
+        Logger logger = LoggerFactory.getLogger(getClass());
+
+        logger.info("Received request to add shop subcategory");
+
+        try {
+
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+            logger.info("User ID extracted from token: {}", userId);
+
+            Long shopId = objShopRepository.getShopId(userId);
+            if (shopId == null) {
+                logger.error("No shop found for userId: {}", userId);
+                return ResponseEntity.status(404).body("Shop not found for user");
+            }
+
+            logger.info("Shop ID found: {}", shopId);
+
+            objShopkeeperServices.addShopSubCategory(shopSubCategoryDTO, shopId);
+
+            logger.info("Subcategory '{}' added successfully for shopId: {}",
+                    shopSubCategoryDTO.getName(), shopId);
+
+            return ResponseEntity.ok("SubCategory Added Successfully!!");
+
+        } catch (Exception e) {
+
+            logger.error("Error while adding shop subcategory", e);
+
+            return ResponseEntity
+                    .status(500)
+                    .body("Error while adding subcategory: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/registorShop")
+    public ResponseEntity<?> registorShop(
+            HttpServletRequest request,
+            @ModelAttribute ShopDTO shopDTO,
+            @RequestParam("logo") MultipartFile logo) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+            boolean isRegistrationDone = objShopkeeperServices.registerShop(shopDTO, logo, userId);
+            return ResponseEntity.ok(isRegistrationDone);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/addProduct")
+    public ResponseEntity<?> addProduct(
+            HttpServletRequest request,
+            @ModelAttribute AddProductDTO addProductDTO,
+            @RequestParam("productImage") MultipartFile productImage) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+            String productImageLink = objR2Service.uploadFile(productImage);
+            String resMessage = objShopkeeperServices.addProduct(addProductDTO, userId, productImageLink);
+            return ResponseEntity.ok(resMessage);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error" + e.getMessage());
+        }
+    }
+
+    @PostMapping("/updateProduct")
+    public ResponseEntity<?> updateProduct(
+            HttpServletRequest request,
+            @ModelAttribute ProductDTO productDTO,
+            @RequestParam(value = "productImage", required = false) MultipartFile productImage
+
+    ) {
+        try {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+            // String productImageLink = objGCSService.uploadFile(productImage);
+            String ImageLink = objShopkeeperServices.updateProduct(productDTO, userId, productImage);
+            UpdateProductDTO objUpdateProductDTO = new UpdateProductDTO();
+            objUpdateProductDTO.setImageLink(ImageLink);
+            objUpdateProductDTO.setMessage("Product date Updated Successfully!!");
+            return ResponseEntity.ok(objUpdateProductDTO);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error" + e.getMessage());
+        }
+    }
+
+    @PostMapping("/updateShopProfile")
+    public ResponseEntity<?> updateShopProfile(HttpServletRequest req, @RequestBody ShopProfileDTO objShopProfileDTO) {
+        try {
+            String isUpdated = objShopkeeperServices.updateShopProfile(req, objShopProfileDTO);
+            return ResponseEntity.ok(isUpdated);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error while Updating");
+        }
+    }
+
+
+    @GetMapping("/orders")
+    public ResponseEntity<?> getMyOrders(HttpServletRequest request) {
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        List<MyOrderResponseDTO> orders =
+                objShopkeeperServices.getMyOrders(userId);
+                    return ResponseEntity.ok(orders);
+
+        
+    }
+
+    // PATCH /api/shopkeeper/orders/{orderId}/accept
+    @PatchMapping("/{orderId}/accept")
+    public Order acceptOrder(
+            @PathVariable Long orderId,
+            HttpServletRequest request) {
+
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        return objShopkeeperServices.acceptOrder(userId, orderId);
+    }
+
+    // PATCH /api/shopkeeper/orders/{orderId}/reject
+    @PatchMapping("/{orderId}/reject")
+    public Order rejectOrder(
+            @PathVariable Long orderId,
+            HttpServletRequest request) {
+
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        return objShopkeeperServices.rejectOrder(userId, orderId);
+    }
+
+    // PATCH /api/shopkeeper/orders/{orderId}/status
+    @PatchMapping("/{orderId}/status")
+    public Order updateOrderStatus(
+            @PathVariable Long orderId,
+
+            HttpServletRequest request) {
+
+            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+
+        // if (request.getStatus() == null
+        //         || request.getStatus().isBlank()) {
+        //     throw new ResponseStatusException(
+        //             HttpStatus.BAD_REQUEST,
+        //             "Status is required"
+        //     );
+        // }
+
+        return objShopkeeperServices.updateOrderStatus(
+                userId,
+                orderId,
+                //request.getStatus().trim().toUpperCase()
+                "Accepted"
+        );
+    }
+
+    private Long getUserId(HttpServletRequest request) {
+        // if (authentication == null
+        //         || !authentication.isAuthenticated()) {
+        //     throw new ResponseStatusException(
+        //             HttpStatus.UNAUTHORIZED,
+        //             "Please log in"
+        //     );
+        // }
+
+        // Object principal = authentication.getPrincipal();
+
+        // try {
+        //     if (principal instanceof Number number) {
+        //         return number.longValue();
+        //     }
+
+        //     if (principal instanceof String value
+        //             && !"anonymousUser".equals(value)) {
+        //         return Long.parseLong(value);
+        //     }
+        // } catch (NumberFormatException ignored) {
+        //     // The security principal isn't a numeric user ID.
+        // }
+
+        throw new ResponseStatusException(
+                HttpStatus.UNAUTHORIZED,
+                "Could not identify the logged-in user from the security principal"
+        );
+    }
+}

@@ -1,0 +1,269 @@
+package com.nearShop.java.auth.controller;
+
+import com.nearShop.java.auth.dto.LoginRequest;
+import com.nearShop.java.auth.dto.OtpRequest;
+import com.nearShop.java.auth.dto.OtpVerifyRequest;
+import com.nearShop.java.auth.dto.response.LoginResponse;
+import com.nearShop.java.auth.service.AuthService;
+import com.nearShop.java.dto.RequestDTO.SignUpRequestDTO;
+import com.nearShop.java.entity.Role;
+import com.nearShop.java.entity.User;
+import com.nearShop.java.entity.UserRole;
+import com.nearShop.java.repository.RoleRepository;
+import com.nearShop.java.repository.UserRepository;
+import com.nearShop.java.repository.UserRoleRepository;
+import com.nearShop.java.security.jwt.JwtUtil;
+import com.nearShop.java.services.OtpService;
+import com.nearShop.java.utilities.NearShopUtility;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.JwtException;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.lang.StackWalker.Option;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:5173")
+public class AuthController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+    @Autowired
+    private AuthService authService;
+    @Autowired
+    private OtpService otpService;
+    @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
+    private NearShopUtility objNearShopUtility;
+    @Autowired
+    private UserRepository objUserRepository;
+    @Autowired
+    private RoleRepository objRoleRepository;
+    @Autowired
+    private UserRoleRepository objuUserRoleRepository;
+
+    // ================= LOGIN =================
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request,
+            HttpServletResponse response) {
+
+        try {
+            // checking for valid request
+            if (request == null || request.getMobile() == null || request.getPassword() == null) {
+                logger.warn("Login failed: Missing mobile or password");
+                return ResponseEntity.badRequest().body("Mobile and Password are required");
+            }
+
+            logger.info("Login attempt for mobile: {}", request.getMobile());
+            String token = authService.login(request);
+
+            if (token == null || token.isEmpty()) {
+                logger.error("Token generation failed for mobile: {}", request.getMobile());
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            }
+            // adding cookie
+            Cookie cookie = authService.createCookie(token);
+            response.addCookie(cookie);
+            LoginResponse objLoginResponse = new LoginResponse();
+
+            // getting user roles
+            List<String> roles = objNearShopUtility.getUserRoles(request.getMobile());
+            if (!roles.isEmpty() && roles.contains(request.getLoginRole()))
+                objLoginResponse.setRole(request.getLoginRole());
+            else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED) // HTTP 401
+                        .body("No roles Assigned Contact Administrator!!");
+            }
+            return ResponseEntity.ok("Login Successful");
+
+        } catch (Exception e) {
+            logger.error("Exception during login", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Something went wrong during login");
+        }
+    }
+
+    @GetMapping("/getUserRoles")
+    public ResponseEntity<?> getUserRoles(@RequestParam String mobile) {
+        try {
+            List<String> roles = authService.getUserRoles(mobile);
+            return ResponseEntity.ok(roles);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
+        }
+    }
+
+    // ================= GET USER ROLE =================
+    @GetMapping("/getUserRole")
+    public ResponseEntity<String> getRole(HttpServletRequest request) {
+
+        try {
+            String token = objNearShopUtility.extractJwtFromCookies(request);
+
+            if (token == null) {
+                logger.warn("JWT token not found in cookies");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No token found");
+            }
+
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(jwtUtil.getSignKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            String role = claims.get("role", String.class);
+
+            if (role == null) {
+                logger.warn("Role not found in JWT claims");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+            }
+
+            logger.info("Role fetched successfully: {}", role);
+            return ResponseEntity.ok(role);
+
+        } catch (JwtException e) {
+            logger.error("Invalid or expired JWT token", e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
+        } catch (Exception e) {
+            logger.error("Exception while fetching role", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Something went wrong");
+        }
+    }
+
+    // ================= SEND OTP =================
+    @PostMapping("/send-otp")
+    public ResponseEntity<String> sendOtp(@RequestBody SignUpRequestDTO request) {
+
+        try {
+            if (request == null || request.getMobile() == null || request.getRole() == null) {
+                logger.warn("OTP send failed: Missing mobile or role");
+                return ResponseEntity.badRequest().body("Mobile and role are required");
+            }
+
+            logger.info("Sending OTP to mobile: {}", request.getMobile());
+
+            String msg = otpService.sendOtp(request.getMobile(), request.getRole());
+
+            logger.info("OTP sent successfully to mobile: {}", request.getMobile());
+
+            return ResponseEntity.ok(msg);
+
+        } catch (Exception e) {
+            logger.error("Exception while sending OTP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to send OTP");
+        }
+    }
+
+    @PostMapping("/send-otp-forRole")
+    public ResponseEntity<String> sendOtpForRole(@RequestBody SignUpRequestDTO request) {
+
+        try {
+            if (request == null || request.getMobile() == null || request.getRole() == null) {
+                logger.warn("OTP send failed: Missing mobile or role");
+                return ResponseEntity.badRequest().body("Mobile and role are required");
+            }
+
+            logger.info("Sending OTP to mobile: {}", request.getMobile());
+
+            String msg = otpService.sendOtpForRole(request.getMobile(), request.getRole());
+
+            logger.info("OTP sent successfully to mobile: {}", request.getMobile());
+
+            return ResponseEntity.ok(msg);
+
+        } catch (Exception e) {
+            logger.error("Exception while sending OTP", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to send OTP");
+        }
+    }
+
+    // ================= VERIFY OTP =================
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@RequestBody SignUpRequestDTO objSignUpRequestDTO, HttpServletRequest request,
+            HttpServletResponse response) {
+
+        try {
+            logger.info("Verifying OTP for mobile: {}", objSignUpRequestDTO.getMobile());
+
+            boolean isVerified = otpService.verifyOtp(objSignUpRequestDTO);
+
+            if (!isVerified) {
+                logger.warn("OTP verification failed for mobile: {}", objSignUpRequestDTO.getMobile());
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("Invalid OTP or expired OTP");
+            }
+
+            logger.info("OTP verified successfully for mobile: {}", objSignUpRequestDTO.getMobile());
+            if (!objSignUpRequestDTO.getVerifyingforRoleAccess()) {
+                LoginRequest objLoginRequest = new LoginRequest();
+                objLoginRequest.setMobile(objSignUpRequestDTO.getMobile());
+                objLoginRequest.setPassword(objSignUpRequestDTO.getPassword());
+                objLoginRequest.setLoginRole(objSignUpRequestDTO.getRole());
+
+                String token = authService.login(objLoginRequest);
+
+                if (token == null || token.isEmpty()) {
+                    logger.error("Token generation failed for mobile: {}", objLoginRequest.getMobile());
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+                }
+
+                Cookie cookie = authService.createCookie(token);
+                response.addCookie(cookie);
+                logger.info("Login successful for mobile: {}", objLoginRequest.getMobile());
+
+            }
+
+            String msg = "";
+            if (objSignUpRequestDTO.getVerifyingforRoleAccess())
+                msg = "Role added";
+            else
+                msg = "Signup Success";
+            return ResponseEntity.ok(msg);
+
+        } catch (Exception e) {
+            logger.error("Exception during OTP verification", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Something went wrong during OTP verification");
+        }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        try {
+            // Create a cookie with the same name, empty value, and maxAge=0 to delete it
+            Cookie cookie = new Cookie("jwt", "");
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true); // true if using HTTPS
+            cookie.setPath("/"); // must match your login cookie path
+            cookie.setMaxAge(0); // delete cookie immediately
+            response.addCookie(cookie);
+
+            return ResponseEntity.ok("Logout successful");
+        } catch (Exception e) {
+            logger.error("Exception during logout", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Something went wrong during logout");
+        }
+    }
+
+    // ================= HELPER METHOD =================
+
+}

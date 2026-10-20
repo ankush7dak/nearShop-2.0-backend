@@ -1,0 +1,172 @@
+com.nearshop
+│
+├── NearShopApplication.java
+│
+├── config
+│   ├── SecurityConfig.java
+│   └── PasswordConfig.java
+│
+├── controller
+│   ├── AuthController.java
+│   ├── CustomerController.java
+│   └── ShopkeeperController.java
+│
+├── service
+│   ├── AuthService.java
+│   ├── CustomerService.java
+│   └── ShopkeeperService.java
+│
+├── serviceImpl
+│   ├── AuthServiceImpl.java
+│   ├── CustomerServiceImpl.java
+│   └── ShopkeeperServiceImpl.java
+│
+├── repository
+│   ├── UserRepository.java
+│   ├── OrderRepository.java
+│   └── ProductRepository.java
+│
+├── entity
+│   ├── User.java
+│   ├── Order.java
+│   └── Product.java
+│
+├── dto
+│   ├── request
+│   │   ├── LoginRequest.java
+│   │   └── RegisterRequest.java
+│   │
+│   └── response
+│       ├── AuthResponse.java
+│       └── OrderResponse.java
+│
+├── security
+│   ├── JwtUtil.java
+│   ├── JwtFilter.java
+│   └── CustomUserDetailsService.java
+│
+├── exception
+│   ├── GlobalExceptionHandler.java
+│   └── CustomException.java
+│
+└── util
+    └── AppConstants.java
+
+
+-----------------------------
+
+----------------------
+
+com.nearshop
+│
+├── security
+│   ├── config
+│   │   └── SecurityConfig.java
+│   │
+│   ├── jwt
+│   │   ├── JwtUtil.java
+│   │   └── JwtFilter.java
+│   │
+│   ├── service
+│   │   └── CustomUserDetailsService.java
+│   │
+│   └── model
+│       └── CustomUserDetails.java
+│
+├── common
+│   ├── exception
+│   │   ├── GlobalExceptionHandler.java
+│   │   └── CustomException.java
+│   │
+│   ├── response
+│   │   └── ApiResponse.java
+│   │
+│   ├── util
+│   │   └── SecurityUtils.java
+│   │
+│   ├── constants
+│   │   └── AppConstants.java
+│   │
+│   ├── enums
+│   │   ├── Role.java
+│   │   ├── PaymentStatus.java
+│   │   └── PlanType.java
+│   │
+│   └── validation
+│       └── (Custom validators if needed)
+│
+├── auth
+│   ├── controller
+│   │   └── AuthController.java
+│   │
+│   ├── service
+│   │   └── AuthService.java
+│   │
+│   └── dto
+│       ├── LoginRequest.java
+│       ├── RegisterRequest.java
+│       └── AuthResponse.java
+│
+├── user
+│   ├── entity
+│   │   └── User.java
+│   │
+│   ├── repository
+│   │   └── UserRepository.java
+│   │
+│   ├── service
+│   │   └── UserService.java
+│   │
+│   ├── controller
+│   │   └── UserController.java
+│   │
+│   ├── dto
+│   │   └── UserResponse.java
+│   │
+│   └── mapper
+│       └── UserMapper.java
+│
+├── subscription
+│   ├── entity
+│   │   ├── Subscription.java
+│   │   └── Plan.java
+│   │
+│   ├── repository
+│   │   ├── SubscriptionRepository.java
+│   │   └── PlanRepository.java
+│   │
+│   ├── service
+│   │   └── SubscriptionService.java
+│   │
+│   ├── controller
+│   │   └── SubscriptionController.java
+│   │
+│   ├── dto
+│   │   └── SubscriptionResponse.java
+│   │
+│   ├── mapper
+│   │   └── SubscriptionMapper.java
+│   │
+│   └── scheduler
+│       └── SubscriptionExpiryScheduler.java
+│
+├── payment
+│   ├── entity
+│   │   └── Payment.java
+│   │
+│   ├── repository
+│   │   └── PaymentRepository.java
+│   │
+│   ├── service
+│   │   └── PaymentService.java
+│   │
+│   ├── controller
+│   │   └── PaymentController.java
+│   │
+│   ├── dto
+│   │   └── PaymentResponse.java
+│   │
+│   └── mapper
+│       └── PaymentMapper.java
+│
+└── NearShopApplication.java
