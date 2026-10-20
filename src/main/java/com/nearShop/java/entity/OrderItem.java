@@ -34,6 +34,9 @@ public class OrderItem {
     @JoinColumn(name = "order_id")
     private Order order;
 
+<<<<<<< HEAD
     public BigDecimal getQuantity;
 
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
  }

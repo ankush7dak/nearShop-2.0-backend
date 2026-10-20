@@ -1,24 +1,36 @@
 package com.nearShop.java.services;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+=======
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+=======
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 import com.nearShop.java.auth.controller.AuthController;
 import com.nearShop.java.dto.AddProductDTO;
@@ -27,22 +39,31 @@ import com.nearShop.java.dto.ProductDTO;
 
 import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.dto.RequestDTO.NavDTO;
+<<<<<<< HEAD
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
 import com.nearShop.java.dto.ResponseDTO.OrderItemResponseDTO;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.dto.ResponseDTO.UserDTO;
 import com.nearShop.java.entity.Category;
+<<<<<<< HEAD
 import com.nearShop.java.entity.Order;
 import com.nearShop.java.entity.OrderItem;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
 import com.nearShop.java.entity.ShopSubcategory;
 import com.nearShop.java.entity.SubCategory;
 import com.nearShop.java.entity.User;
 import com.nearShop.java.repository.CategoryRepository;
+<<<<<<< HEAD
 import com.nearShop.java.repository.OrderRepository;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.repository.ProductRepository;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.repository.ShopSubcategoryRepository;
@@ -57,8 +78,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.stream.Collectors;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 @Service
 public class ShopkeeperServices {
@@ -80,8 +104,11 @@ public class ShopkeeperServices {
     ProductRepository objProductRepository;
     @Autowired
     ModelMapper objModelMapper;
+<<<<<<< HEAD
     @Autowired
     OrderRepository objOrderRepository;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
     public boolean isShopRegistered(Long userId) {
         // TODO Auto-generated method stub
@@ -369,6 +396,7 @@ public class ShopkeeperServices {
         return objProductRepository.searchProducts(search,cat_id,shopId, pageable);
     }
 
+<<<<<<< HEAD
     // @Transactional(readOnly = true)
     public List<MyOrderResponseDTO> getMyOrders(Long userId) {
 
@@ -549,6 +577,8 @@ public class ShopkeeperServices {
         return dto;
     }
 
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
      
 
 }

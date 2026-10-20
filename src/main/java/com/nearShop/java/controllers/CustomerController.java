@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
+<<<<<<< HEAD
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.entity.Cart;
 import com.nearShop.java.entity.CartItem;
@@ -67,9 +70,14 @@ public class CustomerController {
             @RequestParam Double userLatitude,
             @RequestParam Double userLongitude) {
         try {
+<<<<<<< HEAD
             Long customerId = objNearShopUtility.getUserIdUsingRequest(req);
             Page<Shop> shops = objCustomerServices.getShopData(shopSearch, shopCategory, shopDistanceRange, shopPage,
                     shopSize, userLatitude, userLongitude,customerId);
+=======
+            Page<Shop> shops = objCustomerServices.getShopData(shopSearch, shopCategory, shopDistanceRange, shopPage,
+                    shopSize, userLatitude, userLongitude);
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
             List<ShopDTO> shopDtoList = shops.getContent().stream().map(shop -> {
                 ShopDTO shopDto = objModelMapper.map(shop, ShopDTO.class);
                 // Optional<Category> category =
@@ -254,6 +262,7 @@ public class CustomerController {
             return ResponseEntity.status(500).body("Error occurred while placing the order");
         }
     }
+<<<<<<< HEAD
 
      @GetMapping("/my-orders")
     public ResponseEntity<List<MyOrderResponseDTO>> getMyOrders(
@@ -267,4 +276,6 @@ public class CustomerController {
 
         return ResponseEntity.ok(orders);
     }
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 }

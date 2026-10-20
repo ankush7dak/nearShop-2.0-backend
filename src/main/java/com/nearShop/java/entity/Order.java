@@ -9,8 +9,11 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 @Entity
 @Table(name = "orders")
 @Data

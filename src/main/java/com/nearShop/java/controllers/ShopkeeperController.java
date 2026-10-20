@@ -6,8 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+<<<<<<< HEAD
 import org.springframework.web.server.ResponseStatusException;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +37,19 @@ import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.dto.RequestDTO.NavDTO;
+<<<<<<< HEAD
 import com.nearShop.java.dto.RequestDTO.UpdateOrderStatusRequest;
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.dto.ResponseDTO.UpdateProductDTO;
+<<<<<<< HEAD
 import com.nearShop.java.entity.Order;
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
@@ -266,6 +278,7 @@ public class ShopkeeperController {
             return ResponseEntity.status(500).body("Error while Updating");
         }
     }
+<<<<<<< HEAD
 
 
     @GetMapping("/orders")
@@ -352,4 +365,6 @@ public class ShopkeeperController {
                 "Could not identify the logged-in user from the security principal"
         );
     }
+=======
+>>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 }
