@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
+import com.nearShop.java.dto.RequestDTO.UpdateCustomerProfileRequest;
+import com.nearShop.java.dto.ResponseDTO.CustomerProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.entity.Cart;
@@ -36,6 +39,7 @@ import com.nearShop.java.utilities.NearShopUtility;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/customer")
@@ -266,5 +270,56 @@ public class CustomerController {
                 objCustomerServices.getMyOrders(userId);
 
         return ResponseEntity.ok(orders);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<CustomerProfileDTO> getProfile(
+            HttpServletRequest req) {
+
+        Long customerId =
+                objNearShopUtility.getUserIdUsingRequest(req);
+
+        return ResponseEntity.ok(
+                objCustomerServices.getProfile(customerId));
+    }
+
+    @PutMapping("/profile")
+    public ResponseEntity<CustomerProfileDTO> updateProfile(
+            @Valid @RequestBody UpdateCustomerProfileRequest request,
+            HttpServletRequest req) {
+
+        Long customerId =
+                objNearShopUtility.getUserIdUsingRequest(req);
+
+        return ResponseEntity.ok(
+                objCustomerServices.updateProfile(customerId, request));
+    }
+
+    public record ChangePasswordRequest(
+            String oldPassword,
+            String newPassword
+    ) {}
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(
+            @RequestBody ChangePasswordRequest request,
+            HttpServletRequest req) {
+
+        Long customerId =
+                objNearShopUtility.getUserIdUsingRequest(req);
+
+        if (request.oldPassword() == null ||
+                request.newPassword() == null) {
+            return ResponseEntity.badRequest().body(
+                    Map.of("message", "Both passwords are required"));
+        }
+
+        objCustomerServices.changePassword(
+                customerId,
+                request.oldPassword(),
+                request.newPassword());
+
+        return ResponseEntity.ok(
+                Map.of("message", "Password updated successfully"));
     }
 }

@@ -1,8 +1,10 @@
+
 package com.nearShop.java.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +23,7 @@ public class User {
     // Optional email
     @Column(unique = true, nullable = true, length = 100)
     private String email;
-    
+
     private String name;
 
     // Login field
@@ -35,7 +37,26 @@ public class User {
     private Boolean isMobileVerified;
 
     @Column(nullable = false, length = 20)
-    private String status;   // ACTIVE / BLOCKED / PENDING
+    private String status;
+
+    // Customer profile fields
+    @Column(length = 10)
+    private String gender;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(length = 255)
+    private String address;
+
+    @Column(length = 100)
+    private String city;
+
+    @Column(length = 100)
+    private String state;
+
+    @Column(length = 10)
+    private String pincode;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -51,10 +72,5 @@ public class User {
         if (this.isMobileVerified == null) {
             this.isMobileVerified = false;
         }
-    }
-
-    public User orElseThrow(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
     }
 }

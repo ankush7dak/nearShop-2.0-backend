@@ -203,7 +203,7 @@ public class AuthController {
         try {
             logger.info("Verifying OTP for mobile: {}", objSignUpRequestDTO.getMobile());
 
-            boolean isVerified = otpService.verifyOtp(objSignUpRequestDTO);
+            boolean isVerified =  otpService.verifyOtp(objSignUpRequestDTO);
 
             if (!isVerified) {
                 logger.warn("OTP verification failed for mobile: {}", objSignUpRequestDTO.getMobile());

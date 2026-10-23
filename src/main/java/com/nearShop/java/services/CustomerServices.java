@@ -1,6 +1,7 @@
 package com.nearShop.java.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,12 +14,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nearShop.java.dto.OrderItemDTO;
 import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
+import com.nearShop.java.dto.RequestDTO.UpdateCustomerProfileRequest;
+import com.nearShop.java.dto.ResponseDTO.CustomerProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
 import com.nearShop.java.dto.ResponseDTO.OrderItemResponseDTO;
 import com.nearShop.java.entity.Cart;
@@ -30,6 +34,7 @@ import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
 import com.nearShop.java.entity.ShopSubcategory;
 import com.nearShop.java.entity.SubCategory;
+import com.nearShop.java.entity.User;
 import com.nearShop.java.repository.CartItemRepository;
 import com.nearShop.java.repository.CartRepository;
 import com.nearShop.java.repository.CategoryRepository;
@@ -38,9 +43,15 @@ import com.nearShop.java.repository.ProductRepository;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.repository.ShopSubcategoryRepository;
 import com.nearShop.java.repository.SubCategoryRepository;
+import com.nearShop.java.repository.UserRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CustomerServices {
+
+    private final PasswordEncoder passwordEncoder = null;
+
 
     @Autowired
     ShopRepository objShopRepository;
@@ -58,6 +69,8 @@ public class CustomerServices {
     CartItemRepository objCartItemRepository;
     @Autowired
     OrderRepository objOrderRepository;
+    @Autowired
+    UserRepository objUserRepository;
 
     public Page<Product> getProductsForShopId(Integer page, Integer size, String search, String category, Long shopId) {
         // TODO Auto-generated method stub
@@ -241,5 +254,89 @@ public class CustomerServices {
         );
 
         return dto;
+    }
+
+    private User getCustomer(Long customerId) {
+        User user = objUserRepository.findById(customerId)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Customer not found"));
+
+        // Adapt this check if your application uses a different
+        // role/status representation.
+        return user;
+    }
+
+    private CustomerProfileDTO toDTO(User user) {
+        return new CustomerProfileDTO(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getMobile(),
+                user.getGender(),
+                user.getDateOfBirth(),
+                user.getAddress(),
+                user.getCity(),
+                user.getState(),
+                user.getPincode()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public CustomerProfileDTO getProfile(Long customerId) {
+        return toDTO(getCustomer(customerId));
+    }
+
+    @Transactional
+    public CustomerProfileDTO updateProfile(
+            Long customerId,
+            UpdateCustomerProfileRequest request) {
+
+        User user = getCustomer(customerId);
+
+        if (request.dob() != null &&
+                request.dob().isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException(
+                    "Date of birth cannot be in the future");
+        }
+
+        user.setName(request.name().trim());
+        user.setGender(request.gender());
+        user.setDateOfBirth(request.dob());
+        user.setAddress(request.address());
+        user.setCity(request.city());
+        user.setState(request.state());
+        user.setPincode(request.pincode());
+
+        // JPA persists the managed entity at transaction commit.
+        return toDTO(objUserRepository.save(user));
+    }
+
+    @Transactional
+    public void changePassword(
+            Long customerId,
+            String oldPassword,
+            String newPassword) {
+
+        User user = getCustomer(customerId);
+
+        if (!passwordEncoder.matches(
+                oldPassword, user.getPassword())) {
+            throw new IllegalArgumentException(
+                    "Old password is incorrect");
+        }
+
+        if (newPassword == null || newPassword.length() < 8) {
+            throw new IllegalArgumentException(
+                    "New password must contain at least 8 characters");
+        }
+
+        if (passwordEncoder.matches(
+                newPassword, user.getPassword())) {
+            throw new IllegalArgumentException(
+                    "New password must differ from the old password");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        objUserRepository.save(user);
     }
 }
