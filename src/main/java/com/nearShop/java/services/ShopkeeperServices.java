@@ -1,36 +1,25 @@
 package com.nearShop.java.services;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-=======
-import java.time.LocalTime;
-import java.util.List;
-import java.util.Optional;
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-=======
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 import com.nearShop.java.auth.controller.AuthController;
 import com.nearShop.java.dto.AddProductDTO;
@@ -39,31 +28,25 @@ import com.nearShop.java.dto.ProductDTO;
 
 import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.dto.RequestDTO.NavDTO;
-<<<<<<< HEAD
+import com.nearShop.java.dto.ResponseDTO.CustomerDTO;
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
 import com.nearShop.java.dto.ResponseDTO.OrderItemResponseDTO;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.dto.ResponseDTO.UserDTO;
 import com.nearShop.java.entity.Category;
-<<<<<<< HEAD
+import com.nearShop.java.entity.CustomerShop;
 import com.nearShop.java.entity.Order;
 import com.nearShop.java.entity.OrderItem;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.entity.Shop;
 import com.nearShop.java.entity.ShopSubcategory;
 import com.nearShop.java.entity.SubCategory;
 import com.nearShop.java.entity.User;
 import com.nearShop.java.repository.CategoryRepository;
-<<<<<<< HEAD
+import com.nearShop.java.repository.CustomerShopRepository;
 import com.nearShop.java.repository.OrderRepository;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.repository.ProductRepository;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.repository.ShopSubcategoryRepository;
@@ -78,11 +61,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.servlet.http.HttpServletRequest;
-<<<<<<< HEAD
 import java.util.List;
 import java.util.stream.Collectors;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 @Service
 public class ShopkeeperServices {
@@ -104,11 +84,10 @@ public class ShopkeeperServices {
     ProductRepository objProductRepository;
     @Autowired
     ModelMapper objModelMapper;
-<<<<<<< HEAD
     @Autowired
     OrderRepository objOrderRepository;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
+    @Autowired
+    CustomerShopRepository objCustomerShopRepository;
 
     public boolean isShopRegistered(Long userId) {
         // TODO Auto-generated method stub
@@ -377,41 +356,36 @@ public class ShopkeeperServices {
         return objNavDTO;
     }
 
-    public Page<Product> getInventory(Integer page, Integer size, String search, String category ,Long userId) {
+    public Page<Product> getInventory(Integer page, Integer size, String search, String category, Long userId) {
         // TODO Auto-generated method stub
         Long shopId = objShopRepository.getShopId(userId);
         Pageable pageable = PageRequest.of(page, size, Sort.by("price").ascending());
         Optional<ShopSubcategory> shopSubCat = objShopSubcategoryRepository.findByName(category);
         Long cat_id = null;
-        if(shopSubCat.isPresent()){
+        if (shopSubCat.isPresent()) {
             cat_id = shopSubCat.get().getShopSubCategoryId();
-        }
-        else{
+        } else {
             Optional<SubCategory> subcat = objSubCategoryRepository.findByName(category);
-            if(subcat.isPresent()){
+            if (subcat.isPresent()) {
                 cat_id = subcat.get().getSubCategoryId();
             }
         }
 
-        return objProductRepository.searchProducts(search,cat_id,shopId, pageable);
+        return objProductRepository.searchProducts(search, cat_id, shopId, pageable);
     }
 
-<<<<<<< HEAD
     // @Transactional(readOnly = true)
     public List<MyOrderResponseDTO> getMyOrders(Long userId) {
 
-    Long shopId = objShopRepository.getShopId(userId);
+        Long shopId = objShopRepository.getShopId(userId);
 
-
-    List<Order> orders =
-                objOrderRepository.findByShopIdOrderByOrderDateDesc(shopId);
+        List<Order> orders = objOrderRepository.findByShopIdOrderByOrderDateDesc(shopId);
 
         return orders.stream()
                 .map(this::convertToDTO)
                 .toList();
-    //return lstOrdersDTO;
-}
-
+        // return lstOrdersDTO;
+    }
 
     // Accept an order
     @Transactional
@@ -422,8 +396,7 @@ public class ShopkeeperServices {
         if (!"PLACED".equals(order.getOrderStatus())) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
-                    "Only newly placed orders can be accepted"
-            );
+                    "Only newly placed orders can be accepted");
         }
 
         order.setOrderStatus("CONFIRMED");
@@ -440,8 +413,7 @@ public class ShopkeeperServices {
         if (!"PLACED".equals(order.getOrderStatus())) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
-                    "Only newly placed orders can be rejected"
-            );
+                    "Only newly placed orders can be rejected");
         }
 
         order.setOrderStatus("CANCELLED");
@@ -462,14 +434,14 @@ public class ShopkeeperServices {
 
         boolean validTransition = switch (currentStatus) {
             case "CONFIRMED" ->
-                    "PROCESSING".equals(newStatus);
+                "PROCESSING".equals(newStatus);
 
             case "PROCESSING" ->
-                    "OUT_FOR_DELIVERY".equals(newStatus)
-                    || "DELIVERED".equals(newStatus);
+                "OUT_FOR_DELIVERY".equals(newStatus)
+                        || "DELIVERED".equals(newStatus);
 
             case "OUT_FOR_DELIVERY" ->
-                    "DELIVERED".equals(newStatus);
+                "DELIVERED".equals(newStatus);
 
             default -> false;
         };
@@ -478,8 +450,7 @@ public class ShopkeeperServices {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "Invalid status transition from "
-                            + currentStatus + " to " + newStatus
-            );
+                            + currentStatus + " to " + newStatus);
         }
 
         order.setOrderStatus(newStatus);
@@ -499,27 +470,24 @@ public class ShopkeeperServices {
         if (shopIds.isEmpty()) {
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN,
-                    "You do not own any shops"
-            );
+                    "You do not own any shops");
         }
 
         Order order = objOrderRepository.findById(orderId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
-                        "Order not found"
-                ));
+                        "Order not found"));
 
         if (!shopIds.contains(order.getShopId())) {
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN,
-                    "You are not authorized to access this order"
-            );
+                    "You are not authorized to access this order");
         }
 
         return order;
     }
 
-     private MyOrderResponseDTO convertToDTO(Order order) {
+    private MyOrderResponseDTO convertToDTO(Order order) {
 
         MyOrderResponseDTO dto = new MyOrderResponseDTO();
 
@@ -544,20 +512,18 @@ public class ShopkeeperServices {
         dto.setOrderStatus(
                 order.getOrderStatus() == null
                         ? null
-                        : order.getOrderStatus().toString()
-        );
+                        : order.getOrderStatus().toString());
 
-        List<OrderItemResponseDTO> itemDTOs =
-                order.getItems().stream()
-                        .map(this::convertItemToDTO)
-                        .toList();
+        List<OrderItemResponseDTO> itemDTOs = order.getItems().stream()
+                .map(this::convertItemToDTO)
+                .toList();
 
         dto.setItems(itemDTOs);
 
         return dto;
     }
 
-     private OrderItemResponseDTO convertItemToDTO(OrderItem item) {
+    private OrderItemResponseDTO convertItemToDTO(OrderItem item) {
 
         OrderItemResponseDTO dto = new OrderItemResponseDTO();
 
@@ -567,18 +533,106 @@ public class ShopkeeperServices {
         dto.setQuantity(item.getQuantity());
         dto.setPrice(item.getPrice());
         BigDecimal total = item.getPrice().multiply(
-        BigDecimal.valueOf(item.getQuantity())
-    );
+                BigDecimal.valueOf(item.getQuantity()));
         dto.setItemTotal(
-            
-                total
-        );
+
+                total);
 
         return dto;
     }
 
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
-     
+    public List<CustomerDTO> getCustomers(Long userId) {
+        // TODO Auto-generated method stub
+        Long shopId = objShopRepository.getShopId(userId);
+
+        List<CustomerDTO> mappings = objCustomerShopRepository.findCustomersByShopId(shopId);
+        return mappings;
+        // return mappings.stream()
+        // .map(mapping -> {
+        // User customer = objUserRepository
+        // .findById(mapping.getCustomerId())
+        // .orElseThrow(() ->
+        // new RuntimeException(
+        // "Customer not found: "
+        // + mapping.getCustomerId()
+        // )
+        // );
+
+        // return new CustomerDTO(
+        // customer.getId(),
+        // customer.getName(),
+        // customer.getMobile(),
+        // customer.getEmail(),
+        // null
+        // );
+        // })
+        // .toList();
+    }
+
+public CustomerDTO searchCustomer(Long customerId) {
+
+    Optional<User> customer =
+            objUserRepository.findById(customerId);
+
+    if (customer.isEmpty()) {
+        throw new RuntimeException(
+                "Customer not found with ID: " + customerId
+        );
+    }
+
+    User user = customer.get();
+
+    return new CustomerDTO(
+            user.getId(),
+            user.getName(),
+            user.getMobile(),
+            user.getEmail(),
+            null
+    );
+}
+
+public String addNewCustomer(Long shopId, Long customerId) {
+    // TODO Auto-generated method stub
+
+     User customer = objUserRepository.findById(customerId)
+            .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Customer not found"
+            ));
+
+
+    if (shopId == null) {
+        throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Shop not found for this shopkeeper"
+        );
+    }
+
+ boolean exists =
+            objCustomerShopRepository
+                    .existsByCustomer_IdAndShop_Id(
+                            customerId,
+                            shopId
+                    );
+
+    if (exists) {
+        return "Customer is already mapped to your shop";
+    }
+
+    Shop shop = objShopRepository.findById(shopId)
+            .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Shop not found"
+            ));
+
+    CustomerShop mapping = new CustomerShop();
+    mapping.setCustomer(customer);
+    mapping.setShop(shop);
+    mapping.setCreatedAt(LocalDateTime.now());
+
+    objCustomerShopRepository.save(mapping);
+
+    return "Customer added to your shop successfully";
+}
 
 }

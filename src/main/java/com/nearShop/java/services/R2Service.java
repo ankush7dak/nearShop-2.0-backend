@@ -9,14 +9,8 @@ import software.amazon.awssdk.core.sync.RequestBody;
 
 import java.io.IOException;
 import java.util.UUID;
-<<<<<<< HEAD
 @Service
 @RequiredArgsConstructor 
-=======
-
-@Service
-@RequiredArgsConstructor
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 public class R2Service {
 
     private final S3Client s3Client;

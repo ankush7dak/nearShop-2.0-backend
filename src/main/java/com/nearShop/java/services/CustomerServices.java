@@ -1,9 +1,6 @@
 package com.nearShop.java.services;
 
-<<<<<<< HEAD
 import java.math.BigDecimal;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nearShop.java.dto.OrderItemDTO;
 import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
-<<<<<<< HEAD
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
 import com.nearShop.java.dto.ResponseDTO.OrderItemResponseDTO;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.entity.Cart;
 import com.nearShop.java.entity.CartItem;
 import com.nearShop.java.entity.Category;
@@ -93,11 +87,7 @@ public class CustomerServices {
     }
 
     public Page<Shop> getShopData(String shopSearch, String shopCategory, Long shopDistanceRange, Integer shopPage,
-<<<<<<< HEAD
             Integer shopSize, Double userLatitude, Double userLongitude,Long customerId) {
-=======
-            Integer shopSize, Double userLatitude, Double userLongitude) {
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
         // TODO Auto-generated method stub
         Pageable pageable = PageRequest.of(shopPage, shopSize);
         Optional<Category> cat = objcCategoryRepository.findByName(shopCategory);
@@ -107,11 +97,7 @@ public class CustomerServices {
         }
 
         return objShopRepository.fetchShopData(shopSearch, catId, shopDistanceRange, userLatitude, userLongitude,
-<<<<<<< HEAD
                 pageable,customerId);
-=======
-                pageable);
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
     }
 
     public Map<Long, Integer> getCartQuantities(Long userId) {
@@ -188,7 +174,6 @@ public class CustomerServices {
         throw new RuntimeException("Error occurred while placing the order: " + e.getMessage());
        }
     }
-<<<<<<< HEAD
     @Transactional(readOnly = true)
     public List<MyOrderResponseDTO> getMyOrders(Long userId) { 
         // TODO Auto-generated method stub
@@ -257,6 +242,4 @@ public class CustomerServices {
 
         return dto;
     }
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 }

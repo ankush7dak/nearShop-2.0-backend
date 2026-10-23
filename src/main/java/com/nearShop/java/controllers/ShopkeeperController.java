@@ -6,22 +6,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-<<<<<<< HEAD
 import org.springframework.web.server.ResponseStatusException;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,19 +32,14 @@ import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.ShopSubCategoryDTO;
 import com.nearShop.java.dto.RequestDTO.NavDTO;
-<<<<<<< HEAD
 import com.nearShop.java.dto.RequestDTO.UpdateOrderStatusRequest;
+import com.nearShop.java.dto.ResponseDTO.CustomerDTO;
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopkeeperDashboardDTO;
 import com.nearShop.java.dto.ResponseDTO.UpdateProductDTO;
-<<<<<<< HEAD
 import com.nearShop.java.entity.Order;
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 import com.nearShop.java.entity.Product;
 import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
@@ -61,6 +51,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/shop")
@@ -111,7 +102,7 @@ public class ShopkeeperController {
         ShopInventoryDataDTO objShopInventoryDataDTO = new ShopInventoryDataDTO();
         try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(req);
-            Page<Product> productPage = objShopkeeperServices.getInventory(page, size, search, category,userId);
+            Page<Product> productPage = objShopkeeperServices.getInventory(page, size, search, category, userId);
             List<ProductDTO> productDTOList = productPage.getContent().stream().map(product -> {
                 ProductDTO dto = objModelMapper.map(product, ProductDTO.class);
                 dto.setShopId(product.getShop().getId());
@@ -125,7 +116,6 @@ public class ShopkeeperController {
             objShopInventoryDataDTO.setIsLastPage(productPage.isLast());
             objShopInventoryDataDTO.setProductDTOList(productDTOList);
 
-            
             // objShopInventoryDataDTO =
             // objShopkeeperServices.getAllInvertoryData(objShopInventoryDataDTO,userId);
             return ResponseEntity.ok(objShopInventoryDataDTO);
@@ -278,93 +268,118 @@ public class ShopkeeperController {
             return ResponseEntity.status(500).body("Error while Updating");
         }
     }
-<<<<<<< HEAD
 
+    @GetMapping("/customers")
+    public ResponseEntity<List<CustomerDTO>> getMyCustomers(
+            HttpServletRequest request) {
+
+        Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+
+        List<CustomerDTO> customers = objShopkeeperServices.getCustomers(userId);
+
+        return ResponseEntity.ok(customers);
+    }
 
     @GetMapping("/orders")
     public ResponseEntity<?> getMyOrders(HttpServletRequest request) {
-            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
-        List<MyOrderResponseDTO> orders =
-                objShopkeeperServices.getMyOrders(userId);
-                    return ResponseEntity.ok(orders);
+        Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        List<MyOrderResponseDTO> orders = objShopkeeperServices.getMyOrders(userId);
+        return ResponseEntity.ok(orders);
 
-        
+    }
+
+    @GetMapping("/searchCustomer")
+    public ResponseEntity<CustomerDTO> searchCustomer(
+            @RequestParam Long customerId) {
+
+        CustomerDTO customer = objShopkeeperServices.searchCustomer(customerId);
+
+        return ResponseEntity.ok(customer);
     }
 
     // PATCH /api/shopkeeper/orders/{orderId}/accept
-    @PatchMapping("/{orderId}/accept")
+    @PostMapping("/{orderId}/accept")
     public Order acceptOrder(
             @PathVariable Long orderId,
             HttpServletRequest request) {
 
-            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        Long userId = objNearShopUtility.getUserIdUsingRequest(request);
         return objShopkeeperServices.acceptOrder(userId, orderId);
     }
 
     // PATCH /api/shopkeeper/orders/{orderId}/reject
-    @PatchMapping("/{orderId}/reject")
+    @PostMapping("/{orderId}/reject")
     public Order rejectOrder(
             @PathVariable Long orderId,
             HttpServletRequest request) {
 
-            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        Long userId = objNearShopUtility.getUserIdUsingRequest(request);
         return objShopkeeperServices.rejectOrder(userId, orderId);
     }
 
     // PATCH /api/shopkeeper/orders/{orderId}/status
-    @PatchMapping("/{orderId}/status")
+    @PostMapping("/{orderId}/status")
     public Order updateOrderStatus(
             @PathVariable Long orderId,
 
             HttpServletRequest request) {
 
-            Long userId = objNearShopUtility.getUserIdUsingRequest(request);
+        Long userId = objNearShopUtility.getUserIdUsingRequest(request);
 
         // if (request.getStatus() == null
-        //         || request.getStatus().isBlank()) {
-        //     throw new ResponseStatusException(
-        //             HttpStatus.BAD_REQUEST,
-        //             "Status is required"
-        //     );
+        // || request.getStatus().isBlank()) {
+        // throw new ResponseStatusException(
+        // HttpStatus.BAD_REQUEST,
+        // "Status is required"
+        // );
         // }
 
         return objShopkeeperServices.updateOrderStatus(
                 userId,
                 orderId,
-                //request.getStatus().trim().toUpperCase()
-                "Accepted"
-        );
+                // request.getStatus().trim().toUpperCase()
+                "Accepted");
+    }
+
+    @PostMapping("/addNewCustomer")
+    public ResponseEntity<?> addNewCustomer(
+            @RequestParam Long customerId,
+        HttpServletRequest req) {
+        Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+        Long shopId = objShopRepository.getShopId(userId);
+        String message = objShopkeeperServices.addNewCustomer(
+                shopId,
+                customerId);
+
+        return ResponseEntity.ok("success");
     }
 
     private Long getUserId(HttpServletRequest request) {
         // if (authentication == null
-        //         || !authentication.isAuthenticated()) {
-        //     throw new ResponseStatusException(
-        //             HttpStatus.UNAUTHORIZED,
-        //             "Please log in"
-        //     );
+        // || !authentication.isAuthenticated()) {
+        // throw new ResponseStatusException(
+        // HttpStatus.UNAUTHORIZED,
+        // "Please log in"
+        // );
         // }
 
         // Object principal = authentication.getPrincipal();
 
         // try {
-        //     if (principal instanceof Number number) {
-        //         return number.longValue();
-        //     }
+        // if (principal instanceof Number number) {
+        // return number.longValue();
+        // }
 
-        //     if (principal instanceof String value
-        //             && !"anonymousUser".equals(value)) {
-        //         return Long.parseLong(value);
-        //     }
+        // if (principal instanceof String value
+        // && !"anonymousUser".equals(value)) {
+        // return Long.parseLong(value);
+        // }
         // } catch (NumberFormatException ignored) {
-        //     // The security principal isn't a numeric user ID.
+        // // The security principal isn't a numeric user ID.
         // }
 
         throw new ResponseStatusException(
                 HttpStatus.UNAUTHORIZED,
-                "Could not identify the logged-in user from the security principal"
-        );
+                "Could not identify the logged-in user from the security principal");
     }
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
 }

@@ -47,7 +47,6 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-<<<<<<< HEAD
 
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
@@ -55,8 +54,7 @@ dependencies {
 	
 	
 
-=======
->>>>>>> 85d808296e6e5c943ba3e73690bffd70071d6d37
+
 	// 🔄 DevTools
 	// developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
