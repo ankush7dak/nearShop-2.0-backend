@@ -43,40 +43,132 @@ public class SecurityConfig {
         return new ModelMapper();
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//     @Bean
+//     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-                .csrf(AbstractHttpConfigurer::disable) // disable CSRF for dev
-                .cors()
-                .and()
-                .authorizeHttpRequests(auth -> auth
-                        // public endpoints
-                        .requestMatchers("/auth/**", "/api/shop/**","/api/customer/**").permitAll()
-                        // role-based endpoints (match lowercase DB roles)
-                        .requestMatchers("/shopkeeper/**").hasAuthority("shopkeeper")
-                        .requestMatchers("/customer/**").hasAuthority("customer")
-                        // all others require auth
-                        .anyRequest().authenticated())
-                // add JWT filter after public endpoints
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//         http
+//                 .csrf(AbstractHttpConfigurer::disable) // disable CSRF for dev
+//                 .cors()
+//                 .and()
+//                 .authorizeHttpRequests(auth -> auth
+//                         // public endpoints
+//                         .requestMatchers("/auth/**", "/api/shop/**","/api/customer/**").permitAll()
+//                         // role-based endpoints (match lowercase DB roles)
+//                         .requestMatchers("/shopkeeper/**").hasAuthority("shopkeeper")
+//                         .requestMatchers("/customer/**").hasAuthority("customer")
+//                         // all others require auth
+//                         .anyRequest().authenticated())
+//                 // add JWT filter after public endpoints
+//                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
-    }
+//         return http.build();
+//     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173")); // your frontend
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+//     // @Bean
+//     // public CorsConfigurationSource corsConfigurationSource() {
+//     //     CorsConfiguration configuration = new CorsConfiguration();
+//     //     configuration.setAllowedOrigins(List.of("*")); // your frontend
+//     //     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH"));
+//     //     configuration.setAllowedHeaders(List.of("*"));
+//     //     configuration.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+//     //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//     //     source.registerCorsConfiguration("/**", configuration);
 
-        return source;
-    }
+//     //     return source;
+//     // }
+
+    
+// @Bean
+// public CorsConfigurationSource corsConfigurationSource() {
+//     CorsConfiguration configuration = new CorsConfiguration();
+
+//     // Allow all origins for development
+//     configuration.setAllowedOriginPatterns(List.of("*"));
+
+//     configuration.setAllowedMethods(List.of(
+//         "GET",
+//         "POST",
+//         "PUT",
+//         "DELETE",
+//         "OPTIONS",
+//         "PATCH"
+//     ));
+
+//     configuration.setAllowedHeaders(List.of("*"));
+
+//     // Required because your frontend uses withCredentials: true
+//     configuration.setAllowCredentials(true);
+
+//     UrlBasedCorsConfigurationSource source =
+//             new UrlBasedCorsConfigurationSource();
+
+//     source.registerCorsConfiguration("/**", configuration);
+
+//     return source;
+// }
+
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+    http
+        .csrf(AbstractHttpConfigurer::disable)
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .authorizeHttpRequests(auth -> auth
+
+            // Allow CORS preflight requests
+            .requestMatchers(
+                org.springframework.http.HttpMethod.OPTIONS, "/**"
+            ).permitAll()
+
+            // Allow root URL for connectivity testing
+            .requestMatchers("/").permitAll()
+
+            // Public endpoints
+            .requestMatchers(
+                "/auth/**",
+                "/api/shop/**",
+                "/api/customer/**"
+            ).permitAll()
+
+            // Role-based endpoints
+            .requestMatchers("/shopkeeper/**").hasAuthority("shopkeeper")
+            .requestMatchers("/customer/**").hasAuthority("customer")
+
+            // Everything else requires authentication
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(
+            jwtFilter,
+            UsernamePasswordAuthenticationFilter.class
+        );
+
+    return http.build();
+}
+
+@Bean
+public CorsConfigurationSource corsConfigurationSource() {
+
+    CorsConfiguration configuration = new CorsConfiguration();
+
+    configuration.setAllowedOriginPatterns(List.of("*"));
+
+    configuration.setAllowedMethods(List.of(
+        "GET", "POST", "PUT", "DELETE",
+        "OPTIONS", "PATCH"
+    ));
+
+    configuration.setAllowedHeaders(List.of("*"));
+    configuration.setAllowCredentials(true);
+
+    UrlBasedCorsConfigurationSource source =
+        new UrlBasedCorsConfigurationSource();
+
+    source.registerCorsConfiguration("/**", configuration);
+
+    return source;
+}
+
 
     @Bean
 public S3Client s3Client() {

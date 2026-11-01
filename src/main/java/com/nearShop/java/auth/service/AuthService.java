@@ -9,6 +9,7 @@ import jakarta.servlet.http.Cookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -65,15 +66,25 @@ public class AuthService {
         return token;
     }
 
-    public Cookie createCookie(String token){
-        Cookie cookie = new Cookie("jwt", token);
-            cookie.setHttpOnly(true);
-            cookie.setSecure(false); // true in production
-            cookie.setPath("/");
-            cookie.setMaxAge(24 * 60 * 60);
+    // public Cookie createCookie(String token){
+    //     Cookie cookie = new Cookie("jwt", token);
+    //         cookie.setHttpOnly(true);
+    //         cookie.setSecure(false); // true in production
+    //         cookie.setPath("/");
+    //         cookie.setMaxAge(24 * 60 * 60);
 
-            return cookie;
-    }
+    //         return cookie;
+    // }
+    public ResponseCookie createCookie(String token) {
+
+    return ResponseCookie.from("jwt", token)
+            .httpOnly(true)
+            .secure(true)
+            .sameSite("None")
+            .path("/")
+            .maxAge(24 * 60 * 60)
+            .build();
+}
 
     public List<String> getUserRoles(String mobile) {
         Optional<User> user = userRepository.findByMobile(mobile);

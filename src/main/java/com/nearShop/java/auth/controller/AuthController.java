@@ -32,12 +32,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
@@ -77,8 +80,11 @@ public class AuthController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
             }
             // adding cookie
-            Cookie cookie = authService.createCookie(token);
-            response.addCookie(cookie);
+            ResponseCookie cookie = authService.createCookie(token);
+            response.addHeader(
+            HttpHeaders.SET_COOKIE,
+                cookie.toString()
+                );
             LoginResponse objLoginResponse = new LoginResponse();
 
             // getting user roles
@@ -225,8 +231,11 @@ public class AuthController {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
                 }
 
-                Cookie cookie = authService.createCookie(token);
-                response.addCookie(cookie);
+                ResponseCookie cookie = authService.createCookie(token);
+                response.addHeader(
+            HttpHeaders.SET_COOKIE,
+                cookie.toString()
+                );
                 logger.info("Login successful for mobile: {}", objLoginRequest.getMobile());
 
             }
