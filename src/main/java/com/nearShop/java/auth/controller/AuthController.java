@@ -85,6 +85,7 @@ public class AuthController {
             HttpHeaders.SET_COOKIE,
                 cookie.toString()
                 );
+                
             LoginResponse objLoginResponse = new LoginResponse();
 
             // getting user roles
