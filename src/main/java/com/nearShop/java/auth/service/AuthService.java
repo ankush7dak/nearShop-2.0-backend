@@ -13,6 +13,8 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.time.Duration;
+
 
 @Service
 public class AuthService {
@@ -75,15 +77,25 @@ public class AuthService {
 
     //         return cookie;
     // }
-    public ResponseCookie createCookie(String token) {
+//     public ResponseCookie createCookie(String token) {
 
         
+//     return ResponseCookie.from("jwt", token)
+//             .httpOnly(true)
+//             .secure(true)
+//             .sameSite("None")
+//             .path("/")
+//             .maxAge(24 * 60 * 60)
+//             .build();
+// }
+
+public ResponseCookie createCookie(String token) {
     return ResponseCookie.from("jwt", token)
             .httpOnly(true)
             .secure(true)
-            .sameSite("None")
             .path("/")
-            .maxAge(24 * 60 * 60)
+            .sameSite("None")
+            .maxAge(Duration.ofHours(24))
             .build();
 }
 
