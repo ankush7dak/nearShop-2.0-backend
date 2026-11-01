@@ -172,6 +172,17 @@ public class CustomerController {
         }
     }
 
+     @GetMapping("/healthStatus")
+    public ResponseEntity<?> healthStatus(HttpServletRequest req) {
+        try {
+           
+            return ResponseEntity.ok("Good");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error");
+        }
+    }
+
     @PostMapping("/deleteCartItems")
     ResponseEntity<?> deleteCartItems(HttpServletRequest req,
             @RequestParam Long shopId) {
