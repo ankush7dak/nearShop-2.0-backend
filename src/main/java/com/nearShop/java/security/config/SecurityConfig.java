@@ -113,7 +113,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     http
         .csrf(AbstractHttpConfigurer::disable)
-        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+       .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .authorizeHttpRequests(auth -> auth
 
             // Allow CORS preflight requests
@@ -151,7 +151,10 @@ public CorsConfigurationSource corsConfigurationSource() {
 
     CorsConfiguration configuration = new CorsConfiguration();
 
-    configuration.setAllowedOriginPatterns(List.of("*"));
+    configuration.setAllowedOrigins(List.of(
+    "http://localhost:5173",
+    "https://getnearshop-hj1l.vercel.app"
+));
 
     configuration.setAllowedMethods(List.of(
         "GET", "POST", "PUT", "DELETE",

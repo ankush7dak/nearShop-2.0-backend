@@ -375,11 +375,15 @@ public class ShopkeeperServices {
     }
 
     // @Transactional(readOnly = true)
-    public List<MyOrderResponseDTO> getMyOrders(Long userId) {
+    public List<MyOrderResponseDTO> getMyOrders(Long userId,Integer page, Integer size) {
 
         Long shopId = objShopRepository.getShopId(userId);
-
-        List<Order> orders = objOrderRepository.findByShopIdOrderByOrderDateDesc(shopId);
+        Pageable pageable = PageRequest.of(
+        page,
+        size,
+        Sort.by(Sort.Direction.DESC, "orderDate")
+    );
+        Page<Order> orders = objOrderRepository.findByShopIdOrderByOrderDateDesc(shopId, pageable);
 
         return orders.stream()
                 .map(this::convertToDTO)

@@ -281,9 +281,12 @@ public class ShopkeeperController {
     }
 
     @GetMapping("/orders")
-    public ResponseEntity<?> getMyOrders(HttpServletRequest request) {
+    public ResponseEntity<?> getMyOrders(HttpServletRequest request,
+        @RequestParam Integer page,
+        @RequestParam Integer size
+    ) {
         Long userId = objNearShopUtility.getUserIdUsingRequest(request);
-        List<MyOrderResponseDTO> orders = objShopkeeperServices.getMyOrders(userId);
+        List<MyOrderResponseDTO> orders = objShopkeeperServices.getMyOrders(userId,page,size);
         return ResponseEntity.ok(orders);
 
     }
@@ -321,7 +324,7 @@ public class ShopkeeperController {
     @PostMapping("/{orderId}/status")
     public Order updateOrderStatus(
             @PathVariable Long orderId,
-
+            @RequestParam String status,
             HttpServletRequest request) {
 
         Long userId = objNearShopUtility.getUserIdUsingRequest(request);
@@ -338,7 +341,7 @@ public class ShopkeeperController {
                 userId,
                 orderId,
                 // request.getStatus().trim().toUpperCase()
-                "Accepted");
+                status);
     }
 
     @PostMapping("/addNewCustomer")

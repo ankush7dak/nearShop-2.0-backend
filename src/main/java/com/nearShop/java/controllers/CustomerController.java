@@ -271,7 +271,7 @@ public class CustomerController {
     }
 
      @GetMapping("/my-orders")
-    public ResponseEntity<List<MyOrderResponseDTO>> getMyOrders(
+    public ResponseEntity<?> getMyOrders(
             HttpServletRequest req) {
 
         // Assumes your JWT filter sets the user ID as the principal.

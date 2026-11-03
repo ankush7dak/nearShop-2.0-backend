@@ -42,5 +42,23 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     select p.* from nearshop.products p, nearshop.cart_items ci where p.product_id = ci.product_id and ci.cart_id = ?1       
     """,nativeQuery = true)
     public List<Product> getCartProducts(Long cartId);
+    
+    @Query(value = """
+            SELECT * FROM products p
+            WHERE
+            (?1 IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', ?1, '%')))
+            AND
+            (?2 IS NULL OR p.shop_sub_category_id = ?2 OR p.sub_category_id = ?2) and p.shop_id = ?3
+            AND p.is_available = '1'
+            """, countQuery = """
+            SELECT COUNT(*) FROM products p
+            WHERE
+            (?1 IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', ?1, '%')))
+            AND
+            (?2 IS NULL OR p.shop_sub_category_id = ?2 OR p.sub_category_id = ?2) and p.shop_id = ?3
+             AND p.is_available = '1'
+            """, nativeQuery = true)
+    public Page<Product> searchProductsForCustomer(String search, Long category ,Long shopId,Pageable pageable);
+
 
 }

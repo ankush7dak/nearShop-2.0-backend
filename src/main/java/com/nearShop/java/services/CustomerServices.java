@@ -86,8 +86,8 @@ public class CustomerServices {
                 cat_id = subcat.get().getSubCategoryId();
             }
         }
-
-        return objProductRepository.searchProducts(search, cat_id, shopId, pageable);
+        
+        return objProductRepository.searchProductsForCustomer(search, cat_id, shopId, pageable);
     }
 
     public List<String> getSelectedShopSubCategories(Long shopId) {

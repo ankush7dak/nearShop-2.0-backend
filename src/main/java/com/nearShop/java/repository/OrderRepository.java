@@ -10,16 +10,19 @@ import org.springframework.stereotype.Repository;
 
 import com.nearShop.java.entity.Order;
 import com.nearShop.java.entity.OtpVerification;
+import org.springframework.data.domain.Page;
+// import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByUserIdOrderByOrderDateDesc(Long userId);
 
-    List<Order> findByShopIdOrderByOrderDateDesc
-                (
-            Long shopId
-    );
+    Page<Order> findByShopIdOrderByOrderDateDesc(
+    Long shopId,
+    Pageable pageable
+);
 
     Optional<Order> findByOrderIdAndShopId(
             Long orderId,
