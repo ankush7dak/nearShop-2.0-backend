@@ -5,6 +5,7 @@ import com.nearShop.java.auth.dto.OtpRequest;
 import com.nearShop.java.auth.dto.OtpVerifyRequest;
 import com.nearShop.java.auth.dto.response.LoginResponse;
 import com.nearShop.java.auth.service.AuthService;
+import com.nearShop.java.dto.RequestDTO.GoogleLoginRequest;
 import com.nearShop.java.dto.RequestDTO.SignUpRequestDTO;
 import com.nearShop.java.entity.Role;
 import com.nearShop.java.entity.User;
@@ -13,6 +14,7 @@ import com.nearShop.java.repository.RoleRepository;
 import com.nearShop.java.repository.UserRepository;
 import com.nearShop.java.repository.UserRoleRepository;
 import com.nearShop.java.security.jwt.JwtUtil;
+import com.nearShop.java.services.GoogleAuthService;
 import com.nearShop.java.services.OtpService;
 import com.nearShop.java.utilities.NearShopUtility;
 
@@ -26,6 +28,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.lang.StackWalker.Option;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -37,10 +40,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 
 @RestController
 @RequestMapping("/auth")
-//@CrossOrigin(origins = "http://localhost:5173")
+// @CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
@@ -59,6 +63,8 @@ public class AuthController {
     private RoleRepository objRoleRepository;
     @Autowired
     private UserRoleRepository objuUserRoleRepository;
+    @Autowired
+    private GoogleAuthService objGoogleAuthService;
 
     // ================= LOGIN =================
     @PostMapping("/login")
@@ -82,10 +88,9 @@ public class AuthController {
             // adding cookie
             ResponseCookie cookie = authService.createCookie(token);
             response.addHeader(
-            HttpHeaders.SET_COOKIE,
-                cookie.toString()
-                );
-                
+                    HttpHeaders.SET_COOKIE,
+                    cookie.toString());
+
             LoginResponse objLoginResponse = new LoginResponse();
 
             // getting user roles
@@ -210,7 +215,7 @@ public class AuthController {
         try {
             logger.info("Verifying OTP for mobile: {}", objSignUpRequestDTO.getMobile());
 
-            boolean isVerified =  otpService.verifyOtp(objSignUpRequestDTO);
+            boolean isVerified = otpService.verifyOtp(objSignUpRequestDTO);
 
             if (!isVerified) {
                 logger.warn("OTP verification failed for mobile: {}", objSignUpRequestDTO.getMobile());
@@ -234,9 +239,8 @@ public class AuthController {
 
                 ResponseCookie cookie = authService.createCookie(token);
                 response.addHeader(
-            HttpHeaders.SET_COOKIE,
-                cookie.toString()
-                );
+                        HttpHeaders.SET_COOKIE,
+                        cookie.toString());
                 logger.info("Login successful for mobile: {}", objLoginRequest.getMobile());
 
             }
@@ -273,6 +277,80 @@ public class AuthController {
                     .body("Something went wrong during logout");
         }
     }
+
+    
+@PostMapping("/google/verify")
+public ResponseEntity<?> verifyGoogle(
+        @RequestBody GoogleLoginRequest request,
+        @RequestParam String role,
+        HttpServletResponse response
+    ) {
+
+    try {
+        GoogleIdToken.Payload payload =
+                objGoogleAuthService.verifyToken(request.getCredential(),role,response);
+
+        if (!payload.getEmailVerified()) {
+                //logger.warn("OTP verification failed for mobile: {}", objSignUpRequestDTO.getMobile());
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("Email not verified");
+            }
+
+            logger.info("Email veriefied successfully: {}", payload.getEmail());
+            //if (!objSignUpRequestDTO.getVerifyingforRoleAccess()) {
+                // LoginRequest objLoginRequest = new LoginRequest();
+                // //objLoginRequest.setMobile(objSignUpRequestDTO.getMobile());
+                // //objLoginRequest.setPassword(objSignUpRequestDTO.getPassword());
+                // objLoginRequest.setLoginRole(role);
+                // objLoginRequest.setEmail(payload.getEmail());
+                // Optional<User> user = objUserRepository.getUserByEmail(payload.getEmail());
+                // String token = jwtUtil.generateToken(payload.getEmail(), role, user.get().getId());
+
+                // if (token == null || token.isEmpty()) {
+                //     logger.error("Token generation failed for mobile: {}", objLoginRequest.getMobile());
+                //     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+                // }
+
+                // ResponseCookie cookie = authService.createCookie(token);
+                // response.addHeader(
+                //         HttpHeaders.SET_COOKIE,
+                //         cookie.toString());
+                // logger.info("Login successful for email: {}", payload.getEmail());
+
+            //}
+            logger.info("token2 is being created authcontroller: {}", payload.getEmail()+ role+ Long.valueOf(payload.getUserId()));
+            String token2 = jwtUtil.generateToken(payload.getEmail(), role, Long.valueOf(payload.getUserId()));
+            logger.info("token2 is created authcontroller: {}", token2);
+
+        ResponseCookie cookie = authService.createCookie(token2);
+                response.addHeader(
+                        HttpHeaders.SET_COOKIE,
+                        cookie.toString());
+                logger.info("cookie set to authcontroller inside verifyGoogle  {}", cookie.toString());
+
+        
+        
+
+        return ResponseEntity.ok(
+                Map.of(
+                    "verified", true,
+                    "googleId", payload.getSubject(),
+                    "email", payload.getEmail(),
+                    "name", payload.get("name"),
+                    "LoginSuccess","yes"
+                )
+        );
+
+    } catch (Exception e) {
+        return ResponseEntity.status(401).body(
+                Map.of(
+                    "verified", false,
+                    "message", "Google verification failed"
+                )
+        );
+    }
+}
+
 
     // ================= HELPER METHOD =================
 

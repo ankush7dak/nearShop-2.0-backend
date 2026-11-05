@@ -21,16 +21,16 @@ public class User {
     private Long id;
 
     // Optional email
-    @Column(unique = true, nullable = true, length = 100)
+    @Column(unique = true, nullable = false, length = 100)
     private String email;
 
     private String name;
 
     // Login field
-    @Column(unique = true, nullable = false, length = 15)
+    @Column(unique = true, nullable = true, length = 15)
     private String mobile;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
     @Column(name = "is_mobile_verified", nullable = false)
@@ -57,6 +57,15 @@ public class User {
 
     @Column(length = 10)
     private String pincode;
+
+    @Column(name = "google_id", unique = true)
+    private String googleId;
+
+    @Column(name = "auth_provider", length = 20)
+    private String authProvider = "LOCAL";
+
+    @Column(name = "profile_image", length = 500)
+    private String profileImage;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

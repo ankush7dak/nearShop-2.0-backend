@@ -11,6 +11,7 @@ import com.nearShop.java.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByMobile(String mobile);
+    Optional<User> findByEmail(String mobile);
     Optional<User> findById(Long id);
 
 

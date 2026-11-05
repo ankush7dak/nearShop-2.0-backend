@@ -43,6 +43,12 @@ dependencies {
 	// ☁️ Cloudflare R2 (via S3 SDK)
 	implementation 'software.amazon.awssdk:s3:2.25.20'
 
+	//google auth
+	//implementation 'com.google.api-client:google-api-client:2.7.2'
+	implementation 'com.google.api-client:google-api-client:2.7.2'
+	implementation 'com.google.http-client:google-http-client-gson:1.45.3'
+
+
 	// 🧰 Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -60,6 +66,7 @@ dependencies {
 
 	// 🧪 Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
 }
 
 tasks.named('test') {
