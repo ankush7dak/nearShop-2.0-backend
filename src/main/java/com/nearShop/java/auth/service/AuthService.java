@@ -94,7 +94,7 @@ public ResponseCookie createCookie(String token) {
             .httpOnly(true)
             .secure(false)
             .path("/")
-            .sameSite("Lax")
+            .sameSite("None")
             .maxAge(Duration.ofHours(24))
             .build();
 }
