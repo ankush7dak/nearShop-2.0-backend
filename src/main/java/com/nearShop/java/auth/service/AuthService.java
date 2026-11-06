@@ -91,12 +91,12 @@ public class AuthService {
 
 public ResponseCookie createCookie(String token) {
     return ResponseCookie.from("jwt", token)
-            .httpOnly(true)
-            .secure(false)
-            .path("/")
-            .sameSite("None")
-            .maxAge(Duration.ofHours(24))
-            .build();
+        .httpOnly(true)
+        .sameSite("None")
+        .secure(true)
+        .path("/")
+        .maxAge(Duration.ofHours(24))
+        .build();
 }
 
     public List<String> getUserRoles(String mobile) {

@@ -570,3 +570,72 @@
 2026-11-06T04:00:08.391+05:30  WARN 15736 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : JWT token not found in cookies
 2026-11-06T04:00:08.444+05:30  WARN 15736 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : JWT token not found in cookies
 2026-11-06T04:00:08.448+05:30  WARN 15736 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : JWT token not found in cookies
+2026-11-06T04:22:31.277+05:30  INFO 13500 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 13500 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-06T04:22:31.283+05:30  INFO 13500 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-06T04:22:32.796+05:30  INFO 13500 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-06T04:22:32.989+05:30  INFO 13500 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 180 ms. Found 13 JPA repository interfaces.
+2026-11-06T04:22:34.774+05:30  INFO 13500 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-06T04:22:34.796+05:30  INFO 13500 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-06T04:22:34.797+05:30  INFO 13500 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-06T04:22:34.951+05:30  INFO 13500 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-06T04:22:34.952+05:30  INFO 13500 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3565 ms
+2026-11-06T04:22:35.300+05:30  INFO 13500 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-06T04:22:35.399+05:30  INFO 13500 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-06T04:22:35.465+05:30  INFO 13500 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-06T04:22:36.019+05:30  INFO 13500 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-06T04:22:36.110+05:30  INFO 13500 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-06T04:22:37.680+05:30  INFO 13500 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4392362c
+2026-11-06T04:22:37.688+05:30  INFO 13500 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-06T04:22:37.826+05:30  WARN 13500 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-06T04:22:37.828+05:30  WARN 13500 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-06T04:22:39.917+05:30  INFO 13500 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-06T04:22:43.277+05:30  INFO 13500 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-06T04:22:43.780+05:30  INFO 13500 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-06T04:22:46.152+05:30  WARN 13500 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-06T04:22:46.228+05:30  INFO 13500 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-06T04:22:47.782+05:30  WARN 13500 --- [nearShop] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-11-06T04:22:47.787+05:30  INFO 13500 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-06T04:22:47.793+05:30  INFO 13500 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-06T04:22:47.868+05:30  INFO 13500 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-06T04:22:47.893+05:30  INFO 13500 --- [nearShop] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-11-06T04:22:47.932+05:30 ERROR 13500 --- [nearShop] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2026-11-06T04:23:45.322+05:30  INFO 9800 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 9800 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-06T04:23:45.327+05:30  INFO 9800 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-06T04:23:46.731+05:30  INFO 9800 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-06T04:23:46.923+05:30  INFO 9800 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 179 ms. Found 13 JPA repository interfaces.
+2026-11-06T04:23:48.091+05:30  INFO 9800 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-06T04:23:48.111+05:30  INFO 9800 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-06T04:23:48.112+05:30  INFO 9800 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-06T04:23:48.244+05:30  INFO 9800 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-06T04:23:48.244+05:30  INFO 9800 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2822 ms
+2026-11-06T04:23:48.539+05:30  INFO 9800 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-06T04:23:48.641+05:30  INFO 9800 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-06T04:23:48.708+05:30  INFO 9800 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-06T04:23:49.428+05:30  INFO 9800 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-06T04:23:49.511+05:30  INFO 9800 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-06T04:23:50.869+05:30  INFO 9800 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2b6fcca1
+2026-11-06T04:23:50.873+05:30  INFO 9800 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-06T04:23:51.008+05:30  WARN 9800 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-06T04:23:51.013+05:30  WARN 9800 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-06T04:23:53.253+05:30  INFO 9800 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-06T04:23:56.615+05:30  INFO 9800 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-06T04:23:57.224+05:30  INFO 9800 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-06T04:23:59.685+05:30  WARN 9800 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-06T04:23:59.769+05:30  INFO 9800 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-06T04:24:00.901+05:30  INFO 9800 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-11-06T04:24:00.916+05:30  INFO 9800 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 16.423 seconds (process running for 17.384)
