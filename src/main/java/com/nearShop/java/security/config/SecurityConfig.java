@@ -152,7 +152,7 @@ public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
 
     configuration.setAllowedOrigins(List.of(
-    "https://getnearshop-hj1l-7m2fckgte-ankush7dak.vercel.app",
+    "https://getnearshop.in",
     "http://localhost:5173",
     "https://getnearshop-hj1l.vercel.app",
     "http://192.168.29.8:5173",
