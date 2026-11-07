@@ -293,7 +293,7 @@ public ResponseEntity<?> verifyGoogle(
         if (!payload.getEmailVerified()) {
                 //logger.warn("OTP verification failed for mobile: {}", objSignUpRequestDTO.getMobile());
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("Email not verified");
+                        .body("Email not verified");  
             }
 
             logger.info("Email veriefied successfully: {}", payload.getEmail());

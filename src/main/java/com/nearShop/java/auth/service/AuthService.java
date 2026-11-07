@@ -92,7 +92,7 @@ public class AuthService {
 public ResponseCookie createCookie(String token) {
     return ResponseCookie.from("jwt", token)
         .httpOnly(true)
-        .sameSite("None")
+        .sameSite("Lax")
         .secure(true)
         .path("/")
         .maxAge(Duration.ofHours(24))

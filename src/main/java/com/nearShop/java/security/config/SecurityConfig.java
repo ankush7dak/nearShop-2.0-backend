@@ -156,7 +156,7 @@ public CorsConfigurationSource corsConfigurationSource() {
     "http://localhost:5173",
     "https://getnearshop-hj1l.vercel.app",
     "http://192.168.29.8:5173",
-    "https://localhost","https://localhost"
+    "https://localhost","https://localhost","https://getnearshop.onrender.com"
 
 ));
 
