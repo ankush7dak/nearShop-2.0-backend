@@ -260,7 +260,7 @@ public class ShopkeeperController {
     }
 
     @PostMapping("/updateShopProfile")
-    public ResponseEntity<?> updateShopProfile(HttpServletRequest req, @RequestBody ShopProfileDTO objShopProfileDTO) {
+    public ResponseEntity<?> updateShopProfile(HttpServletRequest req, @ModelAttribute ShopProfileDTO objShopProfileDTO) {
         try {
             String isUpdated = objShopkeeperServices.updateShopProfile(req, objShopProfileDTO);
             return ResponseEntity.ok(isUpdated);

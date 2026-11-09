@@ -25,6 +25,7 @@ public class MyOrderResponseDTO {
 
     private OffsetDateTime orderDate;
     private String orderStatus;
+    private String shopProfileImage;
 
     private List<OrderItemResponseDTO> items;
 }

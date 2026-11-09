@@ -28,6 +28,7 @@ public class ShopDTO {
     private Integer deliveryRange;
     private String status;
     private Boolean isActive;
+    private String logoUrl;
 
     // getters and setters
 }

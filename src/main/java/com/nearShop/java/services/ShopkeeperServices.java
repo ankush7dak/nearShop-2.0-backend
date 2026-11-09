@@ -293,6 +293,7 @@ public class ShopkeeperServices {
         }
         if (shop.isPresent()) {
             Shop shop_ = shop.get();
+            objShopProfileDTO.setLogoUrl(shop_.getLogoUrl());
             shopDTO = objModelMapper.map(shop_, ShopDTO.class);
             if (null != shop_ && shop_.getCategory() != null) {
                 shopDTO.setCategoryName(shop_.getCategory().getName());
@@ -322,6 +323,9 @@ public class ShopkeeperServices {
 
             if (objShop.isPresent()) {
                 Shop shop = objShop.get();
+                if(objShopProfileDTO.getLogo() != null){
+                    shop.setLogoUrl(objR2Service.uploadFile(objShopProfileDTO.getLogo()));
+                }
                 shop.setAddress(objShopProfileDTO.getShopDTO().getAddress());
                 Optional<Category> category = objCategoryRepository
                         .findByName(objShopProfileDTO.getShopDTO().getCategoryName());
@@ -501,7 +505,9 @@ public class ShopkeeperServices {
 
         // Fetch shop name
         objShopRepository.findById(order.getShopId())
-                .ifPresent(shop -> dto.setShopName(shop.getShopName()));
+                .ifPresent(shop -> {dto.setShopName(shop.getShopName());
+                    dto.setShopProfileImage(shop.getLogoUrl());
+                });
 
         dto.setSubtotal(order.getSubtotal());
         dto.setDiscount(order.getDiscount());

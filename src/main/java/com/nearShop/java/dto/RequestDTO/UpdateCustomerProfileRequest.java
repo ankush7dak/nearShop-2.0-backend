@@ -3,10 +3,12 @@ package com.nearShop.java.dto.RequestDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
 public record UpdateCustomerProfileRequest(
+
         @NotBlank
         @Size(max = 100)
         String name,
@@ -28,7 +30,12 @@ public record UpdateCustomerProfileRequest(
         @Size(max = 100)
         String state,
 
-        @Pattern(regexp = "^$|^[0-9]{6}$",
-                 message = "PIN code must contain six digits")
-        String pincode
+        @Pattern(
+            regexp = "^$|^[0-9]{6}$",
+            message = "PIN code must contain six digits"
+        )
+        String pincode,
+
+        MultipartFile profileImage
+
 ) {}

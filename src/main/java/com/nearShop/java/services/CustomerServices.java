@@ -14,10 +14,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.nearShop.java.controllers.ImageController;
 import com.nearShop.java.dto.OrderItemDTO;
 import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
@@ -71,6 +74,8 @@ public class CustomerServices {
     OrderRepository objOrderRepository;
     @Autowired
     UserRepository objUserRepository;
+    @Autowired
+    R2Service objR2Service;
 
     public Page<Product> getProductsForShopId(Integer page, Integer size, String search, String category, Long shopId) {
         // TODO Auto-generated method stub
@@ -208,7 +213,8 @@ public class CustomerServices {
 
         // Fetch shop name
         objShopRepository.findById(order.getShopId())
-                .ifPresent(shop -> dto.setShopName(shop.getShopName()));
+                .ifPresent(shop -> {dto.setShopName(shop.getShopName());
+            dto.setShopProfileImage(shop.getLogoUrl());});
 
         dto.setSubtotal(order.getSubtotal());
         dto.setDiscount(order.getDiscount());
@@ -277,7 +283,8 @@ public class CustomerServices {
                 user.getAddress(),
                 user.getCity(),
                 user.getState(),
-                user.getPincode()
+                user.getPincode(),
+                user.getProfileImage()
         );
     }
 
@@ -292,7 +299,7 @@ public class CustomerServices {
             UpdateCustomerProfileRequest request) {
 
         User user = getCustomer(customerId);
-
+        
         if (request.dob() != null &&
                 request.dob().isAfter(LocalDate.now())) {
             throw new IllegalArgumentException(
@@ -306,6 +313,11 @@ public class CustomerServices {
         user.setCity(request.city());
         user.setState(request.state());
         user.setPincode(request.pincode());
+        if(request.profileImage()!=null){
+            MultipartFile userImage = request.profileImage();
+            String userImageUrl = objR2Service.uploadFile(userImage);
+            user.setProfileImage(userImageUrl);
+        }
 
         // JPA persists the managed entity at transaction commit.
         return toDTO(objUserRepository.save(user));
