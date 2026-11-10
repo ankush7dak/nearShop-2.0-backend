@@ -231,7 +231,11 @@ public class ShopkeeperServices {
         Long shopId = objShopRepository.getShopId(userId);
         ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
         Integer productCount = objProductRepository.getProductCount(shopId);
+        String totalRevenue = objOrderRepository.getTotalRevenue(shopId);
+        String newOrders = objOrderRepository.getNewOrdersCount(shopId);
         objShopkeeperDashboardDTO.setProductCount(productCount);
+        objShopkeeperDashboardDTO.setTotalRevenue(Double.valueOf(totalRevenue));
+        objShopkeeperDashboardDTO.setNewOrders(Integer.valueOf(newOrders));
         return objShopkeeperDashboardDTO;
     }
 
@@ -508,6 +512,10 @@ public class ShopkeeperServices {
                 .ifPresent(shop -> {dto.setShopName(shop.getShopName());
                     dto.setShopProfileImage(shop.getLogoUrl());
                 });
+        objUserRepository.findById(order.getUserId())
+        .ifPresent(user -> {dto.setProfileImageUrl(user.getProfileImage());
+                        dto.setMobileNo(user.getMobile());
+                    dto.setCustomerName(user.getName());});
 
         dto.setSubtotal(order.getSubtotal());
         dto.setDiscount(order.getDiscount());
@@ -597,7 +605,8 @@ public CustomerDTO searchCustomer(Long customerId) {
             user.getName(),
             user.getMobile(),
             user.getEmail(),
-            null
+            null,
+            user.getProfileImage()
     );
 }
 

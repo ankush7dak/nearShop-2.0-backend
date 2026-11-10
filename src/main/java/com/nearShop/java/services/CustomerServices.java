@@ -2,6 +2,7 @@ package com.nearShop.java.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -153,11 +154,11 @@ public class CustomerServices {
             order.setCouponCode(orderRequest.getCouponCode());
             order.setTotalItems(orderRequest.getTotalItems());
 
-        // order.setOrderDate(
-        // orderRequest.getOrderDate() != null
-        //     ? orderRequest.getOrderDate()
-        //     : OffsetDateTime.now()
-        // );
+        order.setOrderDate(
+        orderRequest.getOrderDate() != null
+            ? orderRequest.getOrderDate()
+            : OffsetDateTime.now()
+        );
 
     order.setOrderStatus("PLACED");
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.nearShop.java.entity.Order;
@@ -28,5 +29,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             Long orderId,
             Long shopId
     );
+    @Query(value = "select sum(ords.total_amount) from nearshop.orders ords where ords.shop_id = ?1 and ords.order_status = 'DELIVERED'" , nativeQuery = true)
+    String getTotalRevenue(Long shopId);
+    @Query(value = "select count(*) from nearshop.orders ords where ords.shop_id = ?1 and ords.order_status = 'PLACED'" , nativeQuery = true)
+    String getNewOrdersCount(Long shopId);
    
 }

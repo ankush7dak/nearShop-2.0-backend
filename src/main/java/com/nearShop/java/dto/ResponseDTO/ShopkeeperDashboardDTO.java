@@ -6,6 +6,7 @@ import lombok.Data;
 public class ShopkeeperDashboardDTO {
     private Integer productCount;
     private Double totalRevenue;
+    private Integer newOrders;
     private Long errCode;
     private Long errMessage;
     private Integer newOrderCount;

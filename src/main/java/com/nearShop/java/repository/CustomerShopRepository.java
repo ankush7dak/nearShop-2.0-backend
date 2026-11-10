@@ -22,7 +22,8 @@ public interface CustomerShopRepository
             u.name,
             u.mobile,
             u.email,
-            cs.createdAt
+            cs.createdAt,
+            u.profileImage
         )
         FROM CustomerShop cs
         JOIN cs.customer u

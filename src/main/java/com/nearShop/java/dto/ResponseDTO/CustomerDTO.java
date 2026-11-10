@@ -17,4 +17,5 @@ public class CustomerDTO {
     private String mobile;
     private String email;
     private LocalDateTime linkedAt;
+    private String profileImageUrl;
 }
