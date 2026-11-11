@@ -230,10 +230,14 @@ public class ShopkeeperServices {
         // TODO Auto-generated method stub
         Long shopId = objShopRepository.getShopId(userId);
         ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
-        Integer productCount = objProductRepository.getProductCount(shopId);
+        String productCount = objProductRepository.getProductCount(shopId);
         String totalRevenue = objOrderRepository.getTotalRevenue(shopId);
+        if(totalRevenue == null) totalRevenue = "0";
         String newOrders = objOrderRepository.getNewOrdersCount(shopId);
-        objShopkeeperDashboardDTO.setProductCount(productCount);
+        objShopkeeperDashboardDTO.setShopRegistered(
+                objShopRepository.findShopByOwnerId(userId) != 0);
+
+        objShopkeeperDashboardDTO.setProductCount(Integer.valueOf(productCount));
         objShopkeeperDashboardDTO.setTotalRevenue(Double.valueOf(totalRevenue));
         objShopkeeperDashboardDTO.setNewOrders(Integer.valueOf(newOrders));
         return objShopkeeperDashboardDTO;
@@ -327,7 +331,7 @@ public class ShopkeeperServices {
 
             if (objShop.isPresent()) {
                 Shop shop = objShop.get();
-                if(objShopProfileDTO.getLogo() != null){
+                if (objShopProfileDTO.getLogo() != null) {
                     shop.setLogoUrl(objR2Service.uploadFile(objShopProfileDTO.getLogo()));
                 }
                 shop.setAddress(objShopProfileDTO.getShopDTO().getAddress());
@@ -383,14 +387,13 @@ public class ShopkeeperServices {
     }
 
     // @Transactional(readOnly = true)
-    public List<MyOrderResponseDTO> getMyOrders(Long userId,Integer page, Integer size) {
+    public List<MyOrderResponseDTO> getMyOrders(Long userId, Integer page, Integer size) {
 
         Long shopId = objShopRepository.getShopId(userId);
         Pageable pageable = PageRequest.of(
-        page,
-        size,
-        Sort.by(Sort.Direction.DESC, "orderDate")
-    );
+                page,
+                size,
+                Sort.by(Sort.Direction.DESC, "orderDate"));
         Page<Order> orders = objOrderRepository.findByShopIdOrderByOrderDateDesc(shopId, pageable);
 
         return orders.stream()
@@ -509,13 +512,16 @@ public class ShopkeeperServices {
 
         // Fetch shop name
         objShopRepository.findById(order.getShopId())
-                .ifPresent(shop -> {dto.setShopName(shop.getShopName());
+                .ifPresent(shop -> {
+                    dto.setShopName(shop.getShopName());
                     dto.setShopProfileImage(shop.getLogoUrl());
                 });
         objUserRepository.findById(order.getUserId())
-        .ifPresent(user -> {dto.setProfileImageUrl(user.getProfileImage());
-                        dto.setMobileNo(user.getMobile());
-                    dto.setCustomerName(user.getName());});
+                .ifPresent(user -> {
+                    dto.setProfileImageUrl(user.getProfileImage());
+                    dto.setMobileNo(user.getMobile());
+                    dto.setCustomerName(user.getName());
+                });
 
         dto.setSubtotal(order.getSubtotal());
         dto.setDiscount(order.getDiscount());
@@ -587,71 +593,75 @@ public class ShopkeeperServices {
         // .toList();
     }
 
-public CustomerDTO searchCustomer(Long customerId) {
+    public CustomerDTO searchCustomer(Long customerId) {
 
-    Optional<User> customer =
-            objUserRepository.findById(customerId);
+        Optional<User> customer = objUserRepository.findById(customerId);
 
-    if (customer.isEmpty()) {
-        throw new RuntimeException(
-                "Customer not found with ID: " + customerId
-        );
+        if (customer.isEmpty()) {
+            throw new RuntimeException(
+                    "Customer not found with ID: " + customerId);
+        }
+
+        User user = customer.get();
+
+        return new CustomerDTO(
+                user.getId(),
+                user.getName(),
+                user.getMobile(),
+                user.getEmail(),
+                null,
+                user.getProfileImage());
     }
 
-    User user = customer.get();
+    public String addNewCustomer(Long shopId, Long customerId) {
+        // TODO Auto-generated method stub
 
-    return new CustomerDTO(
-            user.getId(),
-            user.getName(),
-            user.getMobile(),
-            user.getEmail(),
-            null,
-            user.getProfileImage()
-    );
-}
+        User customer = objUserRepository.findById(customerId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Customer not found"));
 
-public String addNewCustomer(Long shopId, Long customerId) {
-    // TODO Auto-generated method stub
-
-     User customer = objUserRepository.findById(customerId)
-            .orElseThrow(() -> new ResponseStatusException(
+        if (shopId == null) {
+            throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "Customer not found"
-            ));
+                    "Shop not found for this shopkeeper");
+        }
 
+        boolean exists = objCustomerShopRepository
+                .existsByCustomer_IdAndShop_Id(
+                        customerId,
+                        shopId);
 
-    if (shopId == null) {
-        throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Shop not found for this shopkeeper"
-        );
+        if (exists) {
+            return "Customer is already mapped to your shop";
+        }
+
+        Shop shop = objShopRepository.findById(shopId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Shop not found"));
+
+        CustomerShop mapping = new CustomerShop();
+        mapping.setCustomer(customer);
+        mapping.setShop(shop);
+        mapping.setCreatedAt(LocalDateTime.now());
+
+        objCustomerShopRepository.save(mapping);
+
+        return "Customer added to your shop successfully";
     }
 
- boolean exists =
-            objCustomerShopRepository
-                    .existsByCustomer_IdAndShop_Id(
-                            customerId,
-                            shopId
-                    );
-
-    if (exists) {
-        return "Customer is already mapped to your shop";
+    public boolean updateShopStatus(Long shopId, boolean isActive) {
+        // TODO Auto-generated method stub
+        Shop shop = objShopRepository.findById(shopId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Shop not found"));
+        shop.setIsActive(isActive);
+        if(isActive == true) shop.setStatus("open");
+        else shop.setStatus("closed");
+        objShopRepository.save(shop);
+        return isActive;
     }
-
-    Shop shop = objShopRepository.findById(shopId)
-            .orElseThrow(() -> new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "Shop not found"
-            ));
-
-    CustomerShop mapping = new CustomerShop();
-    mapping.setCustomer(customer);
-    mapping.setShop(shop);
-    mapping.setCreatedAt(LocalDateTime.now());
-
-    objCustomerShopRepository.save(mapping);
-
-    return "Customer added to your shop successfully";
-}
 
 }

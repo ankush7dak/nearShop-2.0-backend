@@ -56,6 +56,8 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("api/shop")
 public class ShopkeeperController {
+        private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     ShopkeeperServices objShopkeeperServices;
     @Autowired
@@ -73,6 +75,7 @@ public class ShopkeeperController {
     public ResponseEntity<?> getDashboardData(HttpServletRequest req) {
         try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+            logger.info("getDashBoardData userId" + userId);
             ShopkeeperDashboardDTO objShopkeeperDashboardDTO = new ShopkeeperDashboardDTO();
             objShopkeeperDashboardDTO = objShopkeeperServices.getDashboardData(userId);
             // fetching product count
@@ -215,7 +218,10 @@ public class ShopkeeperController {
             @RequestParam("logo") MultipartFile logo) {
         try {
             Long userId = objNearShopUtility.getUserIdUsingRequest(request);
-            boolean isRegistrationDone = objShopkeeperServices.registerShop(shopDTO, logo, userId);
+            boolean isRegistrationDone  = false;
+            if(objShopRepository.findShopByOwnerId(userId) == 0){
+            isRegistrationDone = objShopkeeperServices.registerShop(shopDTO, logo, userId);
+           }
             return ResponseEntity.ok(isRegistrationDone);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error: " + e.getMessage());
@@ -356,6 +362,21 @@ public class ShopkeeperController {
 
         return ResponseEntity.ok("success");
     }
+
+    @PostMapping("/updateShopStatus")
+    public ResponseEntity<?> updateShopStatus(
+            @RequestParam boolean isActive,
+        HttpServletRequest req) {
+        Long userId = objNearShopUtility.getUserIdUsingRequest(req);
+        Long shopId = objShopRepository.getShopId(userId);
+        boolean message = objShopkeeperServices.updateShopStatus(
+                shopId,
+                isActive);
+
+        return ResponseEntity.ok(message);
+    }
+
+
 
     private Long getUserId(HttpServletRequest request) {
         // if (authentication == null

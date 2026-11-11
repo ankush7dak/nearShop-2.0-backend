@@ -1,588 +1,317 @@
-2026-11-11T01:22:33.146+05:30  INFO 17680 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 17680 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
-2026-11-11T01:22:33.169+05:30  INFO 17680 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-11-11T01:22:35.260+05:30  INFO 17680 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-11T01:22:35.571+05:30  INFO 17680 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 264 ms. Found 13 JPA repository interfaces.
-2026-11-11T01:22:37.312+05:30  INFO 17680 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-11-11T01:22:37.347+05:30  INFO 17680 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-11T01:22:37.348+05:30  INFO 17680 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-11-11T01:22:37.610+05:30  INFO 17680 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-11-11T01:22:37.611+05:30  INFO 17680 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4257 ms
-2026-11-11T01:22:37.933+05:30  INFO 17680 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-11T01:22:38.069+05:30  INFO 17680 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-11T01:22:38.150+05:30  INFO 17680 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-11T01:22:38.907+05:30  INFO 17680 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-11T01:22:38.980+05:30  INFO 17680 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-11T01:22:41.993+05:30  INFO 17680 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3ca278bc
-2026-11-11T01:22:42.000+05:30  INFO 17680 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-11T01:22:42.172+05:30  WARN 17680 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-11T01:22:42.176+05:30  WARN 17680 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-11-11T01:22:45.288+05:30  INFO 17680 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-11T01:22:49.645+05:30  INFO 17680 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-11T01:22:50.362+05:30  INFO 17680 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-11T01:22:53.510+05:30  WARN 17680 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-11T01:22:53.593+05:30  INFO 17680 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-11-11T01:22:55.139+05:30  INFO 17680 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-11-11T01:22:55.158+05:30  INFO 17680 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 23.244 seconds (process running for 24.12)
-2026-11-11T01:22:58.810+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-3] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794338805251,"i_e":{"enable_itp_optimization":24},"i_et":1794338805251,"i_b":"yVM1TCM/3OxpHeD8uYea0ZGhFMI4byQKkHXuQX917jY"}] that contained an invalid cookie. That cookie will be ignored.
+2026-11-12T00:07:52.363+05:30  INFO 2008 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:07:52.513+05:30  INFO 2008 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:10:58.134+05:30  INFO 21264 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 21264 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-12T00:10:58.142+05:30  INFO 21264 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-12T00:10:59.588+05:30  INFO 21264 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-12T00:10:59.782+05:30  INFO 21264 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 180 ms. Found 13 JPA repository interfaces.
+2026-11-12T00:11:00.971+05:30  INFO 21264 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-12T00:11:00.992+05:30  INFO 21264 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-12T00:11:00.992+05:30  INFO 21264 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-12T00:11:01.117+05:30  INFO 21264 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-12T00:11:01.118+05:30  INFO 21264 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2837 ms
+2026-11-12T00:11:01.429+05:30  INFO 21264 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-12T00:11:01.534+05:30  INFO 21264 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-12T00:11:01.596+05:30  INFO 21264 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-12T00:11:02.275+05:30  INFO 21264 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-12T00:11:02.342+05:30  INFO 21264 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-12T00:11:03.991+05:30  INFO 21264 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ef8090b
+2026-11-12T00:11:04.004+05:30  INFO 21264 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-12T00:11:04.174+05:30  WARN 21264 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-12T00:11:04.176+05:30  WARN 21264 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-12T00:11:06.386+05:30  INFO 21264 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-12T00:11:10.178+05:30  INFO 21264 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-12T00:11:10.744+05:30  INFO 21264 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-12T00:11:13.080+05:30  WARN 21264 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-12T00:11:13.161+05:30  INFO 21264 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-12T00:11:14.337+05:30  INFO 21264 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-11-12T00:11:14.351+05:30  INFO 21264 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 17.025 seconds (process running for 17.757)
+2026-11-12T00:11:26.622+05:30  INFO 21264 --- [nearShop] [http-nio-8081-exec-3] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794421110304,"i_e":{"enable_itp_optimization":24},"i_et":1794421110304};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2026-11-11T01:22:58.824+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-11T01:22:58.824+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-11T01:22:58.828+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-11-11T01:22:59.260+05:30 ERROR 17680 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Invalid or expired JWT token
-
-io.jsonwebtoken.ExpiredJwtException: JWT expired at 2026-11-10T06:28:53Z. Current time: 2026-11-10T19:52:59Z, a difference of 48246258 milliseconds.  Allowed clock skew: 0 milliseconds.
-	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:427) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at com.nearShop.java.auth.controller.AuthController.getRole(AuthController.java:138) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at com.nearShop.java.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:145) ~[main/:na]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
-
-2026-11-11T01:22:59.353+05:30 ERROR 17680 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Invalid or expired JWT token
-
-io.jsonwebtoken.ExpiredJwtException: JWT expired at 2026-11-10T06:28:53Z. Current time: 2026-11-10T19:52:59Z, a difference of 48246353 milliseconds.  Allowed clock skew: 0 milliseconds.
-	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:427) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173) ~[jjwt-impl-0.11.5.jar:0.11.5]
-	at com.nearShop.java.auth.controller.AuthController.getRole(AuthController.java:138) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.31.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at com.nearShop.java.security.jwt.JwtFilter.doFilterInternal(JwtFilter.java:145) ~[main/:na]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.4.jar:6.3.4]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.14.jar:6.1.14]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.31.jar:10.1.31]
-	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
-
-2026-11-11T01:23:17.699+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
-2026-11-11T01:23:17.701+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
-2026-11-11T01:23:18.536+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
-2026-11-11T01:23:18.737+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T01:26:03.823+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T01:26:03.852+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T01:33:17.932+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@13cc61e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.936+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@74411ce7 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.942+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@f355379 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.945+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4d1faac8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.950+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@19d1e002 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.952+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@14cd0518 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.961+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@31c62263 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.968+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1bf8779 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:33:17.975+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1778a6bc (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.322+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T01:42:03.348+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T01:42:03.448+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3ca278bc (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.453+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2ecd2f55 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.456+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2fc0422c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.459+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2666503e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.465+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@571ac46d (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.468+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2b6b5a6d (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.470+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@44e0a8a6 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.476+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1078345e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.480+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@730a5b3e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:42:03.486+05:30  WARN 17680 --- [nearShop] [http-nio-8081-exec-3] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3d84c55f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:45:43.111+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T01:45:43.131+05:30  INFO 17680 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T01:46:51.507+05:30  INFO 16440 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 16440 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
-2026-11-11T01:46:51.515+05:30  INFO 16440 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-11-11T01:46:52.911+05:30  INFO 16440 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-11T01:46:53.108+05:30  INFO 16440 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 183 ms. Found 13 JPA repository interfaces.
-2026-11-11T01:46:54.231+05:30  INFO 16440 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-11-11T01:46:54.255+05:30  INFO 16440 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-11T01:46:54.257+05:30  INFO 16440 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-11-11T01:46:54.389+05:30  INFO 16440 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-11-11T01:46:54.390+05:30  INFO 16440 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2775 ms
-2026-11-11T01:46:54.698+05:30  INFO 16440 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-11T01:46:54.811+05:30  INFO 16440 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-11T01:46:54.875+05:30  INFO 16440 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-11T01:46:55.640+05:30  INFO 16440 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-11T01:46:55.713+05:30  INFO 16440 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-11T01:46:57.573+05:30  INFO 16440 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ef8090b
-2026-11-11T01:46:57.585+05:30  INFO 16440 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-11T01:46:57.837+05:30  WARN 16440 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-11T01:46:57.842+05:30  WARN 16440 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-11-11T01:47:00.235+05:30  INFO 16440 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-11T01:47:03.967+05:30  INFO 16440 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-11T01:47:04.590+05:30  INFO 16440 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-11T01:47:07.412+05:30  WARN 16440 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-11T01:47:07.496+05:30  INFO 16440 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-11-11T01:47:08.550+05:30  INFO 16440 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-11-11T01:47:08.567+05:30  INFO 16440 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 17.897 seconds (process running for 18.884)
-2026-11-11T01:47:17.498+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794340379397,"i_e":{"enable_itp_optimization":24},"i_et":1794340379397,"i_b":"yVM1TCM/3OxpHeD8uYea0ZGhFMI4byQKkHXuQX917jY"};] that contained an invalid cookie. That cookie will be ignored.
+2026-11-12T00:11:26.676+05:30  INFO 21264 --- [nearShop] [http-nio-8081-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-12T00:11:26.687+05:30  INFO 21264 --- [nearShop] [http-nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-12T00:11:26.691+05:30  INFO 21264 --- [nearShop] [http-nio-8081-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-12T00:11:27.233+05:30  INFO 21264 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:11:27.279+05:30  INFO 21264 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:12:57.990+05:30  INFO 7820 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 7820 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-12T00:12:57.996+05:30  INFO 7820 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-12T00:12:59.338+05:30  INFO 7820 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-12T00:12:59.532+05:30  INFO 7820 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 181 ms. Found 13 JPA repository interfaces.
+2026-11-12T00:13:00.728+05:30  INFO 7820 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-12T00:13:00.750+05:30  INFO 7820 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-12T00:13:00.750+05:30  INFO 7820 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-12T00:13:00.881+05:30  INFO 7820 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-12T00:13:00.882+05:30  INFO 7820 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2795 ms
+2026-11-12T00:13:01.185+05:30  INFO 7820 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-12T00:13:01.290+05:30  INFO 7820 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-12T00:13:01.354+05:30  INFO 7820 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-12T00:13:02.030+05:30  INFO 7820 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-12T00:13:02.091+05:30  INFO 7820 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-12T00:13:03.498+05:30  INFO 7820 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58021c3c
+2026-11-12T00:13:03.508+05:30  INFO 7820 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-12T00:13:03.708+05:30  WARN 7820 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-12T00:13:03.710+05:30  WARN 7820 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-12T00:13:05.963+05:30  INFO 7820 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-12T00:13:09.611+05:30  INFO 7820 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-12T00:13:10.160+05:30  INFO 7820 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-12T00:13:12.761+05:30  WARN 7820 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-12T00:13:12.836+05:30  INFO 7820 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-12T00:13:13.844+05:30  INFO 7820 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-11-12T00:13:13.859+05:30  INFO 7820 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 16.645 seconds (process running for 17.865)
+2026-11-12T00:13:24.685+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794421110304,"i_e":{"enable_itp_optimization":24},"i_et":1794421110304};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2026-11-11T01:47:17.513+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-11T01:47:17.513+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-11T01:47:17.515+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-11-11T01:48:06.547+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:48:06.548+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:48:17.676+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:48:17.678+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:48:24.958+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:48:24.959+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:48:29.531+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:48:29.532+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:49:19.820+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:49:19.823+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:49:28.067+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:49:28.070+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:49:51.986+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:49:51.987+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:50:05.405+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:50:05.407+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:50:39.830+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:50:39.832+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:50:46.341+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:50:46.341+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:51:08.740+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T01:51:08.740+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T01:51:37.458+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : JWT token not found in cookies
-2026-11-11T01:51:37.476+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : JWT token not found in cookies
-2026-11-11T01:52:58.027+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
-2026-11-11T01:52:58.028+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
-2026-11-11T01:52:58.377+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role customer
-2026-11-11T01:52:58.545+05:30  INFO 16440 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T01:52:58.778+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@380bb033 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:52:58.787+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@57d505e8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:52:58.791+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@705c86cd (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:52:58.803+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3a20cc5e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:52:58.808+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@744ead92 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:52:58.807+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-4] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6e29f84f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T01:52:58.811+05:30  WARN 16440 --- [nearShop] [http-nio-8081-exec-8] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@55b899a5 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T02:03:37.410+05:30  INFO 20968 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 20968 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
-2026-11-11T02:03:37.417+05:30  INFO 20968 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-11-11T02:03:39.337+05:30  INFO 20968 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-11T02:03:39.565+05:30  INFO 20968 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 215 ms. Found 13 JPA repository interfaces.
-2026-11-11T02:03:40.833+05:30  INFO 20968 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-11-11T02:03:40.857+05:30  INFO 20968 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-11T02:03:40.858+05:30  INFO 20968 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-11-11T02:03:41.020+05:30  INFO 20968 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-11-11T02:03:41.021+05:30  INFO 20968 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3409 ms
-2026-11-11T02:03:41.392+05:30  INFO 20968 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-11T02:03:41.575+05:30  INFO 20968 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-11T02:03:41.654+05:30  INFO 20968 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-11T02:03:43.088+05:30  INFO 20968 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-11T02:03:43.241+05:30  INFO 20968 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-11T02:03:46.508+05:30  INFO 20968 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@10d4b573
-2026-11-11T02:03:46.514+05:30  INFO 20968 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-11T02:03:46.695+05:30  WARN 20968 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-11T02:03:46.697+05:30  WARN 20968 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-11-11T02:03:49.942+05:30  INFO 20968 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-11T02:03:55.992+05:30  INFO 20968 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-11T02:03:56.788+05:30  INFO 20968 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-11T02:04:00.847+05:30  WARN 20968 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-11T02:04:00.968+05:30  INFO 20968 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-11-11T02:04:02.520+05:30  INFO 20968 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-11-11T02:04:02.554+05:30  INFO 20968 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 26.626 seconds (process running for 27.527)
-2026-11-11T02:04:02.965+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-11T02:04:02.965+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-11T02:04:02.968+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-11-11T02:04:03.072+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794342823102,"i_e":{"enable_itp_optimization":24},"i_et":1794342823102,"i_b":"r1b2ye70AF/6F1JGk0uDSYOSskdLrMjnEqPrrWFgiiQ"}] that contained an invalid cookie. That cookie will be ignored.
+2026-11-12T00:13:24.687+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-12T00:13:24.687+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-12T00:13:24.692+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2026-11-12T00:13:25.269+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:13:25.347+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:14:40.677+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
+2026-11-12T00:14:40.677+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
+2026-11-12T00:14:41.122+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
+2026-11-12T00:14:41.247+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:20:07.066+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Email veriefied successfully: ankush.k.s145@gmail.com
+2026-11-12T00:20:07.067+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : token2 is being created authcontroller: ankush.k.s145@gmail.comshopkeeper540001
+2026-11-12T00:20:07.069+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : token2 is created authcontroller: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2guay5zMTQ1QGdtYWlsLmNvbSIsInJvbGUiOiJzaG9wa2VlcGVyIiwidXNlcklkIjo1NDAwMDEsImlhdCI6MTc5NDQyMzAwNywiZXhwIjoxNzk0NDU5MDA3fQ.PnmjIs2mY5tTXRjzc529-lqEbQzCOaHrqH0UI5ImSyI
+2026-11-12T00:20:07.070+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : cookie set to authcontroller inside verifyGoogle  jwt=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2guay5zMTQ1QGdtYWlsLmNvbSIsInJvbGUiOiJzaG9wa2VlcGVyIiwidXNlcklkIjo1NDAwMDEsImlhdCI6MTc5NDQyMzAwNywiZXhwIjoxNzk0NDU5MDA3fQ.PnmjIs2mY5tTXRjzc529-lqEbQzCOaHrqH0UI5ImSyI; Path=/; Max-Age=86400; Expires=Thu, 12 Nov 2026 18:50:07 GMT; Secure; HttpOnly; SameSite=None
+2026-11-12T00:20:07.097+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:20:07.133+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4b99769c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.682+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5578e943 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.695+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7d4913ad (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.703+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@358103c1 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.711+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@205c5a78 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.719+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@32fc8dc1 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.722+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@79d2448 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.726+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3a3fa071 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:20:11.736+05:30  WARN 7820 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@78f2a2d4 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T00:21:29.093+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Email veriefied successfully: ankush.pandaya4444@gmail.com
+2026-11-12T00:21:29.093+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : token2 is being created authcontroller: ankush.pandaya4444@gmail.comshopkeeper570001
+2026-11-12T00:21:29.094+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : token2 is created authcontroller: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2gucGFuZGF5YTQ0NDRAZ21haWwuY29tIiwicm9sZSI6InNob3BrZWVwZXIiLCJ1c2VySWQiOjU3MDAwMSwiaWF0IjoxNzk0NDIzMDg5LCJleHAiOjE3OTQ0NTkwODl9.NKV8qOMTtDRZt_Ny5Sk7kfDCjSOsrsC7KQuWKfwKXIU
+2026-11-12T00:21:29.095+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : cookie set to authcontroller inside verifyGoogle  jwt=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2gucGFuZGF5YTQ0NDRAZ21haWwuY29tIiwicm9sZSI6InNob3BrZWVwZXIiLCJ1c2VySWQiOjU3MDAwMSwiaWF0IjoxNzk0NDIzMDg5LCJleHAiOjE3OTQ0NTkwODl9.NKV8qOMTtDRZt_Ny5Sk7kfDCjSOsrsC7KQuWKfwKXIU; Path=/; Max-Age=86400; Expires=Thu, 12 Nov 2026 18:51:29 GMT; Secure; HttpOnly; SameSite=None
+2026-11-12T00:21:29.111+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:22:04.380+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:22:04.424+05:30  INFO 7820 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:32:07.409+05:30  INFO 7288 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 7288 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-12T00:32:07.416+05:30  INFO 7288 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-12T00:32:08.831+05:30  INFO 7288 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-12T00:32:09.124+05:30  INFO 7288 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 279 ms. Found 13 JPA repository interfaces.
+2026-11-12T00:32:10.252+05:30  INFO 7288 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-12T00:32:10.274+05:30  INFO 7288 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-12T00:32:10.275+05:30  INFO 7288 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-12T00:32:10.400+05:30  INFO 7288 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-12T00:32:10.401+05:30  INFO 7288 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2831 ms
+2026-11-12T00:32:10.754+05:30  INFO 7288 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-12T00:32:10.894+05:30  INFO 7288 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-12T00:32:10.967+05:30  INFO 7288 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-12T00:32:11.569+05:30  INFO 7288 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-12T00:32:11.646+05:30  INFO 7288 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-12T00:32:16.563+05:30  INFO 7288 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4392362c
+2026-11-12T00:32:16.575+05:30  INFO 7288 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-12T00:32:16.788+05:30  WARN 7288 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-12T00:32:16.790+05:30  WARN 7288 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-12T00:32:19.887+05:30  INFO 7288 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-12T00:32:23.596+05:30  INFO 7288 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-12T00:32:24.107+05:30  INFO 7288 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-12T00:32:26.505+05:30  WARN 7288 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-12T00:32:26.581+05:30  INFO 7288 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-12T00:32:27.788+05:30  INFO 7288 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-11-12T00:32:27.811+05:30  INFO 7288 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 21.285 seconds (process running for 22.078)
+2026-11-12T00:32:31.174+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-12T00:32:31.175+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-12T00:32:31.177+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-12T00:32:34.341+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-3] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794423084629,"i_e":{"enable_itp_optimization":24},"i_et":1794423084629};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2026-11-11T02:04:03.399+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856874
-2026-11-11T02:04:03.399+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856874
-2026-11-11T02:04:04.184+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856874 with role shopkeeper
-2026-11-11T02:04:04.365+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:05:02.769+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:05:02.812+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:05:41.608+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Login attempt for mobile: 7700856865
-2026-11-11T02:05:41.608+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.service.AuthService        : Login attempt for mobile: 7700856865
-2026-11-11T02:05:41.847+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.service.AuthService        : Login successful for mobile 7700856865 with role customer
-2026-11-11T02:05:41.953+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T02:06:19.399+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:06:19.433+05:30  INFO 20968 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:11:07.565+05:30  INFO 20396 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 20396 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
-2026-11-11T02:11:07.570+05:30  INFO 20396 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-11-11T02:11:09.058+05:30  INFO 20396 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-11T02:11:09.247+05:30  INFO 20396 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 176 ms. Found 13 JPA repository interfaces.
-2026-11-11T02:11:10.450+05:30  INFO 20396 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-11-11T02:11:10.475+05:30  INFO 20396 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-11T02:11:10.476+05:30  INFO 20396 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-11-11T02:11:10.602+05:30  INFO 20396 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-11-11T02:11:10.603+05:30  INFO 20396 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2946 ms
-2026-11-11T02:11:11.495+05:30  INFO 20396 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-11T02:11:11.635+05:30  INFO 20396 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-11T02:11:11.712+05:30  INFO 20396 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-11T02:11:12.331+05:30  INFO 20396 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-11T02:11:12.393+05:30  INFO 20396 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-11T02:11:14.193+05:30  INFO 20396 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7c3c3d67
-2026-11-11T02:11:14.204+05:30  INFO 20396 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-11T02:11:14.432+05:30  WARN 20396 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-11T02:11:14.435+05:30  WARN 20396 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-11-11T02:11:16.642+05:30  INFO 20396 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-11T02:11:20.484+05:30  INFO 20396 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-11T02:11:21.204+05:30  INFO 20396 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-11T02:11:23.650+05:30  WARN 20396 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-11T02:11:23.725+05:30  INFO 20396 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-11-11T02:11:24.833+05:30  INFO 20396 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-11-11T02:11:24.846+05:30  INFO 20396 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 18.097 seconds (process running for 18.831)
-2026-11-11T02:11:27.032+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-11T02:11:27.033+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-11T02:11:27.051+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
-2026-11-11T02:11:30.383+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794342823102,"i_e":{"enable_itp_optimization":24},"i_et":1794342823102,"i_b":"r1b2ye70AF/6F1JGk0uDSYOSskdLrMjnEqPrrWFgiiQ"};] that contained an invalid cookie. That cookie will be ignored.
+2026-11-12T00:32:34.591+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:32:34.641+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:32:36.117+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : getDashBoardData userId570001
+2026-11-12T00:32:37.105+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : getDashBoardData userId570001
+2026-11-12T00:36:22.845+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:36:23.637+05:30  INFO 7288 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:40:36.645+05:30  INFO 6688 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 6688 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-12T00:40:36.651+05:30  INFO 6688 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-12T00:40:38.171+05:30  INFO 6688 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-12T00:40:38.378+05:30  INFO 6688 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 176 ms. Found 13 JPA repository interfaces.
+2026-11-12T00:40:39.748+05:30  INFO 6688 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-12T00:40:39.770+05:30  INFO 6688 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-12T00:40:39.770+05:30  INFO 6688 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-12T00:40:39.908+05:30  INFO 6688 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-12T00:40:39.909+05:30  INFO 6688 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3156 ms
+2026-11-12T00:40:40.296+05:30  INFO 6688 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-12T00:40:40.409+05:30  INFO 6688 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-12T00:40:40.479+05:30  INFO 6688 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-12T00:40:41.089+05:30  INFO 6688 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-12T00:40:41.161+05:30  INFO 6688 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-12T00:40:42.667+05:30  INFO 6688 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3cad24ae
+2026-11-12T00:40:42.673+05:30  INFO 6688 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-12T00:40:42.901+05:30  WARN 6688 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-12T00:40:42.906+05:30  WARN 6688 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-12T00:40:45.983+05:30  INFO 6688 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-12T00:40:49.703+05:30  INFO 6688 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-12T00:40:50.368+05:30  INFO 6688 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-12T00:40:52.844+05:30  WARN 6688 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-12T00:40:52.916+05:30  INFO 6688 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-12T00:40:54.027+05:30  INFO 6688 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-11-12T00:40:54.040+05:30  INFO 6688 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 18.257 seconds (process running for 19.083)
+2026-11-12T00:40:58.767+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-12T00:40:58.768+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-12T00:40:58.770+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-12T00:41:16.028+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794422994660,"i_e":{"enable_itp_optimization":24},"i_et":1794422994660};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2026-11-11T02:13:12.798+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:13:12.906+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:13:13.811+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T02:13:13.848+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T02:13:30.462+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:13:30.505+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:14:12.704+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:14:12.722+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:18:00.953+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:18:00.994+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:19:01.301+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T02:19:01.305+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T02:23:57.869+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:23:57.903+05:30  INFO 20396 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T02:26:36.037+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T02:26:36.038+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T02:26:59.365+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T02:26:59.366+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T02:27:17.394+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T02:27:17.394+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T02:27:48.172+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1bc2a2f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T02:27:48.928+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
-2026-11-11T02:27:48.929+05:30  WARN 20396 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
-2026-11-11T03:03:25.675+05:30  INFO 5924 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 5924 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
-2026-11-11T03:03:25.680+05:30  INFO 5924 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-11-11T03:03:27.121+05:30  INFO 5924 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-11T03:03:27.402+05:30  INFO 5924 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 264 ms. Found 13 JPA repository interfaces.
-2026-11-11T03:03:28.637+05:30  INFO 5924 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-11-11T03:03:28.659+05:30  INFO 5924 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-11T03:03:28.660+05:30  INFO 5924 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-11-11T03:03:28.790+05:30  INFO 5924 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-11-11T03:03:28.791+05:30  INFO 5924 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3015 ms
-2026-11-11T03:03:29.118+05:30  INFO 5924 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-11T03:03:29.309+05:30  INFO 5924 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-11T03:03:29.379+05:30  INFO 5924 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-11T03:03:29.979+05:30  INFO 5924 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-11T03:03:30.045+05:30  INFO 5924 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-11T03:03:32.392+05:30  INFO 5924 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@39f93225
-2026-11-11T03:03:32.404+05:30  INFO 5924 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-11T03:03:32.592+05:30  WARN 5924 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-11T03:03:32.594+05:30  WARN 5924 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-11-11T03:03:34.797+05:30  INFO 5924 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-11T03:03:38.934+05:30  INFO 5924 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-11T03:03:39.500+05:30  INFO 5924 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-11T03:03:42.030+05:30  WARN 5924 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-11T03:03:42.165+05:30  INFO 5924 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-11-11T03:03:43.321+05:30  INFO 5924 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-11-11T03:03:43.335+05:30  INFO 5924 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 18.483 seconds (process running for 19.297)
-2026-11-11T03:04:42.821+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794342823102,"i_e":{"enable_itp_optimization":24},"i_et":1794342823102,"i_b":"r1b2ye70AF/6F1JGk0uDSYOSskdLrMjnEqPrrWFgiiQ"};] that contained an invalid cookie. That cookie will be ignored.
+2026-11-12T00:41:16.279+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:41:17.079+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:41:30.780+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
+2026-11-12T00:41:30.782+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
+2026-11-12T00:41:32.120+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:41:32.600+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:41:47.718+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
+2026-11-12T00:41:47.718+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
+2026-11-12T00:41:51.903+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
+2026-11-12T00:41:51.904+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
+2026-11-12T00:41:54.537+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Ignoring exception, response committed already: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)
+2026-11-12T00:41:54.538+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Document nesting depth (1001) exceeds the maximum allowed (1000, from `StreamWriteConstraints.getMaxNestingDepth()`)]
+2026-11-12T00:41:56.423+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:41:56.905+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:42:00.000+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:42:00.485+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:47.045+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:47.964+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:51.229+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:52.119+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:54.081+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:54.545+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:57.175+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:46:57.622+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:47:00.136+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:47:00.579+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:47:02.519+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:47:02.956+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:47:05.202+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:47:06.094+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:48:13.045+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:48:13.480+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:48:20.979+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:48:21.360+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:49:01.083+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:49:01.552+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:51:58.097+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:51:58.565+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T00:56:26.331+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:56:26.354+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:58:22.384+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:58:22.414+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:59:09.734+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:59:09.754+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:59:18.553+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:59:18.575+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:59:51.288+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T00:59:51.310+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:01:24.397+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:01:24.856+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:06:13.652+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:06:13.665+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3cad24ae (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.675+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4a7e4393 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.681+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2d6978f2 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.687+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@165fad56 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.689+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@796bc246 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.692+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@41317423 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.696+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@27793a1f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.698+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4c2706bb (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:06:13.705+05:30  WARN 6688 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6b79948b (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:07:02.006+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Email veriefied successfully: ankush.k.s145@gmail.com
+2026-11-12T01:07:02.008+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : token2 is being created authcontroller: ankush.k.s145@gmail.comshopkeeper540001
+2026-11-12T01:07:02.025+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : token2 is created authcontroller: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2guay5zMTQ1QGdtYWlsLmNvbSIsInJvbGUiOiJzaG9wa2VlcGVyIiwidXNlcklkIjo1NDAwMDEsImlhdCI6MTc5NDQyNTgyMiwiZXhwIjoxNzk0NDYxODIyfQ.jGLX5xyowvSdvgfjNkistQtYPtMLYimcCDT3Ay0-1PE
+2026-11-12T01:07:02.047+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : cookie set to authcontroller inside verifyGoogle  jwt=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2guay5zMTQ1QGdtYWlsLmNvbSIsInJvbGUiOiJzaG9wa2VlcGVyIiwidXNlcklkIjo1NDAwMDEsImlhdCI6MTc5NDQyNTgyMiwiZXhwIjoxNzk0NDYxODIyfQ.jGLX5xyowvSdvgfjNkistQtYPtMLYimcCDT3Ay0-1PE; Path=/; Max-Age=86400; Expires=Thu, 12 Nov 2026 19:37:02 GMT; Secure; HttpOnly; SameSite=None
+2026-11-12T01:07:02.062+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:07:02.247+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:07:02.649+05:30  INFO 6688 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:24:03.596+05:30  INFO 17868 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 17868 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-12T01:24:03.603+05:30  INFO 17868 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-12T01:24:05.598+05:30  INFO 17868 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-12T01:24:05.812+05:30  INFO 17868 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 199 ms. Found 13 JPA repository interfaces.
+2026-11-12T01:24:07.042+05:30  INFO 17868 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-12T01:24:07.065+05:30  INFO 17868 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-12T01:24:07.065+05:30  INFO 17868 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-12T01:24:07.203+05:30  INFO 17868 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-12T01:24:07.204+05:30  INFO 17868 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3441 ms
+2026-11-12T01:24:07.526+05:30  INFO 17868 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-12T01:24:07.636+05:30  INFO 17868 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-12T01:24:07.706+05:30  INFO 17868 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-12T01:24:08.432+05:30  INFO 17868 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-12T01:24:08.535+05:30  INFO 17868 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-12T01:24:10.632+05:30  INFO 17868 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58021c3c
+2026-11-12T01:24:10.639+05:30  INFO 17868 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-12T01:24:10.793+05:30  WARN 17868 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-12T01:24:10.796+05:30  WARN 17868 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-12T01:24:13.226+05:30  INFO 17868 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-12T01:24:17.226+05:30  INFO 17868 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-12T01:24:17.801+05:30  INFO 17868 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-12T01:24:20.641+05:30  WARN 17868 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-12T01:24:20.719+05:30  INFO 17868 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-12T01:24:21.821+05:30  INFO 17868 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-11-12T01:24:21.836+05:30  INFO 17868 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 19.234 seconds (process running for 20.281)
+2026-11-12T01:24:26.843+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-12T01:24:26.844+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-12T01:24:26.846+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-11-12T01:24:26.993+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-3] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794425815650,"i_e":{"enable_itp_optimization":24},"i_et":1794425815650};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2026-11-11T03:04:42.834+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-11T03:04:42.835+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-11T03:04:42.839+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-11-11T03:04:43.155+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:04:43.190+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:04:47.865+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:04:47.900+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:06:26.825+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:06:26.920+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:06:53.829+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:06:53.854+05:30  INFO 5924 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:16:22.811+05:30  INFO 9764 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 9764 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
-2026-11-11T03:16:22.817+05:30  INFO 9764 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-11-11T03:16:25.202+05:30  INFO 9764 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-11T03:16:25.495+05:30  INFO 9764 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 279 ms. Found 13 JPA repository interfaces.
-2026-11-11T03:16:26.631+05:30  INFO 9764 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-11-11T03:16:26.654+05:30  INFO 9764 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-11T03:16:26.655+05:30  INFO 9764 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-11-11T03:16:26.801+05:30  INFO 9764 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-11-11T03:16:26.801+05:30  INFO 9764 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3838 ms
-2026-11-11T03:16:27.113+05:30  INFO 9764 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-11T03:16:27.229+05:30  INFO 9764 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-11T03:16:27.295+05:30  INFO 9764 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-11T03:16:28.110+05:30  INFO 9764 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-11T03:16:28.172+05:30  INFO 9764 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-11T03:16:30.053+05:30  INFO 9764 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c997de8
-2026-11-11T03:16:30.060+05:30  INFO 9764 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-11T03:16:30.243+05:30  WARN 9764 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-11T03:16:30.249+05:30  WARN 9764 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-11-11T03:16:33.380+05:30  INFO 9764 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-11T03:16:37.025+05:30  INFO 9764 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-11T03:16:38.322+05:30  INFO 9764 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-11T03:16:42.891+05:30  WARN 9764 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-11T03:16:42.967+05:30  INFO 9764 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-11-11T03:16:44.471+05:30  INFO 9764 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-11-11T03:16:44.486+05:30  INFO 9764 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 22.531 seconds (process running for 23.362)
-2026-11-11T03:17:06.688+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794342823102,"i_e":{"enable_itp_optimization":24},"i_et":1794342823102,"i_b":"r1b2ye70AF/6F1JGk0uDSYOSskdLrMjnEqPrrWFgiiQ"};] that contained an invalid cookie. That cookie will be ignored.
+2026-11-12T01:24:27.196+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'PUT' is not supported]
+2026-11-12T01:24:31.625+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'PUT' is not supported]
+2026-11-12T01:24:53.343+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:24:53.409+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:24:58.640+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'isActive' for method parameter type boolean is not present]
+2026-11-12T01:25:45.491+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'isActive' for method parameter type boolean is not present]
+2026-11-12T01:25:49.070+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:25:49.097+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:26:52.741+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:26:52.770+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:33:06.149+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:33:06.179+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:33:06.298+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6a27122c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.298+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-1] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@408a1a5a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.307+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4f4f3a33 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.314+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1dabe784 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.320+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7e6e0ec8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.321+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7dd20a44 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.328+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6ce94da (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.330+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5beb7874 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:06.336+05:30  WARN 17868 --- [nearShop] [http-nio-8081-exec-9] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@30e6a892 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2026-11-12T01:33:15.065+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:33:15.099+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:33:21.966+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:33:22.458+05:30  INFO 17868 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:37:25.825+05:30  INFO 15168 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 15168 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
+2026-11-12T01:37:25.831+05:30  INFO 15168 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-11-12T01:37:27.245+05:30  INFO 15168 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-12T01:37:27.437+05:30  INFO 15168 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 175 ms. Found 13 JPA repository interfaces.
+2026-11-12T01:37:28.498+05:30  INFO 15168 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-11-12T01:37:28.519+05:30  INFO 15168 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-12T01:37:28.519+05:30  INFO 15168 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-11-12T01:37:28.648+05:30  INFO 15168 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-11-12T01:37:28.649+05:30  INFO 15168 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2720 ms
+2026-11-12T01:37:28.946+05:30  INFO 15168 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-12T01:37:29.056+05:30  INFO 15168 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-12T01:37:29.120+05:30  INFO 15168 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-12T01:37:29.674+05:30  INFO 15168 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-12T01:37:29.729+05:30  INFO 15168 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-12T01:37:31.288+05:30  INFO 15168 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4392362c
+2026-11-12T01:37:31.299+05:30  INFO 15168 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-12T01:37:31.463+05:30  WARN 15168 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-12T01:37:31.466+05:30  WARN 15168 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-11-12T01:37:33.638+05:30  INFO 15168 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-12T01:37:37.042+05:30  INFO 15168 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-12T01:37:37.765+05:30  INFO 15168 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-12T01:37:42.331+05:30  WARN 15168 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-12T01:37:42.431+05:30  INFO 15168 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-11-12T01:37:43.785+05:30  INFO 15168 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-11-12T01:37:43.800+05:30  INFO 15168 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 19.031 seconds (process running for 20.129)
+2026-11-12T01:37:50.497+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-12T01:37:50.498+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-12T01:37:50.500+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-12T01:37:52.881+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794425815650,"i_e":{"enable_itp_optimization":24},"i_et":1794425815650};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2026-11-11T03:17:06.697+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-11T03:17:06.698+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-11T03:17:06.701+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-11-11T03:17:07.006+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:17:07.031+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:17:35.942+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:17:35.977+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:28:05.285+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:28:05.307+05:30  INFO 9764 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:28:05.407+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5c997de8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.425+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1deac366 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.436+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@246a8d22 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.437+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6673db4c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.439+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6629755c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.440+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@50dec463 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.442+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@660b1f01 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.446+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7bc86cdb (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.450+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2d311155 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:28:05.453+05:30  WARN 9764 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6494d7d5 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:33:06.532+05:30  INFO 7232 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Starting NearShopApplication using Java 17.0.12 with PID 7232 (C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main\build\classes\java\main started by Ankushivam in C:\Users\Ankushivam\Documents\NearShop\backup\nearShop-2.0-backend-main)
-2026-11-11T03:33:06.537+05:30  INFO 7232 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : No active profile set, falling back to 1 default profile: "default"
-2026-11-11T03:33:07.969+05:30  INFO 7232 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-11T03:33:08.158+05:30  INFO 7232 --- [nearShop] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 175 ms. Found 13 JPA repository interfaces.
-2026-11-11T03:33:09.229+05:30  INFO 7232 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
-2026-11-11T03:33:09.252+05:30  INFO 7232 --- [nearShop] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-11-11T03:33:09.252+05:30  INFO 7232 --- [nearShop] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
-2026-11-11T03:33:09.387+05:30  INFO 7232 --- [nearShop] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-11-11T03:33:09.388+05:30  INFO 7232 --- [nearShop] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2768 ms
-2026-11-11T03:33:09.683+05:30  INFO 7232 --- [nearShop] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-11T03:33:09.791+05:30  INFO 7232 --- [nearShop] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-11-11T03:33:09.858+05:30  INFO 7232 --- [nearShop] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-11T03:33:10.425+05:30  INFO 7232 --- [nearShop] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-11T03:33:10.493+05:30  INFO 7232 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-11T03:33:12.160+05:30  INFO 7232 --- [nearShop] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1e8bccfb
-2026-11-11T03:33:12.167+05:30  INFO 7232 --- [nearShop] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-11T03:33:12.342+05:30  WARN 7232 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-11-11T03:33:12.345+05:30  WARN 7232 --- [nearShop] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2026-11-11T03:33:14.419+05:30  INFO 7232 --- [nearShop] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-11T03:33:18.132+05:30  INFO 7232 --- [nearShop] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-11T03:33:18.667+05:30  INFO 7232 --- [nearShop] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-11T03:33:21.142+05:30  WARN 7232 --- [nearShop] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-11T03:33:21.214+05:30  INFO 7232 --- [nearShop] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-11-11T03:33:22.224+05:30  INFO 7232 --- [nearShop] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
-2026-11-11T03:33:22.238+05:30  INFO 7232 --- [nearShop] [main] com.nearShop.java.NearShopApplication    : Started NearShopApplication in 16.582 seconds (process running for 17.541)
-2026-11-11T03:33:30.178+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-11-11T03:33:30.185+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-11-11T03:33:30.194+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
-2026-11-11T03:33:37.776+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0,"i_ll":1794342823102,"i_e":{"enable_itp_optimization":24},"i_et":1794342823102,"i_b":"r1b2ye70AF/6F1JGk0uDSYOSskdLrMjnEqPrrWFgiiQ"};] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2026-11-11T03:34:54.388+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:34:54.418+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:35:06.662+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Email veriefied successfully: ankush.k.s145@gmail.com
-2026-11-11T03:35:06.663+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : token2 is being created authcontroller: ankush.k.s145@gmail.comcustomer540001
-2026-11-11T03:35:06.684+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : token2 is created authcontroller: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2guay5zMTQ1QGdtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsInVzZXJJZCI6NTQwMDAxLCJpYXQiOjE3OTQzNDgzMDYsImV4cCI6MTc5NDM4NDMwNn0.GFA8M7J72EeEzRnXwF94yuxGBrbszJ5RKg3ZKxOs0Uo
-2026-11-11T03:35:06.706+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : cookie set to authcontroller inside verifyGoogle  jwt=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmt1c2guay5zMTQ1QGdtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciIsInVzZXJJZCI6NTQwMDAxLCJpYXQiOjE3OTQzNDgzMDYsImV4cCI6MTc5NDM4NDMwNn0.GFA8M7J72EeEzRnXwF94yuxGBrbszJ5RKg3ZKxOs0Uo; Path=/; Max-Age=86400; Expires=Wed, 11 Nov 2026 22:05:06 GMT; Secure; HttpOnly; SameSite=None
-2026-11-11T03:35:06.728+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:35:19.317+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:35:19.340+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:36:55.332+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:36:55.355+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:43:17.864+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:43:17.887+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:44:24.996+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:44:25.015+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:44:25.130+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:44:25.158+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:44:25.179+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-10] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@17286ec8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:44:25.294+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-5] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3d94d79 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:44:25.327+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@10c9fc3a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:44:25.451+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@68f5a1f0 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:44:25.453+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@f84ac32 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:44:25.457+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@3b5a3111 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:44:25.466+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@19e22f6f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
-2026-11-11T03:47:03.026+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:47:03.048+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:47:03.129+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:47:03.160+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:47:05.022+05:30  WARN 7232 --- [nearShop] [http-nio-8081-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to flush: java.io.IOException: An established connection was aborted by the software in your host machine]
-2026-11-11T03:47:05.741+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-3] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:47:05.802+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:47:06.427+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:47:06.446+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-1] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:51:45.129+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:51:45.144+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: customer
-2026-11-11T03:51:51.717+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-10] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
-2026-11-11T03:51:51.735+05:30  INFO 7232 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:37:57.282+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:37:57.343+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-7] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:38:05.328+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-9] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:38:05.400+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-2] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:40:49.445+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-5] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:40:49.505+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-6] c.n.java.auth.controller.AuthController  : Role fetched successfully: shopkeeper
+2026-11-12T01:44:52.014+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-4] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001
+2026-11-12T01:44:52.485+05:30  INFO 15168 --- [nearShop] [http-nio-8081-exec-8] c.n.java.auth.controller.AuthController  : getDashBoardData userId540001

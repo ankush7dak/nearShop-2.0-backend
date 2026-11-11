@@ -11,4 +11,5 @@ public class ShopkeeperDashboardDTO {
     private Long errMessage;
     private Integer newOrderCount;
     private Integer lowStockCount;
+    private boolean shopRegistered;
 }

@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = """
                 select count(*) from nearshop.products p where p.shop_id = ?1
             """, nativeQuery = true)
-    public Integer getProductCount(Long shopId);
+    public String getProductCount(Long shopId);
 
     public List<Product> findByShop_Id(Long shopId);
 
