@@ -21,6 +21,7 @@ import com.nearShop.java.dto.ProductDTO;
 import com.nearShop.java.dto.ShopDTO;
 import com.nearShop.java.dto.RequestDTO.OrderRequestDTO;
 import com.nearShop.java.dto.RequestDTO.UpdateCustomerProfileRequest;
+import com.nearShop.java.dto.ResponseDTO.CartResponseDTO;
 import com.nearShop.java.dto.ResponseDTO.CustomerProfileDTO;
 import com.nearShop.java.dto.ResponseDTO.MyOrderResponseDTO;
 import com.nearShop.java.dto.ResponseDTO.ShopInventoryDataDTO;
@@ -34,6 +35,7 @@ import com.nearShop.java.repository.CartItemRepository;
 import com.nearShop.java.repository.CartRepository;
 import com.nearShop.java.repository.CategoryRepository;
 import com.nearShop.java.repository.ProductRepository;
+import com.nearShop.java.repository.ShopRepository;
 import com.nearShop.java.services.CustomerServices;
 import com.nearShop.java.services.ShopkeeperServices;
 import com.nearShop.java.utilities.NearShopUtility;
@@ -61,6 +63,8 @@ public class CustomerController {
     CartItemRepository objCartItemRepository;
     @Autowired
     ProductRepository objProductRepository;
+    @Autowired
+    ShopRepository objShopRepository;
 
     @GetMapping("/getShopData")
     ResponseEntity<?> getShopData(HttpServletRequest req,
@@ -163,10 +167,16 @@ public class CustomerController {
                     else if(product.getSubcategory() != null){
                         productDTO.setSubcategoryName(product.getSubcategory().getName());
                     }
+
                     return productDTO;
                 }).toList();
             }
-            return ResponseEntity.ok(lstProductDTO);
+            CartResponseDTO cartResponseDTO = new CartResponseDTO(); 
+            cartResponseDTO.setLstProductDTO(lstProductDTO);
+            Optional<Shop> shop = objShopRepository.findById(cart.get().getShopId());
+            cartResponseDTO.setShopName(shop.get().getShopName());
+            cartResponseDTO.setShopProfileUrl(shop.get().getLogoUrl());
+            return ResponseEntity.ok(cartResponseDTO);
 
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error");

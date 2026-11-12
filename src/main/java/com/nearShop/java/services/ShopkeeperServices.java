@@ -452,10 +452,10 @@ public class ShopkeeperServices {
                 "PROCESSING".equals(newStatus);
 
             case "PROCESSING" ->
-                "OUT_FOR_DELIVERY".equals(newStatus)
+                "READY_FOR_PICKUP".equals(newStatus)
                         || "DELIVERED".equals(newStatus);
 
-            case "OUT_FOR_DELIVERY" ->
+            case "READY_FOR_PICKUP" ->
                 "DELIVERED".equals(newStatus);
 
             default -> false;
